@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import { uploadToS3 } from './upload'
 
 /**
  * The main function for the action.
@@ -7,20 +7,29 @@ import { wait } from './wait'
  */
 export async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    const awsKeyId = core.getInput('aws-access-key-id', { required: true })
+    const awsSecretAccessKey = core.getInput('aws-secret-access-key', {
+      required: true
+    })
+    const awsBucket = core.getInput('aws-bucket', { required: true })
+    const awsRegion = core.getInput('aws-region', { required: true })
+    const paths = core.getMultilineInput('path', { required: true })
+    const awsEndpoint = core.getInput('aws-endpoint-url', { required: false })
+    const awsUsePathStyle = core.getBooleanInput('aws-use-path-style', {
+      required: false
+    })
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    await uploadToS3({
+      paths,
+      awsKeyId,
+      awsSecretAccessKey,
+      awsBucket,
+      awsRegion,
+      awsEndpoint,
+      awsUsePathStyle
+    })
   } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message)
+    console.error(error)
+    core.setFailed((error as Error).message)
   }
 }

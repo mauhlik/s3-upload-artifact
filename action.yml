@@ -1,24 +1,32 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-
-# Add your action's branding here. This will appear on the GitHub Marketplace.
+name: Upload S3
+description: 'Upload artifact to S3'
+author: 'Marek Uhlik'
 branding:
-  icon: 'heart'
-  color: 'red'
-
-# Define your inputs here.
+  icon: 'upload-cloud'
+  color: 'orange'
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  path:
+    description: 'file or directory which to upload'
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
-
+  aws-access-key-id:
+    description: 'aws key id'
+    required: true
+  aws-secret-access-key:
+    description: 'aws secret access key'
+    required: true
+  aws-bucket:
+    description: 'aws bucket name'
+    required: true
+  aws-region:
+    description: 'aws bucket region'
+    required: true
+  aws-endpoint-url:
+    required: false
+    description: 'endpoint URI to send requests'
+  aws-use-path-style:
+    required: false
+    description: 'use path style instead of virtual host style'
+    default: false
 runs:
-  using: node20
-  main: dist/index.js
+  using: 'node20'
+  main: 'dist/index.js'

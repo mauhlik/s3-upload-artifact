@@ -53,12 +53,18 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Create file with date
+        run: |
+          echo "Date: $(date)" > date.txt
+
       - name: Test Local Action
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+          path: date.txt
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-bucket: ${{ vars.AWS_BUCKET }}
+          aws-region: ${{ vars.AWS_REGION }}
+          aws-endpoint-url: ${{ vars.AWS_ENDPOINT_URL }}
+          aws-use-path-style: ${{ vars.AWS_USE_PATH_STYLE }}
