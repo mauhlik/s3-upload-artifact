@@ -31,11 +31,6 @@ jobs:
         run: |
           npm run bundle
 
-      - name: Fix vercel/ncc CRLF output
-        run: |
-          # See https://github.com/vercel/ncc/issues/638
-          sed -i 's/\x0D$//' ./dist/*/index.js
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
