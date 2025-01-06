@@ -2,10 +2,10 @@ name: Update dist/
 
 on:
   push:
-    branches-ignore: [ "update-dist--**" ]
+    branches-ignore: ['update-dist--**']
   workflow_dispatch:
 
-permissions: read-all    
+permissions: read-all
 
 jobs:
   update-dist:
@@ -36,9 +36,9 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          title: "chore(dist): update dist/ on ${{ github.ref_name }}"
-          commit-message: "chore(dist): update dist/"
-          body: "Updated dist/ built distributable files"
+          title: 'chore(dist): update dist/ on ${{ github.ref_name }}'
+          commit-message: 'chore(dist): update dist/'
+          body: 'Updated dist/ built distributable files'
           branch: update-dist--${{ github.ref_name }}
           delete-branch: true
           labels: bot,dist
