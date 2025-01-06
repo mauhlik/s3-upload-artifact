@@ -5,6 +5,8 @@ on:
     branches-ignore: [ "update-dist--**" ]
   workflow_dispatch:
 
+permissions: read-all    
+
 jobs:
   update-dist:
     name: Update dist
