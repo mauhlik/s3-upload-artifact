@@ -9,7 +9,7 @@
     "outDir": "./dist",
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "noEmit": true, // Keep noEmit
+    "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
