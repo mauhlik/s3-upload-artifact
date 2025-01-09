@@ -1,4 +1,4 @@
-# Create a GitHub Action Using TypeScript
+# Upload artifact into s3
 
 [![GitHub Super-Linter](https://github.com/MaUhlik-cen56998/s3-upload-artifact/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
 ![CI](https://github.com/MaUhlik-cen56998/s3-upload-artifact/actions/workflows/ci.yml/badge.svg)
@@ -17,8 +17,7 @@ steps:
   - name: Upload artifact
     id: upload-artifact
     uses:
-      MaUhlik-cen56998/s3-upload-artifact@v1.0.1 <!--- x-release-please-version
-      -->
+      MaUhlik-cen56998/s3-upload-artifact@v1.0.1 <!--- x-release-please-version -->
     with:
       path:
         path: |
