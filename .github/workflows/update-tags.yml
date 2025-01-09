@@ -1,0 +1,12 @@
+name: Update tags
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  update-tags:
+    permissions:
+      contents: write
+    uses: MaUhlik-cen56998/reusable-workflows/.github/workflows/update-tags.yml@v1
