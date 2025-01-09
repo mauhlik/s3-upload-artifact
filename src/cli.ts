@@ -1,4 +1,5 @@
 import { Command } from 'commander'
+
 import { uploadToS3 } from './upload'
 
 const program = new Command()
@@ -28,13 +29,13 @@ const options = program.opts<Options>()
 const paths = options.path.split(',')
 
 uploadToS3({
-  paths: paths,
-  awsKeyId: options.awsAccessKeyId,
-  awsSecretAccessKey: options.awsSecretAccessKey,
   awsBucket: options.awsBucket,
-  awsRegion: options.awsRegion,
   awsEndpoint: options.awsEndpointUrl,
-  awsUsePathStyle: options.awsUsePathStyle
+  awsKeyId: options.awsAccessKeyId,
+  awsRegion: options.awsRegion,
+  awsSecretAccessKey: options.awsSecretAccessKey,
+  awsUsePathStyle: options.awsUsePathStyle,
+  paths
 }).catch(error => {
   console.error(error)
   process.exit(1)
