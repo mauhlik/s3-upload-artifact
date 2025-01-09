@@ -1,4 +1,5 @@
-import { S3Client, PutObjectCommand, S3ClientConfig } from '@aws-sdk/client-s3'
+import type { S3ClientConfig } from '@aws-sdk/client-s3'
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { readFileSync } from 'fs'
 import { basename } from 'path'
 
@@ -13,21 +14,21 @@ interface UploadToS3Params {
 }
 
 export async function uploadToS3({
-  paths,
-  awsKeyId,
-  awsSecretAccessKey,
   awsBucket,
-  awsRegion,
   awsEndpoint,
-  awsUsePathStyle
+  awsKeyId,
+  awsRegion,
+  awsSecretAccessKey,
+  awsUsePathStyle,
+  paths
 }: UploadToS3Params): Promise<void> {
   const s3Options: S3ClientConfig = {
     credentials: {
       accessKeyId: awsKeyId,
       secretAccessKey: awsSecretAccessKey
     },
-    region: awsRegion,
-    forcePathStyle: awsUsePathStyle
+    forcePathStyle: awsUsePathStyle,
+    region: awsRegion
   }
   if (awsEndpoint) {
     s3Options.endpoint = awsEndpoint
@@ -40,9 +41,9 @@ export async function uploadToS3({
     const fileName = basename(filePath)
 
     const params = {
+      Body: fileContent,
       Bucket: awsBucket,
-      Key: fileName,
-      Body: fileContent
+      Key: fileName
     }
 
     //logger.info(`Uploading ${fileName} to ${awsBucket}/${fileName}`);
