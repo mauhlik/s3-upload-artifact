@@ -19,6 +19,9 @@ export async function run(): Promise<void> {
     const awsUsePathStyle = core.getBooleanInput('aws-use-path-style', {
       required: false
     })
+    const remoteNamePrefix = core.getInput('remote-name-prefix', {
+      required: false
+    })
 
     await uploadToS3({
       awsBucket,
@@ -27,7 +30,8 @@ export async function run(): Promise<void> {
       awsRegion,
       awsSecretAccessKey,
       awsUsePathStyle,
-      paths
+      paths,
+      remoteNamePrefix
     })
   } catch (error) {
     console.error(error)

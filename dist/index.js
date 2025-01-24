@@ -59765,6 +59765,9 @@ async function run() {
         const awsUsePathStyle = core.getBooleanInput('aws-use-path-style', {
             required: false
         });
+        const remoteNamePrefix = core.getInput('remote-name-prefix', {
+            required: false
+        });
         await (0, upload_1.uploadToS3)({
             awsBucket,
             awsEndpoint,
@@ -59772,7 +59775,8 @@ async function run() {
             awsRegion,
             awsSecretAccessKey,
             awsUsePathStyle,
-            paths
+            paths,
+            remoteNamePrefix
         });
     }
     catch (error) {
@@ -59790,10 +59794,10 @@ async function run() {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.uploadToS3 = uploadToS3;
+exports.resolveRemoteName = resolveRemoteName;
 const client_s3_1 = __nccwpck_require__(3711);
 const fs_1 = __nccwpck_require__(9896);
-const path_1 = __nccwpck_require__(6928);
-async function uploadToS3({ awsBucket, awsEndpoint, awsKeyId, awsRegion, awsSecretAccessKey, awsUsePathStyle, paths }) {
+async function uploadToS3({ awsBucket, awsEndpoint, awsKeyId, awsRegion, awsSecretAccessKey, awsUsePathStyle, paths, remoteNamePrefix }) {
     const s3Options = {
         credentials: {
             accessKeyId: awsKeyId,
@@ -59808,17 +59812,22 @@ async function uploadToS3({ awsBucket, awsEndpoint, awsKeyId, awsRegion, awsSecr
     const s3Client = new client_s3_1.S3Client(s3Options);
     for (const filePath of paths) {
         const fileContent = (0, fs_1.readFileSync)(filePath);
-        const fileName = (0, path_1.basename)(filePath);
         const params = {
             Body: fileContent,
             Bucket: awsBucket,
-            Key: fileName
+            Key: resolveRemoteName(filePath, remoteNamePrefix)
         };
-        //logger.info(`Uploading ${fileName} to ${awsBucket}/${fileName}`);
-        //logger.info(`File size: ${fileContent.length} bytes`);
         const command = new client_s3_1.PutObjectCommand(params);
         await s3Client.send(command);
-        //logger.info(`Successfully uploaded ${fileName} to ${awsBucket}/${fileName}`);
+    }
+}
+function resolveRemoteName(filePath, remoteNamePrefix) {
+    if (remoteNamePrefix) {
+        remoteNamePrefix = remoteNamePrefix.replace(/^\/+/, '');
+        return `${remoteNamePrefix}/${filePath}`;
+    }
+    else {
+        return filePath;
     }
 }
 

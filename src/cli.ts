@@ -12,6 +12,7 @@ program
   .requiredOption('--aws-region <region>', 'AWS Region')
   .option('--aws-endpoint-url <url>', 'AWS Endpoint URL')
   .option('--aws-use-path-style', 'Use path-style URLs for S3', false)
+  .option('--remote-name-prefix <prefix>', 'Prefix for remote file names')
 
 program.parse(process.argv)
 
@@ -23,6 +24,7 @@ interface Options {
   awsRegion: string
   awsEndpointUrl?: string
   awsUsePathStyle: boolean
+  remoteNamePrefix?: string
 }
 
 const options = program.opts<Options>()
@@ -35,7 +37,8 @@ uploadToS3({
   awsRegion: options.awsRegion,
   awsSecretAccessKey: options.awsSecretAccessKey,
   awsUsePathStyle: options.awsUsePathStyle,
-  paths
+  paths: paths,
+  remoteNamePrefix: options.remoteNamePrefix
 }).catch(error => {
   console.error(error)
   process.exit(1)

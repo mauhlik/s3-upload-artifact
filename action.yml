@@ -8,6 +8,10 @@ inputs:
   path:
     description: 'file or directory which to upload'
     required: true
+  remote-name-prefix:
+    description: 'prefix for remote file name'
+    required: false
+    default: ''
   aws-access-key-id:
     description: 'aws key id'
     required: true
