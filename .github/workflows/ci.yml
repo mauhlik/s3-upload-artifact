@@ -93,4 +93,4 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
           aws-endpoint-url: ${{ vars.AWS_ENDPOINT_URL }}
           aws-use-path-style: ${{ vars.AWS_USE_PATH_STYLE }}
-          remote-name-prefix: 'tmp/'
+          remote-name-prefix: 'tmp'

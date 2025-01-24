@@ -34,4 +34,31 @@ describe('resolveRemoteName', () => {
     const result = resolveRemoteName(filePath, remoteNamePrefix)
     expect(result).toBe('path/to/file.txt')
   })
+
+  it('should handle a prefix with trailing slashes', () => {
+    const filePath = 'path/to/file.txt'
+    const remoteNamePrefix = 'prefix/'
+    const result = resolveRemoteName(filePath, remoteNamePrefix)
+    expect(result).toBe('prefix/path/to/file.txt')
+  })
+
+  it('should handle leading and trailing slashes in the file path', () => {
+    const filePath = '/path/to/file.txt'
+    const result = resolveRemoteName(filePath)
+    expect(result).toBe('path/to/file.txt')
+  })
+
+  it('should handle leading and trailing slashes in the prefix', () => {
+    const filePath = 'path/to/file.txt'
+    const remoteNamePrefix = '/prefix/'
+    const result = resolveRemoteName(filePath, remoteNamePrefix)
+    expect(result).toBe('prefix/path/to/file.txt')
+  })
+
+  it('should handle leading and trailing slashes in the file path and prefix', () => {
+    const filePath = '/path/to/file.txt'
+    const remoteNamePrefix = '/prefix/'
+    const result = resolveRemoteName(filePath, remoteNamePrefix)
+    expect(result).toBe('prefix/path/to/file.txt')
+  })
 })

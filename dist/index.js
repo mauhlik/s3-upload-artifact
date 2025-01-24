@@ -59822,8 +59822,9 @@ async function uploadToS3({ awsBucket, awsEndpoint, awsKeyId, awsRegion, awsSecr
     }
 }
 function resolveRemoteName(filePath, remoteNamePrefix) {
+    filePath = filePath.replace(/(^\/+|\/+$)/g, '');
     if (remoteNamePrefix) {
-        remoteNamePrefix = remoteNamePrefix.replace(/^\/+/, '');
+        remoteNamePrefix = remoteNamePrefix.replace(/(^\/+|\/+$)/g, '');
         return `${remoteNamePrefix}/${filePath}`;
     }
     else {

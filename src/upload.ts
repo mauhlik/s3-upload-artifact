@@ -55,8 +55,9 @@ export function resolveRemoteName(
   filePath: string,
   remoteNamePrefix?: string
 ): string {
+  filePath = filePath.replace(/(^\/+|\/+$)/g, '')
   if (remoteNamePrefix) {
-    remoteNamePrefix = remoteNamePrefix.replace(/^\/+/, '')
+    remoteNamePrefix = remoteNamePrefix.replace(/(^\/+|\/+$)/g, '')
     return `${remoteNamePrefix}/${filePath}`
   } else {
     return filePath
