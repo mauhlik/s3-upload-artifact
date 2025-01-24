@@ -17,7 +17,7 @@ steps:
   - name: Upload artifact
     id: upload-artifact
     uses:
-      MaUhlik-cen56998/s3-upload-artifact@v1.0.1 <!--- x-release-please-version -->
+      MaUhlik-cen56998/s3-upload-artifact@v1
     with:
       path:
         path: |
