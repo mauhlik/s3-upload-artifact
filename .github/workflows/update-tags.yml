@@ -9,4 +9,4 @@ permissions:
 
 jobs:
   update-tags:
-    uses: MaUhlik-cen56998/reusable-workflows/.github/workflows/update-tags.yml@v1
+    uses: mauhlik/reusable-workflows/.github/workflows/update-tags.yml@v1
