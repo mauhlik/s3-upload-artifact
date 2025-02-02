@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.0...v1.1.1) (2025-02-02)
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-s3 from 3.735.0 to 3.740.0 ([#57](https://github.com/mauhlik/s3-upload-artifact/issues/57)) ([662d2ce](https://github.com/mauhlik/s3-upload-artifact/commit/662d2ce378e855aa1effb1a49ce838bab89b045c))
+* **deps:** bump the npm-development group across 1 directory with 5 updates ([#58](https://github.com/mauhlik/s3-upload-artifact/issues/58)) ([74297ba](https://github.com/mauhlik/s3-upload-artifact/commit/74297baf577220dcebf44e5b131660e6d18c02e2))
+
 ## [1.1.0](https://github.com/MaUhlik-cen56998/s3-upload-artifact/compare/v1.0.1...v1.1.0) (2025-01-24)
 
 
