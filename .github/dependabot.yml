@@ -15,7 +15,7 @@ updates:
     schedule:
       interval: weekly
     commit-message:
-      prefix: "fix(deps)"
+      prefix: 'fix(deps)'
     groups:
       npm-development:
         dependency-type: development
