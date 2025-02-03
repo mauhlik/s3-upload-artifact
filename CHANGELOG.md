@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.1...v1.1.2) (2025-02-03)
+
+
+### Bug Fixes
+
+* **deps:** bump @stylistic/eslint-plugin in the npm-development group ([#61](https://github.com/mauhlik/s3-upload-artifact/issues/61)) ([8679ad4](https://github.com/mauhlik/s3-upload-artifact/commit/8679ad4eec18cd061d5d057e6368a59e6d4a11bc))
+
 ## [1.1.1](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.0...v1.1.1) (2025-02-02)
 
 
