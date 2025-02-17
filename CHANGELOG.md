@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.3](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.2...v1.1.3) (2025-02-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-s3 from 3.740.0 to 3.744.0 ([#66](https://github.com/mauhlik/s3-upload-artifact/issues/66)) ([27d2ed2](https://github.com/mauhlik/s3-upload-artifact/commit/27d2ed230867e054dbd6987bda8d5ece4d6246f2))
+* **deps:** bump @aws-sdk/client-s3 from 3.744.0 to 3.749.0 ([#71](https://github.com/mauhlik/s3-upload-artifact/issues/71)) ([5a63d44](https://github.com/mauhlik/s3-upload-artifact/commit/5a63d448c1e9b04d963e367b50a6dc037da94447))
+* **deps:** bump eslint-plugin-perfectionist from 4.7.0 to 4.8.0 ([#65](https://github.com/mauhlik/s3-upload-artifact/issues/65)) ([293771a](https://github.com/mauhlik/s3-upload-artifact/commit/293771a3240a2f0b39a522c2356a42b98f65fc12))
+* **deps:** bump eslint-plugin-perfectionist from 4.8.0 to 4.9.0 ([#72](https://github.com/mauhlik/s3-upload-artifact/issues/72)) ([f872f6a](https://github.com/mauhlik/s3-upload-artifact/commit/f872f6a6d1de8425229e020daf0cb64901f517fb))
+* **deps:** bump the npm-development group across 1 directory with 9 updates ([#69](https://github.com/mauhlik/s3-upload-artifact/issues/69)) ([95318a8](https://github.com/mauhlik/s3-upload-artifact/commit/95318a84423304d4c78b55aa3ab25b3a065194bf))
+
 ## [1.1.2](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.1...v1.1.2) (2025-02-03)
 
 
