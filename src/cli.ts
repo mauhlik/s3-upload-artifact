@@ -41,5 +41,5 @@ uploadToS3({
   remoteNamePrefix: options.remoteNamePrefix
 }).catch(error => {
   console.error(error)
-  process.exit(1)
+  throw new Error('Upload to S3 failed')
 })

@@ -5,6 +5,9 @@
     "module": "CommonJS",
     "rootDir": ".",
     "baseUrl": "./",
+    "paths": {
+      "*": ["src/*"]
+    },
     "sourceMap": true,
     "outDir": "./dist",
     "noImplicitAny": true,
