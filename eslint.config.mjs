@@ -3,5 +3,6 @@ export default {
     'import/resolver': {
       typescript: { project: './tsconfig.json' }
     }
-  }
+  },
+  ignores: ['**/*.yml']
 }
