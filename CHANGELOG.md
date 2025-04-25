@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.4](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.3...v1.1.4) (2025-04-25)
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-s3 from 3.749.0 to 3.750.0 ([#75](https://github.com/mauhlik/s3-upload-artifact/issues/75)) ([9e90288](https://github.com/mauhlik/s3-upload-artifact/commit/9e902889c6cce2e7614203d17c025a2b8be86913))
+* **deps:** bump @stylistic/eslint-plugin from 3.1.0 to 4.0.1 ([#77](https://github.com/mauhlik/s3-upload-artifact/issues/77)) ([032a7ac](https://github.com/mauhlik/s3-upload-artifact/commit/032a7acddf2bb2269db852727bd290d9bafd45d3))
+* **deps:** bump esbuild and tsx ([#94](https://github.com/mauhlik/s3-upload-artifact/issues/94)) ([393f109](https://github.com/mauhlik/s3-upload-artifact/commit/393f109d518fd981f1b5983ed1d32d14fe32b512))
+* **deps:** bump eslint-plugin-jsdoc in the npm-production group ([#85](https://github.com/mauhlik/s3-upload-artifact/issues/85)) ([b4e0592](https://github.com/mauhlik/s3-upload-artifact/commit/b4e05925afed1a5ace8811f1bd5d3a8df864eb2b))
+* **deps:** bump eslint-plugin-perfectionist from 4.9.0 to 4.10.1 ([#80](https://github.com/mauhlik/s3-upload-artifact/issues/80)) ([35ad5d0](https://github.com/mauhlik/s3-upload-artifact/commit/35ad5d06789651a229472b797ad7d20eca02f670))
+* **deps:** bump globals from 15.15.0 to 16.0.0 ([#76](https://github.com/mauhlik/s3-upload-artifact/issues/76)) ([693acf2](https://github.com/mauhlik/s3-upload-artifact/commit/693acf27540153aad5c02982535ec80e61bf8fb6))
+* **deps:** bump the npm-development group across 1 directory with 16 updates ([#92](https://github.com/mauhlik/s3-upload-artifact/issues/92)) ([7242eef](https://github.com/mauhlik/s3-upload-artifact/commit/7242eef98975f0da7c3b9a8ad29ab79e8662b145))
+* **deps:** update @eslint/js to version 9.25.1 in package.json and package-lock.json ([1a977c3](https://github.com/mauhlik/s3-upload-artifact/commit/1a977c3e3902adc72a006470e839b0857e2e5377))
+* **deps:** update resolved URLs for @eslint/js in package-lock.json ([70f5a24](https://github.com/mauhlik/s3-upload-artifact/commit/70f5a2405992652fc6a8030d1605b911a9177927))
+
 ## [1.1.3](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.2...v1.1.3) (2025-02-17)
 
 
