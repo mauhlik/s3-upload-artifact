@@ -5,6 +5,7 @@ on:
       - main
   pull_request_target:
     types: [opened, synchronize, reopened]
+  merge_group:
 
 permissions:
   contents: read
