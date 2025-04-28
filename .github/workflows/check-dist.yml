@@ -17,7 +17,7 @@ on:
     branches:
       - main
   merge_group:
-  
+
 permissions:
   contents: read
 
