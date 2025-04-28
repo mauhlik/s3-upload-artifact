@@ -3849,9 +3849,9 @@ exports.defaultS3HttpAuthSchemeProvider = createEndpointRuleSetHttpAuthSchemePro
 const resolveHttpAuthSchemeConfig = (config) => {
     const config_0 = (0, core_1.resolveAwsSdkSigV4Config)(config);
     const config_1 = (0, core_1.resolveAwsSdkSigV4AConfig)(config_0);
-    return {
-        ...config_1,
-    };
+    return Object.assign(config_1, {
+        authSchemePreference: (0, util_middleware_1.normalizeProvider)(config.authSchemePreference ?? []),
+    });
 };
 exports.resolveHttpAuthSchemeConfig = resolveHttpAuthSchemeConfig;
 
@@ -3904,9 +3904,9 @@ util_endpoints_2.customEndpointFunctions.aws = util_endpoints_1.awsEndpointFunct
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ruleSet = void 0;
-const ci = "required", cj = "type", ck = "conditions", cl = "fn", cm = "argv", cn = "ref", co = "assign", cp = "url", cq = "properties", cr = "backend", cs = "authSchemes", ct = "disableDoubleEncoding", cu = "signingName", cv = "signingRegion", cw = "headers", cx = "signingRegionSet";
-const a = 6, b = false, c = true, d = "isSet", e = "booleanEquals", f = "error", g = "aws.partition", h = "stringEquals", i = "getAttr", j = "name", k = "substring", l = "bucketSuffix", m = "parseURL", n = "{url#scheme}://{url#authority}/{uri_encoded_bucket}{url#path}", o = "endpoint", p = "tree", q = "aws.isVirtualHostableS3Bucket", r = "{url#scheme}://{Bucket}.{url#authority}{url#path}", s = "not", t = "{url#scheme}://{url#authority}{url#path}", u = "hardwareType", v = "regionPrefix", w = "bucketAliasSuffix", x = "outpostId", y = "isValidHostLabel", z = "sigv4a", A = "s3-outposts", B = "s3", C = "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", D = "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", E = "https://{Bucket}.s3.{partitionResult#dnsSuffix}", F = "aws.parseArn", G = "bucketArn", H = "arnType", I = "", J = "s3-object-lambda", K = "accesspoint", L = "accessPointName", M = "{url#scheme}://{accessPointName}-{bucketArn#accountId}.{url#authority}{url#path}", N = "mrapPartition", O = "outpostType", P = "arnPrefix", Q = "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", R = "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", S = "https://s3.{partitionResult#dnsSuffix}", T = { [ci]: false, [cj]: "String" }, U = { [ci]: true, "default": false, [cj]: "Boolean" }, V = { [ci]: false, [cj]: "Boolean" }, W = { [cl]: e, [cm]: [{ [cn]: "Accelerate" }, true] }, X = { [cl]: e, [cm]: [{ [cn]: "UseFIPS" }, true] }, Y = { [cl]: e, [cm]: [{ [cn]: "UseDualStack" }, true] }, Z = { [cl]: d, [cm]: [{ [cn]: "Endpoint" }] }, aa = { [cl]: g, [cm]: [{ [cn]: "Region" }], [co]: "partitionResult" }, ab = { [cl]: h, [cm]: [{ [cl]: i, [cm]: [{ [cn]: "partitionResult" }, j] }, "aws-cn"] }, ac = { [cl]: d, [cm]: [{ [cn]: "Bucket" }] }, ad = { [cn]: "Bucket" }, ae = { [cl]: m, [cm]: [{ [cn]: "Endpoint" }], [co]: "url" }, af = { [cl]: e, [cm]: [{ [cl]: i, [cm]: [{ [cn]: "url" }, "isIp"] }, true] }, ag = { [cn]: "url" }, ah = { [cl]: "uriEncode", [cm]: [ad], [co]: "uri_encoded_bucket" }, ai = { [cr]: "S3Express", [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: "s3express", [cv]: "{Region}" }] }, aj = {}, ak = { [cl]: q, [cm]: [ad, false] }, al = { [f]: "S3Express bucket name is not a valid virtual hostable name.", [cj]: f }, am = { [cr]: "S3Express", [cs]: [{ [ct]: true, [j]: "sigv4-s3express", [cu]: "s3express", [cv]: "{Region}" }] }, an = { [cl]: d, [cm]: [{ [cn]: "UseS3ExpressControlEndpoint" }] }, ao = { [cl]: e, [cm]: [{ [cn]: "UseS3ExpressControlEndpoint" }, true] }, ap = { [cl]: s, [cm]: [Z] }, aq = { [f]: "Unrecognized S3Express bucket name format.", [cj]: f }, ar = { [cl]: s, [cm]: [ac] }, as = { [cn]: u }, at = { [ck]: [ap], [f]: "Expected a endpoint to be specified but no endpoint was found", [cj]: f }, au = { [cs]: [{ [ct]: true, [j]: z, [cu]: A, [cx]: ["*"] }, { [ct]: true, [j]: "sigv4", [cu]: A, [cv]: "{Region}" }] }, av = { [cl]: e, [cm]: [{ [cn]: "ForcePathStyle" }, false] }, aw = { [cn]: "ForcePathStyle" }, ax = { [cl]: e, [cm]: [{ [cn]: "Accelerate" }, false] }, ay = { [cl]: h, [cm]: [{ [cn]: "Region" }, "aws-global"] }, az = { [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: B, [cv]: "us-east-1" }] }, aA = { [cl]: s, [cm]: [ay] }, aB = { [cl]: e, [cm]: [{ [cn]: "UseGlobalEndpoint" }, true] }, aC = { [cp]: "https://{Bucket}.s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [cq]: { [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: B, [cv]: "{Region}" }] }, [cw]: {} }, aD = { [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: B, [cv]: "{Region}" }] }, aE = { [cl]: e, [cm]: [{ [cn]: "UseGlobalEndpoint" }, false] }, aF = { [cl]: e, [cm]: [{ [cn]: "UseDualStack" }, false] }, aG = { [cp]: "https://{Bucket}.s3-fips.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, aH = { [cl]: e, [cm]: [{ [cn]: "UseFIPS" }, false] }, aI = { [cp]: "https://{Bucket}.s3-accelerate.dualstack.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, aJ = { [cp]: "https://{Bucket}.s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, aK = { [cl]: e, [cm]: [{ [cl]: i, [cm]: [ag, "isIp"] }, false] }, aL = { [cp]: C, [cq]: aD, [cw]: {} }, aM = { [cp]: r, [cq]: aD, [cw]: {} }, aN = { [o]: aM, [cj]: o }, aO = { [cp]: D, [cq]: aD, [cw]: {} }, aP = { [cp]: "https://{Bucket}.s3.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, aQ = { [f]: "Invalid region: region was not a valid DNS name.", [cj]: f }, aR = { [cn]: G }, aS = { [cn]: H }, aT = { [cl]: i, [cm]: [aR, "service"] }, aU = { [cn]: L }, aV = { [ck]: [Y], [f]: "S3 Object Lambda does not support Dual-stack", [cj]: f }, aW = { [ck]: [W], [f]: "S3 Object Lambda does not support S3 Accelerate", [cj]: f }, aX = { [ck]: [{ [cl]: d, [cm]: [{ [cn]: "DisableAccessPoints" }] }, { [cl]: e, [cm]: [{ [cn]: "DisableAccessPoints" }, true] }], [f]: "Access points are not supported for this operation", [cj]: f }, aY = { [ck]: [{ [cl]: d, [cm]: [{ [cn]: "UseArnRegion" }] }, { [cl]: e, [cm]: [{ [cn]: "UseArnRegion" }, false] }, { [cl]: s, [cm]: [{ [cl]: h, [cm]: [{ [cl]: i, [cm]: [aR, "region"] }, "{Region}"] }] }], [f]: "Invalid configuration: region from ARN `{bucketArn#region}` does not match client region `{Region}` and UseArnRegion is `false`", [cj]: f }, aZ = { [cl]: i, [cm]: [{ [cn]: "bucketPartition" }, j] }, ba = { [cl]: i, [cm]: [aR, "accountId"] }, bb = { [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: J, [cv]: "{bucketArn#region}" }] }, bc = { [f]: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointName}`", [cj]: f }, bd = { [f]: "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{bucketArn#accountId}`", [cj]: f }, be = { [f]: "Invalid region in ARN: `{bucketArn#region}` (invalid DNS name)", [cj]: f }, bf = { [f]: "Client was configured for partition `{partitionResult#name}` but ARN (`{Bucket}`) has `{bucketPartition#name}`", [cj]: f }, bg = { [f]: "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`.", [cj]: f }, bh = { [f]: "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided", [cj]: f }, bi = { [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: B, [cv]: "{bucketArn#region}" }] }, bj = { [cs]: [{ [ct]: true, [j]: z, [cu]: A, [cx]: ["*"] }, { [ct]: true, [j]: "sigv4", [cu]: A, [cv]: "{bucketArn#region}" }] }, bk = { [cl]: F, [cm]: [ad] }, bl = { [cp]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: aD, [cw]: {} }, bm = { [cp]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: aD, [cw]: {} }, bn = { [cp]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: aD, [cw]: {} }, bo = { [cp]: Q, [cq]: aD, [cw]: {} }, bp = { [cp]: "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: aD, [cw]: {} }, bq = { [cn]: "UseObjectLambdaEndpoint" }, br = { [cs]: [{ [ct]: true, [j]: "sigv4", [cu]: J, [cv]: "{Region}" }] }, bs = { [cp]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, bt = { [cp]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, bu = { [cp]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, bv = { [cp]: t, [cq]: aD, [cw]: {} }, bw = { [cp]: "https://s3.{Region}.{partitionResult#dnsSuffix}", [cq]: aD, [cw]: {} }, bx = [{ [cn]: "Region" }], by = [{ [cn]: "Endpoint" }], bz = [ad], bA = [Y], bB = [W], bC = [Z, ae], bD = [{ [cl]: d, [cm]: [{ [cn]: "DisableS3ExpressSessionAuth" }] }, { [cl]: e, [cm]: [{ [cn]: "DisableS3ExpressSessionAuth" }, true] }], bE = [af], bF = [ah], bG = [ak], bH = [X], bI = [{ [cl]: k, [cm]: [ad, 6, 14, true], [co]: "s3expressAvailabilityZoneId" }, { [cl]: k, [cm]: [ad, 14, 16, true], [co]: "s3expressAvailabilityZoneDelim" }, { [cl]: h, [cm]: [{ [cn]: "s3expressAvailabilityZoneDelim" }, "--"] }], bJ = [{ [ck]: [X], [o]: { [cp]: "https://{Bucket}.s3express-fips-{s3expressAvailabilityZoneId}.{Region}.amazonaws.com", [cq]: ai, [cw]: {} }, [cj]: o }, { [o]: { [cp]: "https://{Bucket}.s3express-{s3expressAvailabilityZoneId}.{Region}.amazonaws.com", [cq]: ai, [cw]: {} }, [cj]: o }], bK = [{ [cl]: k, [cm]: [ad, 6, 15, true], [co]: "s3expressAvailabilityZoneId" }, { [cl]: k, [cm]: [ad, 15, 17, true], [co]: "s3expressAvailabilityZoneDelim" }, { [cl]: h, [cm]: [{ [cn]: "s3expressAvailabilityZoneDelim" }, "--"] }], bL = [{ [cl]: k, [cm]: [ad, 6, 19, true], [co]: "s3expressAvailabilityZoneId" }, { [cl]: k, [cm]: [ad, 19, 21, true], [co]: "s3expressAvailabilityZoneDelim" }, { [cl]: h, [cm]: [{ [cn]: "s3expressAvailabilityZoneDelim" }, "--"] }], bM = [{ [cl]: k, [cm]: [ad, 6, 20, true], [co]: "s3expressAvailabilityZoneId" }, { [cl]: k, [cm]: [ad, 20, 22, true], [co]: "s3expressAvailabilityZoneDelim" }, { [cl]: h, [cm]: [{ [cn]: "s3expressAvailabilityZoneDelim" }, "--"] }], bN = [{ [cl]: k, [cm]: [ad, 6, 26, true], [co]: "s3expressAvailabilityZoneId" }, { [cl]: k, [cm]: [ad, 26, 28, true], [co]: "s3expressAvailabilityZoneDelim" }, { [cl]: h, [cm]: [{ [cn]: "s3expressAvailabilityZoneDelim" }, "--"] }], bO = [{ [ck]: [X], [o]: { [cp]: "https://{Bucket}.s3express-fips-{s3expressAvailabilityZoneId}.{Region}.amazonaws.com", [cq]: am, [cw]: {} }, [cj]: o }, { [o]: { [cp]: "https://{Bucket}.s3express-{s3expressAvailabilityZoneId}.{Region}.amazonaws.com", [cq]: am, [cw]: {} }, [cj]: o }], bP = [ac], bQ = [{ [cl]: y, [cm]: [{ [cn]: x }, false] }], bR = [{ [cl]: h, [cm]: [{ [cn]: v }, "beta"] }], bS = ["*"], bT = [aa], bU = [{ [cl]: y, [cm]: [{ [cn]: "Region" }, false] }], bV = [{ [cl]: h, [cm]: [{ [cn]: "Region" }, "us-east-1"] }], bW = [{ [cl]: h, [cm]: [aS, K] }], bX = [{ [cl]: i, [cm]: [aR, "resourceId[1]"], [co]: L }, { [cl]: s, [cm]: [{ [cl]: h, [cm]: [aU, I] }] }], bY = [aR, "resourceId[1]"], bZ = [{ [cl]: s, [cm]: [{ [cl]: h, [cm]: [{ [cl]: i, [cm]: [aR, "region"] }, I] }] }], ca = [{ [cl]: s, [cm]: [{ [cl]: d, [cm]: [{ [cl]: i, [cm]: [aR, "resourceId[2]"] }] }] }], cb = [aR, "resourceId[2]"], cc = [{ [cl]: g, [cm]: [{ [cl]: i, [cm]: [aR, "region"] }], [co]: "bucketPartition" }], cd = [{ [cl]: h, [cm]: [aZ, { [cl]: i, [cm]: [{ [cn]: "partitionResult" }, j] }] }], ce = [{ [cl]: y, [cm]: [{ [cl]: i, [cm]: [aR, "region"] }, true] }], cf = [{ [cl]: y, [cm]: [ba, false] }], cg = [{ [cl]: y, [cm]: [aU, false] }], ch = [{ [cl]: y, [cm]: [{ [cn]: "Region" }, true] }];
-const _data = { version: "1.0", parameters: { Bucket: T, Region: T, UseFIPS: U, UseDualStack: U, Endpoint: T, ForcePathStyle: U, Accelerate: U, UseGlobalEndpoint: U, UseObjectLambdaEndpoint: V, Key: T, Prefix: T, CopySource: T, DisableAccessPoints: V, DisableMultiRegionAccessPoints: U, UseArnRegion: V, UseS3ExpressControlEndpoint: V, DisableS3ExpressSessionAuth: V }, rules: [{ [ck]: [{ [cl]: d, [cm]: bx }], rules: [{ [ck]: [W, X], error: "Accelerate cannot be used with FIPS", [cj]: f }, { [ck]: [Y, Z], error: "Cannot set dual-stack in combination with a custom endpoint.", [cj]: f }, { [ck]: [Z, X], error: "A custom endpoint cannot be combined with FIPS", [cj]: f }, { [ck]: [Z, W], error: "A custom endpoint cannot be combined with S3 Accelerate", [cj]: f }, { [ck]: [X, aa, ab], error: "Partition does not support FIPS", [cj]: f }, { [ck]: [ac, { [cl]: k, [cm]: [ad, 0, a, c], [co]: l }, { [cl]: h, [cm]: [{ [cn]: l }, "--x-s3"] }], rules: [{ [ck]: bA, error: "S3Express does not support Dual-stack.", [cj]: f }, { [ck]: bB, error: "S3Express does not support S3 Accelerate.", [cj]: f }, { [ck]: bC, rules: [{ [ck]: bD, rules: [{ [ck]: bE, rules: [{ [ck]: bF, rules: [{ endpoint: { [cp]: n, [cq]: ai, [cw]: aj }, [cj]: o }], [cj]: p }], [cj]: p }, { [ck]: bG, rules: [{ endpoint: { [cp]: r, [cq]: ai, [cw]: aj }, [cj]: o }], [cj]: p }, al], [cj]: p }, { [ck]: bE, rules: [{ [ck]: bF, rules: [{ endpoint: { [cp]: n, [cq]: am, [cw]: aj }, [cj]: o }], [cj]: p }], [cj]: p }, { [ck]: bG, rules: [{ endpoint: { [cp]: r, [cq]: am, [cw]: aj }, [cj]: o }], [cj]: p }, al], [cj]: p }, { [ck]: [an, ao], rules: [{ [ck]: [ah, ap], rules: [{ [ck]: bH, endpoint: { [cp]: "https://s3express-control-fips.{Region}.amazonaws.com/{uri_encoded_bucket}", [cq]: ai, [cw]: aj }, [cj]: o }, { endpoint: { [cp]: "https://s3express-control.{Region}.amazonaws.com/{uri_encoded_bucket}", [cq]: ai, [cw]: aj }, [cj]: o }], [cj]: p }], [cj]: p }, { [ck]: bG, rules: [{ [ck]: bD, rules: [{ [ck]: bI, rules: bJ, [cj]: p }, { [ck]: bK, rules: bJ, [cj]: p }, { [ck]: bL, rules: bJ, [cj]: p }, { [ck]: bM, rules: bJ, [cj]: p }, { [ck]: bN, rules: bJ, [cj]: p }, aq], [cj]: p }, { [ck]: bI, rules: bO, [cj]: p }, { [ck]: bK, rules: bO, [cj]: p }, { [ck]: bL, rules: bO, [cj]: p }, { [ck]: bM, rules: bO, [cj]: p }, { [ck]: bN, rules: bO, [cj]: p }, aq], [cj]: p }, al], [cj]: p }, { [ck]: [ar, an, ao], rules: [{ [ck]: bC, endpoint: { [cp]: t, [cq]: ai, [cw]: aj }, [cj]: o }, { [ck]: bH, endpoint: { [cp]: "https://s3express-control-fips.{Region}.amazonaws.com", [cq]: ai, [cw]: aj }, [cj]: o }, { endpoint: { [cp]: "https://s3express-control.{Region}.amazonaws.com", [cq]: ai, [cw]: aj }, [cj]: o }], [cj]: p }, { [ck]: [ac, { [cl]: k, [cm]: [ad, 49, 50, c], [co]: u }, { [cl]: k, [cm]: [ad, 8, 12, c], [co]: v }, { [cl]: k, [cm]: [ad, 0, 7, c], [co]: w }, { [cl]: k, [cm]: [ad, 32, 49, c], [co]: x }, { [cl]: g, [cm]: bx, [co]: "regionPartition" }, { [cl]: h, [cm]: [{ [cn]: w }, "--op-s3"] }], rules: [{ [ck]: bQ, rules: [{ [ck]: [{ [cl]: h, [cm]: [as, "e"] }], rules: [{ [ck]: bR, rules: [at, { [ck]: bC, endpoint: { [cp]: "https://{Bucket}.ec2.{url#authority}", [cq]: au, [cw]: aj }, [cj]: o }], [cj]: p }, { endpoint: { [cp]: "https://{Bucket}.ec2.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [cq]: au, [cw]: aj }, [cj]: o }], [cj]: p }, { [ck]: [{ [cl]: h, [cm]: [as, "o"] }], rules: [{ [ck]: bR, rules: [at, { [ck]: bC, endpoint: { [cp]: "https://{Bucket}.op-{outpostId}.{url#authority}", [cq]: au, [cw]: aj }, [cj]: o }], [cj]: p }, { endpoint: { [cp]: "https://{Bucket}.op-{outpostId}.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [cq]: au, [cw]: aj }, [cj]: o }], [cj]: p }, { error: "Unrecognized hardware type: \"Expected hardware type o or e but got {hardwareType}\"", [cj]: f }], [cj]: p }, { error: "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`.", [cj]: f }], [cj]: p }, { [ck]: bP, rules: [{ [ck]: [Z, { [cl]: s, [cm]: [{ [cl]: d, [cm]: [{ [cl]: m, [cm]: by }] }] }], error: "Custom endpoint `{Endpoint}` was not a valid URI", [cj]: f }, { [ck]: [av, ak], rules: [{ [ck]: bT, rules: [{ [ck]: bU, rules: [{ [ck]: [W, ab], error: "S3 Accelerate cannot be used in this region", [cj]: f }, { [ck]: [Y, X, ax, ap, ay], endpoint: { [cp]: "https://{Bucket}.s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [Y, X, ax, ap, aA, aB], rules: [{ endpoint: aC, [cj]: o }], [cj]: p }, { [ck]: [Y, X, ax, ap, aA, aE], endpoint: aC, [cj]: o }, { [ck]: [aF, X, ax, ap, ay], endpoint: { [cp]: "https://{Bucket}.s3-fips.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, X, ax, ap, aA, aB], rules: [{ endpoint: aG, [cj]: o }], [cj]: p }, { [ck]: [aF, X, ax, ap, aA, aE], endpoint: aG, [cj]: o }, { [ck]: [Y, aH, W, ap, ay], endpoint: { [cp]: "https://{Bucket}.s3-accelerate.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [Y, aH, W, ap, aA, aB], rules: [{ endpoint: aI, [cj]: o }], [cj]: p }, { [ck]: [Y, aH, W, ap, aA, aE], endpoint: aI, [cj]: o }, { [ck]: [Y, aH, ax, ap, ay], endpoint: { [cp]: "https://{Bucket}.s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [Y, aH, ax, ap, aA, aB], rules: [{ endpoint: aJ, [cj]: o }], [cj]: p }, { [ck]: [Y, aH, ax, ap, aA, aE], endpoint: aJ, [cj]: o }, { [ck]: [aF, aH, ax, Z, ae, af, ay], endpoint: { [cp]: C, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, aH, ax, Z, ae, aK, ay], endpoint: { [cp]: r, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, aH, ax, Z, ae, af, aA, aB], rules: [{ [ck]: bV, endpoint: aL, [cj]: o }, { endpoint: aL, [cj]: o }], [cj]: p }, { [ck]: [aF, aH, ax, Z, ae, aK, aA, aB], rules: [{ [ck]: bV, endpoint: aM, [cj]: o }, aN], [cj]: p }, { [ck]: [aF, aH, ax, Z, ae, af, aA, aE], endpoint: aL, [cj]: o }, { [ck]: [aF, aH, ax, Z, ae, aK, aA, aE], endpoint: aM, [cj]: o }, { [ck]: [aF, aH, W, ap, ay], endpoint: { [cp]: D, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, aH, W, ap, aA, aB], rules: [{ [ck]: bV, endpoint: aO, [cj]: o }, { endpoint: aO, [cj]: o }], [cj]: p }, { [ck]: [aF, aH, W, ap, aA, aE], endpoint: aO, [cj]: o }, { [ck]: [aF, aH, ax, ap, ay], endpoint: { [cp]: E, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, aH, ax, ap, aA, aB], rules: [{ [ck]: bV, endpoint: { [cp]: E, [cq]: aD, [cw]: aj }, [cj]: o }, { endpoint: aP, [cj]: o }], [cj]: p }, { [ck]: [aF, aH, ax, ap, aA, aE], endpoint: aP, [cj]: o }], [cj]: p }, aQ], [cj]: p }], [cj]: p }, { [ck]: [Z, ae, { [cl]: h, [cm]: [{ [cl]: i, [cm]: [ag, "scheme"] }, "http"] }, { [cl]: q, [cm]: [ad, c] }, av, aH, aF, ax], rules: [{ [ck]: bT, rules: [{ [ck]: bU, rules: [aN], [cj]: p }, aQ], [cj]: p }], [cj]: p }, { [ck]: [av, { [cl]: F, [cm]: bz, [co]: G }], rules: [{ [ck]: [{ [cl]: i, [cm]: [aR, "resourceId[0]"], [co]: H }, { [cl]: s, [cm]: [{ [cl]: h, [cm]: [aS, I] }] }], rules: [{ [ck]: [{ [cl]: h, [cm]: [aT, J] }], rules: [{ [ck]: bW, rules: [{ [ck]: bX, rules: [aV, aW, { [ck]: bZ, rules: [aX, { [ck]: ca, rules: [aY, { [ck]: cc, rules: [{ [ck]: bT, rules: [{ [ck]: cd, rules: [{ [ck]: ce, rules: [{ [ck]: [{ [cl]: h, [cm]: [ba, I] }], error: "Invalid ARN: Missing account id", [cj]: f }, { [ck]: cf, rules: [{ [ck]: cg, rules: [{ [ck]: bC, endpoint: { [cp]: M, [cq]: bb, [cw]: aj }, [cj]: o }, { [ck]: bH, endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bb, [cw]: aj }, [cj]: o }, { endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bb, [cw]: aj }, [cj]: o }], [cj]: p }, bc], [cj]: p }, bd], [cj]: p }, be], [cj]: p }, bf], [cj]: p }], [cj]: p }], [cj]: p }, bg], [cj]: p }, { error: "Invalid ARN: bucket ARN is missing a region", [cj]: f }], [cj]: p }, bh], [cj]: p }, { error: "Invalid ARN: Object Lambda ARNs only support `accesspoint` arn types, but found: `{arnType}`", [cj]: f }], [cj]: p }, { [ck]: bW, rules: [{ [ck]: bX, rules: [{ [ck]: bZ, rules: [{ [ck]: bW, rules: [{ [ck]: bZ, rules: [aX, { [ck]: ca, rules: [aY, { [ck]: cc, rules: [{ [ck]: bT, rules: [{ [ck]: [{ [cl]: h, [cm]: [aZ, "{partitionResult#name}"] }], rules: [{ [ck]: ce, rules: [{ [ck]: [{ [cl]: h, [cm]: [aT, B] }], rules: [{ [ck]: cf, rules: [{ [ck]: cg, rules: [{ [ck]: bB, error: "Access Points do not support S3 Accelerate", [cj]: f }, { [ck]: [X, Y], endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bi, [cw]: aj }, [cj]: o }, { [ck]: [X, aF], endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bi, [cw]: aj }, [cj]: o }, { [ck]: [aH, Y], endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bi, [cw]: aj }, [cj]: o }, { [ck]: [aH, aF, Z, ae], endpoint: { [cp]: M, [cq]: bi, [cw]: aj }, [cj]: o }, { [ck]: [aH, aF], endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bi, [cw]: aj }, [cj]: o }], [cj]: p }, bc], [cj]: p }, bd], [cj]: p }, { error: "Invalid ARN: The ARN was not for the S3 service, found: {bucketArn#service}", [cj]: f }], [cj]: p }, be], [cj]: p }, bf], [cj]: p }], [cj]: p }], [cj]: p }, bg], [cj]: p }], [cj]: p }], [cj]: p }, { [ck]: [{ [cl]: y, [cm]: [aU, c] }], rules: [{ [ck]: bA, error: "S3 MRAP does not support dual-stack", [cj]: f }, { [ck]: bH, error: "S3 MRAP does not support FIPS", [cj]: f }, { [ck]: bB, error: "S3 MRAP does not support S3 Accelerate", [cj]: f }, { [ck]: [{ [cl]: e, [cm]: [{ [cn]: "DisableMultiRegionAccessPoints" }, c] }], error: "Invalid configuration: Multi-Region Access Point ARNs are disabled.", [cj]: f }, { [ck]: [{ [cl]: g, [cm]: bx, [co]: N }], rules: [{ [ck]: [{ [cl]: h, [cm]: [{ [cl]: i, [cm]: [{ [cn]: N }, j] }, { [cl]: i, [cm]: [aR, "partition"] }] }], rules: [{ endpoint: { [cp]: "https://{accessPointName}.accesspoint.s3-global.{mrapPartition#dnsSuffix}", [cq]: { [cs]: [{ [ct]: c, name: z, [cu]: B, [cx]: bS }] }, [cw]: aj }, [cj]: o }], [cj]: p }, { error: "Client was configured for partition `{mrapPartition#name}` but bucket referred to partition `{bucketArn#partition}`", [cj]: f }], [cj]: p }], [cj]: p }, { error: "Invalid Access Point Name", [cj]: f }], [cj]: p }, bh], [cj]: p }, { [ck]: [{ [cl]: h, [cm]: [aT, A] }], rules: [{ [ck]: bA, error: "S3 Outposts does not support Dual-stack", [cj]: f }, { [ck]: bH, error: "S3 Outposts does not support FIPS", [cj]: f }, { [ck]: bB, error: "S3 Outposts does not support S3 Accelerate", [cj]: f }, { [ck]: [{ [cl]: d, [cm]: [{ [cl]: i, [cm]: [aR, "resourceId[4]"] }] }], error: "Invalid Arn: Outpost Access Point ARN contains sub resources", [cj]: f }, { [ck]: [{ [cl]: i, [cm]: bY, [co]: x }], rules: [{ [ck]: bQ, rules: [aY, { [ck]: cc, rules: [{ [ck]: bT, rules: [{ [ck]: cd, rules: [{ [ck]: ce, rules: [{ [ck]: cf, rules: [{ [ck]: [{ [cl]: i, [cm]: cb, [co]: O }], rules: [{ [ck]: [{ [cl]: i, [cm]: [aR, "resourceId[3]"], [co]: L }], rules: [{ [ck]: [{ [cl]: h, [cm]: [{ [cn]: O }, K] }], rules: [{ [ck]: bC, endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.{url#authority}", [cq]: bj, [cw]: aj }, [cj]: o }, { endpoint: { [cp]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.s3-outposts.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cq]: bj, [cw]: aj }, [cj]: o }], [cj]: p }, { error: "Expected an outpost type `accesspoint`, found {outpostType}", [cj]: f }], [cj]: p }, { error: "Invalid ARN: expected an access point name", [cj]: f }], [cj]: p }, { error: "Invalid ARN: Expected a 4-component resource", [cj]: f }], [cj]: p }, bd], [cj]: p }, be], [cj]: p }, bf], [cj]: p }], [cj]: p }], [cj]: p }, { error: "Invalid ARN: The outpost Id may only contain a-z, A-Z, 0-9 and `-`. Found: `{outpostId}`", [cj]: f }], [cj]: p }, { error: "Invalid ARN: The Outpost Id was not set", [cj]: f }], [cj]: p }, { error: "Invalid ARN: Unrecognized format: {Bucket} (type: {arnType})", [cj]: f }], [cj]: p }, { error: "Invalid ARN: No ARN type specified", [cj]: f }], [cj]: p }, { [ck]: [{ [cl]: k, [cm]: [ad, 0, 4, b], [co]: P }, { [cl]: h, [cm]: [{ [cn]: P }, "arn:"] }, { [cl]: s, [cm]: [{ [cl]: d, [cm]: [bk] }] }], error: "Invalid ARN: `{Bucket}` was not a valid ARN", [cj]: f }, { [ck]: [{ [cl]: e, [cm]: [aw, c] }, bk], error: "Path-style addressing cannot be used with ARN buckets", [cj]: f }, { [ck]: bF, rules: [{ [ck]: bT, rules: [{ [ck]: [ax], rules: [{ [ck]: [Y, ap, X, ay], endpoint: { [cp]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [Y, ap, X, aA, aB], rules: [{ endpoint: bl, [cj]: o }], [cj]: p }, { [ck]: [Y, ap, X, aA, aE], endpoint: bl, [cj]: o }, { [ck]: [aF, ap, X, ay], endpoint: { [cp]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, ap, X, aA, aB], rules: [{ endpoint: bm, [cj]: o }], [cj]: p }, { [ck]: [aF, ap, X, aA, aE], endpoint: bm, [cj]: o }, { [ck]: [Y, ap, aH, ay], endpoint: { [cp]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [Y, ap, aH, aA, aB], rules: [{ endpoint: bn, [cj]: o }], [cj]: p }, { [ck]: [Y, ap, aH, aA, aE], endpoint: bn, [cj]: o }, { [ck]: [aF, Z, ae, aH, ay], endpoint: { [cp]: Q, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, Z, ae, aH, aA, aB], rules: [{ [ck]: bV, endpoint: bo, [cj]: o }, { endpoint: bo, [cj]: o }], [cj]: p }, { [ck]: [aF, Z, ae, aH, aA, aE], endpoint: bo, [cj]: o }, { [ck]: [aF, ap, aH, ay], endpoint: { [cp]: R, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aF, ap, aH, aA, aB], rules: [{ [ck]: bV, endpoint: { [cp]: R, [cq]: aD, [cw]: aj }, [cj]: o }, { endpoint: bp, [cj]: o }], [cj]: p }, { [ck]: [aF, ap, aH, aA, aE], endpoint: bp, [cj]: o }], [cj]: p }, { error: "Path-style addressing cannot be used with S3 Accelerate", [cj]: f }], [cj]: p }], [cj]: p }], [cj]: p }, { [ck]: [{ [cl]: d, [cm]: [bq] }, { [cl]: e, [cm]: [bq, c] }], rules: [{ [ck]: bT, rules: [{ [ck]: ch, rules: [aV, aW, { [ck]: bC, endpoint: { [cp]: t, [cq]: br, [cw]: aj }, [cj]: o }, { [ck]: bH, endpoint: { [cp]: "https://s3-object-lambda-fips.{Region}.{partitionResult#dnsSuffix}", [cq]: br, [cw]: aj }, [cj]: o }, { endpoint: { [cp]: "https://s3-object-lambda.{Region}.{partitionResult#dnsSuffix}", [cq]: br, [cw]: aj }, [cj]: o }], [cj]: p }, aQ], [cj]: p }], [cj]: p }, { [ck]: [ar], rules: [{ [ck]: bT, rules: [{ [ck]: ch, rules: [{ [ck]: [X, Y, ap, ay], endpoint: { [cp]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [X, Y, ap, aA, aB], rules: [{ endpoint: bs, [cj]: o }], [cj]: p }, { [ck]: [X, Y, ap, aA, aE], endpoint: bs, [cj]: o }, { [ck]: [X, aF, ap, ay], endpoint: { [cp]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [X, aF, ap, aA, aB], rules: [{ endpoint: bt, [cj]: o }], [cj]: p }, { [ck]: [X, aF, ap, aA, aE], endpoint: bt, [cj]: o }, { [ck]: [aH, Y, ap, ay], endpoint: { [cp]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aH, Y, ap, aA, aB], rules: [{ endpoint: bu, [cj]: o }], [cj]: p }, { [ck]: [aH, Y, ap, aA, aE], endpoint: bu, [cj]: o }, { [ck]: [aH, aF, Z, ae, ay], endpoint: { [cp]: t, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aH, aF, Z, ae, aA, aB], rules: [{ [ck]: bV, endpoint: bv, [cj]: o }, { endpoint: bv, [cj]: o }], [cj]: p }, { [ck]: [aH, aF, Z, ae, aA, aE], endpoint: bv, [cj]: o }, { [ck]: [aH, aF, ap, ay], endpoint: { [cp]: S, [cq]: az, [cw]: aj }, [cj]: o }, { [ck]: [aH, aF, ap, aA, aB], rules: [{ [ck]: bV, endpoint: { [cp]: S, [cq]: aD, [cw]: aj }, [cj]: o }, { endpoint: bw, [cj]: o }], [cj]: p }, { [ck]: [aH, aF, ap, aA, aE], endpoint: bw, [cj]: o }], [cj]: p }, aQ], [cj]: p }], [cj]: p }], [cj]: p }, { error: "A region must be set when sending requests to S3.", [cj]: f }] };
+const cp = "required", cq = "type", cr = "rules", cs = "conditions", ct = "fn", cu = "argv", cv = "ref", cw = "assign", cx = "url", cy = "properties", cz = "backend", cA = "authSchemes", cB = "disableDoubleEncoding", cC = "signingName", cD = "signingRegion", cE = "headers", cF = "signingRegionSet";
+const a = 6, b = false, c = true, d = "isSet", e = "booleanEquals", f = "error", g = "aws.partition", h = "stringEquals", i = "getAttr", j = "name", k = "substring", l = "bucketSuffix", m = "parseURL", n = "endpoint", o = "tree", p = "aws.isVirtualHostableS3Bucket", q = "{url#scheme}://{Bucket}.{url#authority}{url#path}", r = "not", s = "accessPointSuffix", t = "{url#scheme}://{url#authority}{url#path}", u = "hardwareType", v = "regionPrefix", w = "bucketAliasSuffix", x = "outpostId", y = "isValidHostLabel", z = "sigv4a", A = "s3-outposts", B = "s3", C = "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", D = "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", E = "https://{Bucket}.s3.{partitionResult#dnsSuffix}", F = "aws.parseArn", G = "bucketArn", H = "arnType", I = "", J = "s3-object-lambda", K = "accesspoint", L = "accessPointName", M = "{url#scheme}://{accessPointName}-{bucketArn#accountId}.{url#authority}{url#path}", N = "mrapPartition", O = "outpostType", P = "arnPrefix", Q = "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", R = "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", S = "https://s3.{partitionResult#dnsSuffix}", T = { [cp]: false, [cq]: "String" }, U = { [cp]: true, "default": false, [cq]: "Boolean" }, V = { [cp]: false, [cq]: "Boolean" }, W = { [ct]: e, [cu]: [{ [cv]: "Accelerate" }, true] }, X = { [ct]: e, [cu]: [{ [cv]: "UseFIPS" }, true] }, Y = { [ct]: e, [cu]: [{ [cv]: "UseDualStack" }, true] }, Z = { [ct]: d, [cu]: [{ [cv]: "Endpoint" }] }, aa = { [ct]: g, [cu]: [{ [cv]: "Region" }], [cw]: "partitionResult" }, ab = { [ct]: h, [cu]: [{ [ct]: i, [cu]: [{ [cv]: "partitionResult" }, j] }, "aws-cn"] }, ac = { [ct]: d, [cu]: [{ [cv]: "Bucket" }] }, ad = { [cv]: "Bucket" }, ae = { [cs]: [Y], [f]: "S3Express does not support Dual-stack.", [cq]: f }, af = { [cs]: [W], [f]: "S3Express does not support S3 Accelerate.", [cq]: f }, ag = { [cs]: [Z, { [ct]: m, [cu]: [{ [cv]: "Endpoint" }], [cw]: "url" }], [cr]: [{ [cs]: [{ [ct]: d, [cu]: [{ [cv]: "DisableS3ExpressSessionAuth" }] }, { [ct]: e, [cu]: [{ [cv]: "DisableS3ExpressSessionAuth" }, true] }], [cr]: [{ [cs]: [{ [ct]: e, [cu]: [{ [ct]: i, [cu]: [{ [cv]: "url" }, "isIp"] }, true] }], [cr]: [{ [cs]: [{ [ct]: "uriEncode", [cu]: [ad], [cw]: "uri_encoded_bucket" }], [cr]: [{ [n]: { [cx]: "{url#scheme}://{url#authority}/{uri_encoded_bucket}{url#path}", [cy]: { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: "s3express", [cD]: "{Region}" }] }, [cE]: {} }, [cq]: n }], [cq]: o }], [cq]: o }, { [cs]: [{ [ct]: p, [cu]: [ad, false] }], [cr]: [{ [n]: { [cx]: q, [cy]: { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: "s3express", [cD]: "{Region}" }] }, [cE]: {} }, [cq]: n }], [cq]: o }, { [f]: "S3Express bucket name is not a valid virtual hostable name.", [cq]: f }], [cq]: o }, { [cs]: [{ [ct]: e, [cu]: [{ [ct]: i, [cu]: [{ [cv]: "url" }, "isIp"] }, true] }], [cr]: [{ [cs]: [{ [ct]: "uriEncode", [cu]: [ad], [cw]: "uri_encoded_bucket" }], [cr]: [{ [n]: { [cx]: "{url#scheme}://{url#authority}/{uri_encoded_bucket}{url#path}", [cy]: { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4-s3express", [cC]: "s3express", [cD]: "{Region}" }] }, [cE]: {} }, [cq]: n }], [cq]: o }], [cq]: o }, { [cs]: [{ [ct]: p, [cu]: [ad, false] }], [cr]: [{ [n]: { [cx]: q, [cy]: { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4-s3express", [cC]: "s3express", [cD]: "{Region}" }] }, [cE]: {} }, [cq]: n }], [cq]: o }, { [f]: "S3Express bucket name is not a valid virtual hostable name.", [cq]: f }], [cq]: o }, ah = { [ct]: m, [cu]: [{ [cv]: "Endpoint" }], [cw]: "url" }, ai = { [ct]: e, [cu]: [{ [ct]: i, [cu]: [{ [cv]: "url" }, "isIp"] }, true] }, aj = { [cv]: "url" }, ak = { [ct]: "uriEncode", [cu]: [ad], [cw]: "uri_encoded_bucket" }, al = { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: "s3express", [cD]: "{Region}" }] }, am = {}, an = { [ct]: p, [cu]: [ad, false] }, ao = { [f]: "S3Express bucket name is not a valid virtual hostable name.", [cq]: f }, ap = { [ct]: d, [cu]: [{ [cv]: "UseS3ExpressControlEndpoint" }] }, aq = { [ct]: e, [cu]: [{ [cv]: "UseS3ExpressControlEndpoint" }, true] }, ar = { [ct]: r, [cu]: [Z] }, as = { [f]: "Unrecognized S3Express bucket name format.", [cq]: f }, at = { [ct]: r, [cu]: [ac] }, au = { [cv]: u }, av = { [cs]: [ar], [f]: "Expected a endpoint to be specified but no endpoint was found", [cq]: f }, aw = { [cA]: [{ [cB]: true, [j]: z, [cC]: A, [cF]: ["*"] }, { [cB]: true, [j]: "sigv4", [cC]: A, [cD]: "{Region}" }] }, ax = { [ct]: e, [cu]: [{ [cv]: "ForcePathStyle" }, false] }, ay = { [cv]: "ForcePathStyle" }, az = { [ct]: e, [cu]: [{ [cv]: "Accelerate" }, false] }, aA = { [ct]: h, [cu]: [{ [cv]: "Region" }, "aws-global"] }, aB = { [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: B, [cD]: "us-east-1" }] }, aC = { [ct]: r, [cu]: [aA] }, aD = { [ct]: e, [cu]: [{ [cv]: "UseGlobalEndpoint" }, true] }, aE = { [cx]: "https://{Bucket}.s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [cy]: { [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: B, [cD]: "{Region}" }] }, [cE]: {} }, aF = { [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: B, [cD]: "{Region}" }] }, aG = { [ct]: e, [cu]: [{ [cv]: "UseGlobalEndpoint" }, false] }, aH = { [ct]: e, [cu]: [{ [cv]: "UseDualStack" }, false] }, aI = { [cx]: "https://{Bucket}.s3-fips.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, aJ = { [ct]: e, [cu]: [{ [cv]: "UseFIPS" }, false] }, aK = { [cx]: "https://{Bucket}.s3-accelerate.dualstack.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, aL = { [cx]: "https://{Bucket}.s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, aM = { [ct]: e, [cu]: [{ [ct]: i, [cu]: [aj, "isIp"] }, false] }, aN = { [cx]: C, [cy]: aF, [cE]: {} }, aO = { [cx]: q, [cy]: aF, [cE]: {} }, aP = { [n]: aO, [cq]: n }, aQ = { [cx]: D, [cy]: aF, [cE]: {} }, aR = { [cx]: "https://{Bucket}.s3.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, aS = { [f]: "Invalid region: region was not a valid DNS name.", [cq]: f }, aT = { [cv]: G }, aU = { [cv]: H }, aV = { [ct]: i, [cu]: [aT, "service"] }, aW = { [cv]: L }, aX = { [cs]: [Y], [f]: "S3 Object Lambda does not support Dual-stack", [cq]: f }, aY = { [cs]: [W], [f]: "S3 Object Lambda does not support S3 Accelerate", [cq]: f }, aZ = { [cs]: [{ [ct]: d, [cu]: [{ [cv]: "DisableAccessPoints" }] }, { [ct]: e, [cu]: [{ [cv]: "DisableAccessPoints" }, true] }], [f]: "Access points are not supported for this operation", [cq]: f }, ba = { [cs]: [{ [ct]: d, [cu]: [{ [cv]: "UseArnRegion" }] }, { [ct]: e, [cu]: [{ [cv]: "UseArnRegion" }, false] }, { [ct]: r, [cu]: [{ [ct]: h, [cu]: [{ [ct]: i, [cu]: [aT, "region"] }, "{Region}"] }] }], [f]: "Invalid configuration: region from ARN `{bucketArn#region}` does not match client region `{Region}` and UseArnRegion is `false`", [cq]: f }, bb = { [ct]: i, [cu]: [{ [cv]: "bucketPartition" }, j] }, bc = { [ct]: i, [cu]: [aT, "accountId"] }, bd = { [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: J, [cD]: "{bucketArn#region}" }] }, be = { [f]: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointName}`", [cq]: f }, bf = { [f]: "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{bucketArn#accountId}`", [cq]: f }, bg = { [f]: "Invalid region in ARN: `{bucketArn#region}` (invalid DNS name)", [cq]: f }, bh = { [f]: "Client was configured for partition `{partitionResult#name}` but ARN (`{Bucket}`) has `{bucketPartition#name}`", [cq]: f }, bi = { [f]: "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`.", [cq]: f }, bj = { [f]: "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided", [cq]: f }, bk = { [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: B, [cD]: "{bucketArn#region}" }] }, bl = { [cA]: [{ [cB]: true, [j]: z, [cC]: A, [cF]: ["*"] }, { [cB]: true, [j]: "sigv4", [cC]: A, [cD]: "{bucketArn#region}" }] }, bm = { [ct]: F, [cu]: [ad] }, bn = { [cx]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aF, [cE]: {} }, bo = { [cx]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aF, [cE]: {} }, bp = { [cx]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aF, [cE]: {} }, bq = { [cx]: Q, [cy]: aF, [cE]: {} }, br = { [cx]: "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aF, [cE]: {} }, bs = { [cv]: "UseObjectLambdaEndpoint" }, bt = { [cA]: [{ [cB]: true, [j]: "sigv4", [cC]: J, [cD]: "{Region}" }] }, bu = { [cx]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, bv = { [cx]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, bw = { [cx]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, bx = { [cx]: t, [cy]: aF, [cE]: {} }, by = { [cx]: "https://s3.{Region}.{partitionResult#dnsSuffix}", [cy]: aF, [cE]: {} }, bz = [{ [cv]: "Region" }], bA = [{ [cv]: "Endpoint" }], bB = [ad], bC = [Y], bD = [W], bE = [Z, ah], bF = [{ [ct]: d, [cu]: [{ [cv]: "DisableS3ExpressSessionAuth" }] }, { [ct]: e, [cu]: [{ [cv]: "DisableS3ExpressSessionAuth" }, true] }], bG = [ak], bH = [an], bI = [aa], bJ = [X], bK = [{ [ct]: k, [cu]: [ad, 6, 14, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 14, 16, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bL = [{ [cs]: [X], [n]: { [cx]: "https://{Bucket}.s3express-fips-{s3expressAvailabilityZoneId}.{Region}.{partitionResult#dnsSuffix}", [cy]: al, [cE]: {} }, [cq]: n }, { [n]: { [cx]: "https://{Bucket}.s3express-{s3expressAvailabilityZoneId}.{Region}.{partitionResult#dnsSuffix}", [cy]: al, [cE]: {} }, [cq]: n }], bM = [{ [ct]: k, [cu]: [ad, 6, 15, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 15, 17, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bN = [{ [ct]: k, [cu]: [ad, 6, 19, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 19, 21, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bO = [{ [ct]: k, [cu]: [ad, 6, 20, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 20, 22, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bP = [{ [ct]: k, [cu]: [ad, 6, 26, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 26, 28, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bQ = [{ [cs]: [X], [n]: { [cx]: "https://{Bucket}.s3express-fips-{s3expressAvailabilityZoneId}.{Region}.{partitionResult#dnsSuffix}", [cy]: { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4-s3express", [cC]: "s3express", [cD]: "{Region}" }] }, [cE]: {} }, [cq]: n }, { [n]: { [cx]: "https://{Bucket}.s3express-{s3expressAvailabilityZoneId}.{Region}.{partitionResult#dnsSuffix}", [cy]: { [cz]: "S3Express", [cA]: [{ [cB]: true, [j]: "sigv4-s3express", [cC]: "s3express", [cD]: "{Region}" }] }, [cE]: {} }, [cq]: n }], bR = [ad, 0, 7, true], bS = [{ [ct]: k, [cu]: [ad, 7, 15, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 15, 17, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bT = [{ [ct]: k, [cu]: [ad, 7, 16, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 16, 18, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bU = [{ [ct]: k, [cu]: [ad, 7, 20, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 20, 22, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bV = [{ [ct]: k, [cu]: [ad, 7, 21, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 21, 23, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bW = [{ [ct]: k, [cu]: [ad, 7, 27, true], [cw]: "s3expressAvailabilityZoneId" }, { [ct]: k, [cu]: [ad, 27, 29, true], [cw]: "s3expressAvailabilityZoneDelim" }, { [ct]: h, [cu]: [{ [cv]: "s3expressAvailabilityZoneDelim" }, "--"] }], bX = [ac], bY = [{ [ct]: y, [cu]: [{ [cv]: x }, false] }], bZ = [{ [ct]: h, [cu]: [{ [cv]: v }, "beta"] }], ca = ["*"], cb = [{ [ct]: y, [cu]: [{ [cv]: "Region" }, false] }], cc = [{ [ct]: h, [cu]: [{ [cv]: "Region" }, "us-east-1"] }], cd = [{ [ct]: h, [cu]: [aU, K] }], ce = [{ [ct]: i, [cu]: [aT, "resourceId[1]"], [cw]: L }, { [ct]: r, [cu]: [{ [ct]: h, [cu]: [aW, I] }] }], cf = [aT, "resourceId[1]"], cg = [{ [ct]: r, [cu]: [{ [ct]: h, [cu]: [{ [ct]: i, [cu]: [aT, "region"] }, I] }] }], ch = [{ [ct]: r, [cu]: [{ [ct]: d, [cu]: [{ [ct]: i, [cu]: [aT, "resourceId[2]"] }] }] }], ci = [aT, "resourceId[2]"], cj = [{ [ct]: g, [cu]: [{ [ct]: i, [cu]: [aT, "region"] }], [cw]: "bucketPartition" }], ck = [{ [ct]: h, [cu]: [bb, { [ct]: i, [cu]: [{ [cv]: "partitionResult" }, j] }] }], cl = [{ [ct]: y, [cu]: [{ [ct]: i, [cu]: [aT, "region"] }, true] }], cm = [{ [ct]: y, [cu]: [bc, false] }], cn = [{ [ct]: y, [cu]: [aW, false] }], co = [{ [ct]: y, [cu]: [{ [cv]: "Region" }, true] }];
+const _data = { version: "1.0", parameters: { Bucket: T, Region: T, UseFIPS: U, UseDualStack: U, Endpoint: T, ForcePathStyle: U, Accelerate: U, UseGlobalEndpoint: U, UseObjectLambdaEndpoint: V, Key: T, Prefix: T, CopySource: T, DisableAccessPoints: V, DisableMultiRegionAccessPoints: U, UseArnRegion: V, UseS3ExpressControlEndpoint: V, DisableS3ExpressSessionAuth: V }, [cr]: [{ [cs]: [{ [ct]: d, [cu]: bz }], [cr]: [{ [cs]: [W, X], error: "Accelerate cannot be used with FIPS", [cq]: f }, { [cs]: [Y, Z], error: "Cannot set dual-stack in combination with a custom endpoint.", [cq]: f }, { [cs]: [Z, X], error: "A custom endpoint cannot be combined with FIPS", [cq]: f }, { [cs]: [Z, W], error: "A custom endpoint cannot be combined with S3 Accelerate", [cq]: f }, { [cs]: [X, aa, ab], error: "Partition does not support FIPS", [cq]: f }, { [cs]: [ac, { [ct]: k, [cu]: [ad, 0, a, c], [cw]: l }, { [ct]: h, [cu]: [{ [cv]: l }, "--x-s3"] }], [cr]: [ae, af, ag, { [cs]: [ap, aq], [cr]: [{ [cs]: bI, [cr]: [{ [cs]: [ak, ar], [cr]: [{ [cs]: bJ, endpoint: { [cx]: "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: al, [cE]: am }, [cq]: n }, { endpoint: { [cx]: "https://s3express-control.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: al, [cE]: am }, [cq]: n }], [cq]: o }], [cq]: o }], [cq]: o }, { [cs]: bH, [cr]: [{ [cs]: bI, [cr]: [{ [cs]: bF, [cr]: [{ [cs]: bK, [cr]: bL, [cq]: o }, { [cs]: bM, [cr]: bL, [cq]: o }, { [cs]: bN, [cr]: bL, [cq]: o }, { [cs]: bO, [cr]: bL, [cq]: o }, { [cs]: bP, [cr]: bL, [cq]: o }, as], [cq]: o }, { [cs]: bK, [cr]: bQ, [cq]: o }, { [cs]: bM, [cr]: bQ, [cq]: o }, { [cs]: bN, [cr]: bQ, [cq]: o }, { [cs]: bO, [cr]: bQ, [cq]: o }, { [cs]: bP, [cr]: bQ, [cq]: o }, as], [cq]: o }], [cq]: o }, ao], [cq]: o }, { [cs]: [ac, { [ct]: k, [cu]: bR, [cw]: s }, { [ct]: h, [cu]: [{ [cv]: s }, "--xa-s3"] }], [cr]: [ae, af, ag, { [cs]: bH, [cr]: [{ [cs]: bI, [cr]: [{ [cs]: bF, [cr]: [{ [cs]: bS, [cr]: bL, [cq]: o }, { [cs]: bT, [cr]: bL, [cq]: o }, { [cs]: bU, [cr]: bL, [cq]: o }, { [cs]: bV, [cr]: bL, [cq]: o }, { [cs]: bW, [cr]: bL, [cq]: o }, as], [cq]: o }, { [cs]: bS, [cr]: bQ, [cq]: o }, { [cs]: bT, [cr]: bQ, [cq]: o }, { [cs]: bU, [cr]: bQ, [cq]: o }, { [cs]: bV, [cr]: bQ, [cq]: o }, { [cs]: bW, [cr]: bQ, [cq]: o }, as], [cq]: o }], [cq]: o }, ao], [cq]: o }, { [cs]: [at, ap, aq], [cr]: [{ [cs]: bI, [cr]: [{ [cs]: bE, endpoint: { [cx]: t, [cy]: al, [cE]: am }, [cq]: n }, { [cs]: bJ, endpoint: { [cx]: "https://s3express-control-fips.{Region}.{partitionResult#dnsSuffix}", [cy]: al, [cE]: am }, [cq]: n }, { endpoint: { [cx]: "https://s3express-control.{Region}.{partitionResult#dnsSuffix}", [cy]: al, [cE]: am }, [cq]: n }], [cq]: o }], [cq]: o }, { [cs]: [ac, { [ct]: k, [cu]: [ad, 49, 50, c], [cw]: u }, { [ct]: k, [cu]: [ad, 8, 12, c], [cw]: v }, { [ct]: k, [cu]: bR, [cw]: w }, { [ct]: k, [cu]: [ad, 32, 49, c], [cw]: x }, { [ct]: g, [cu]: bz, [cw]: "regionPartition" }, { [ct]: h, [cu]: [{ [cv]: w }, "--op-s3"] }], [cr]: [{ [cs]: bY, [cr]: [{ [cs]: [{ [ct]: h, [cu]: [au, "e"] }], [cr]: [{ [cs]: bZ, [cr]: [av, { [cs]: bE, endpoint: { [cx]: "https://{Bucket}.ec2.{url#authority}", [cy]: aw, [cE]: am }, [cq]: n }], [cq]: o }, { endpoint: { [cx]: "https://{Bucket}.ec2.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [cy]: aw, [cE]: am }, [cq]: n }], [cq]: o }, { [cs]: [{ [ct]: h, [cu]: [au, "o"] }], [cr]: [{ [cs]: bZ, [cr]: [av, { [cs]: bE, endpoint: { [cx]: "https://{Bucket}.op-{outpostId}.{url#authority}", [cy]: aw, [cE]: am }, [cq]: n }], [cq]: o }, { endpoint: { [cx]: "https://{Bucket}.op-{outpostId}.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [cy]: aw, [cE]: am }, [cq]: n }], [cq]: o }, { error: "Unrecognized hardware type: \"Expected hardware type o or e but got {hardwareType}\"", [cq]: f }], [cq]: o }, { error: "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`.", [cq]: f }], [cq]: o }, { [cs]: bX, [cr]: [{ [cs]: [Z, { [ct]: r, [cu]: [{ [ct]: d, [cu]: [{ [ct]: m, [cu]: bA }] }] }], error: "Custom endpoint `{Endpoint}` was not a valid URI", [cq]: f }, { [cs]: [ax, an], [cr]: [{ [cs]: bI, [cr]: [{ [cs]: cb, [cr]: [{ [cs]: [W, ab], error: "S3 Accelerate cannot be used in this region", [cq]: f }, { [cs]: [Y, X, az, ar, aA], endpoint: { [cx]: "https://{Bucket}.s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [Y, X, az, ar, aC, aD], [cr]: [{ endpoint: aE, [cq]: n }], [cq]: o }, { [cs]: [Y, X, az, ar, aC, aG], endpoint: aE, [cq]: n }, { [cs]: [aH, X, az, ar, aA], endpoint: { [cx]: "https://{Bucket}.s3-fips.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, X, az, ar, aC, aD], [cr]: [{ endpoint: aI, [cq]: n }], [cq]: o }, { [cs]: [aH, X, az, ar, aC, aG], endpoint: aI, [cq]: n }, { [cs]: [Y, aJ, W, ar, aA], endpoint: { [cx]: "https://{Bucket}.s3-accelerate.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [Y, aJ, W, ar, aC, aD], [cr]: [{ endpoint: aK, [cq]: n }], [cq]: o }, { [cs]: [Y, aJ, W, ar, aC, aG], endpoint: aK, [cq]: n }, { [cs]: [Y, aJ, az, ar, aA], endpoint: { [cx]: "https://{Bucket}.s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [Y, aJ, az, ar, aC, aD], [cr]: [{ endpoint: aL, [cq]: n }], [cq]: o }, { [cs]: [Y, aJ, az, ar, aC, aG], endpoint: aL, [cq]: n }, { [cs]: [aH, aJ, az, Z, ah, ai, aA], endpoint: { [cx]: C, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, aJ, az, Z, ah, aM, aA], endpoint: { [cx]: q, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, aJ, az, Z, ah, ai, aC, aD], [cr]: [{ [cs]: cc, endpoint: aN, [cq]: n }, { endpoint: aN, [cq]: n }], [cq]: o }, { [cs]: [aH, aJ, az, Z, ah, aM, aC, aD], [cr]: [{ [cs]: cc, endpoint: aO, [cq]: n }, aP], [cq]: o }, { [cs]: [aH, aJ, az, Z, ah, ai, aC, aG], endpoint: aN, [cq]: n }, { [cs]: [aH, aJ, az, Z, ah, aM, aC, aG], endpoint: aO, [cq]: n }, { [cs]: [aH, aJ, W, ar, aA], endpoint: { [cx]: D, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, aJ, W, ar, aC, aD], [cr]: [{ [cs]: cc, endpoint: aQ, [cq]: n }, { endpoint: aQ, [cq]: n }], [cq]: o }, { [cs]: [aH, aJ, W, ar, aC, aG], endpoint: aQ, [cq]: n }, { [cs]: [aH, aJ, az, ar, aA], endpoint: { [cx]: E, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, aJ, az, ar, aC, aD], [cr]: [{ [cs]: cc, endpoint: { [cx]: E, [cy]: aF, [cE]: am }, [cq]: n }, { endpoint: aR, [cq]: n }], [cq]: o }, { [cs]: [aH, aJ, az, ar, aC, aG], endpoint: aR, [cq]: n }], [cq]: o }, aS], [cq]: o }], [cq]: o }, { [cs]: [Z, ah, { [ct]: h, [cu]: [{ [ct]: i, [cu]: [aj, "scheme"] }, "http"] }, { [ct]: p, [cu]: [ad, c] }, ax, aJ, aH, az], [cr]: [{ [cs]: bI, [cr]: [{ [cs]: cb, [cr]: [aP], [cq]: o }, aS], [cq]: o }], [cq]: o }, { [cs]: [ax, { [ct]: F, [cu]: bB, [cw]: G }], [cr]: [{ [cs]: [{ [ct]: i, [cu]: [aT, "resourceId[0]"], [cw]: H }, { [ct]: r, [cu]: [{ [ct]: h, [cu]: [aU, I] }] }], [cr]: [{ [cs]: [{ [ct]: h, [cu]: [aV, J] }], [cr]: [{ [cs]: cd, [cr]: [{ [cs]: ce, [cr]: [aX, aY, { [cs]: cg, [cr]: [aZ, { [cs]: ch, [cr]: [ba, { [cs]: cj, [cr]: [{ [cs]: bI, [cr]: [{ [cs]: ck, [cr]: [{ [cs]: cl, [cr]: [{ [cs]: [{ [ct]: h, [cu]: [bc, I] }], error: "Invalid ARN: Missing account id", [cq]: f }, { [cs]: cm, [cr]: [{ [cs]: cn, [cr]: [{ [cs]: bE, endpoint: { [cx]: M, [cy]: bd, [cE]: am }, [cq]: n }, { [cs]: bJ, endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bd, [cE]: am }, [cq]: n }, { endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bd, [cE]: am }, [cq]: n }], [cq]: o }, be], [cq]: o }, bf], [cq]: o }, bg], [cq]: o }, bh], [cq]: o }], [cq]: o }], [cq]: o }, bi], [cq]: o }, { error: "Invalid ARN: bucket ARN is missing a region", [cq]: f }], [cq]: o }, bj], [cq]: o }, { error: "Invalid ARN: Object Lambda ARNs only support `accesspoint` arn types, but found: `{arnType}`", [cq]: f }], [cq]: o }, { [cs]: cd, [cr]: [{ [cs]: ce, [cr]: [{ [cs]: cg, [cr]: [{ [cs]: cd, [cr]: [{ [cs]: cg, [cr]: [aZ, { [cs]: ch, [cr]: [ba, { [cs]: cj, [cr]: [{ [cs]: bI, [cr]: [{ [cs]: [{ [ct]: h, [cu]: [bb, "{partitionResult#name}"] }], [cr]: [{ [cs]: cl, [cr]: [{ [cs]: [{ [ct]: h, [cu]: [aV, B] }], [cr]: [{ [cs]: cm, [cr]: [{ [cs]: cn, [cr]: [{ [cs]: bD, error: "Access Points do not support S3 Accelerate", [cq]: f }, { [cs]: [X, Y], endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bk, [cE]: am }, [cq]: n }, { [cs]: [X, aH], endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bk, [cE]: am }, [cq]: n }, { [cs]: [aJ, Y], endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bk, [cE]: am }, [cq]: n }, { [cs]: [aJ, aH, Z, ah], endpoint: { [cx]: M, [cy]: bk, [cE]: am }, [cq]: n }, { [cs]: [aJ, aH], endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bk, [cE]: am }, [cq]: n }], [cq]: o }, be], [cq]: o }, bf], [cq]: o }, { error: "Invalid ARN: The ARN was not for the S3 service, found: {bucketArn#service}", [cq]: f }], [cq]: o }, bg], [cq]: o }, bh], [cq]: o }], [cq]: o }], [cq]: o }, bi], [cq]: o }], [cq]: o }], [cq]: o }, { [cs]: [{ [ct]: y, [cu]: [aW, c] }], [cr]: [{ [cs]: bC, error: "S3 MRAP does not support dual-stack", [cq]: f }, { [cs]: bJ, error: "S3 MRAP does not support FIPS", [cq]: f }, { [cs]: bD, error: "S3 MRAP does not support S3 Accelerate", [cq]: f }, { [cs]: [{ [ct]: e, [cu]: [{ [cv]: "DisableMultiRegionAccessPoints" }, c] }], error: "Invalid configuration: Multi-Region Access Point ARNs are disabled.", [cq]: f }, { [cs]: [{ [ct]: g, [cu]: bz, [cw]: N }], [cr]: [{ [cs]: [{ [ct]: h, [cu]: [{ [ct]: i, [cu]: [{ [cv]: N }, j] }, { [ct]: i, [cu]: [aT, "partition"] }] }], [cr]: [{ endpoint: { [cx]: "https://{accessPointName}.accesspoint.s3-global.{mrapPartition#dnsSuffix}", [cy]: { [cA]: [{ [cB]: c, name: z, [cC]: B, [cF]: ca }] }, [cE]: am }, [cq]: n }], [cq]: o }, { error: "Client was configured for partition `{mrapPartition#name}` but bucket referred to partition `{bucketArn#partition}`", [cq]: f }], [cq]: o }], [cq]: o }, { error: "Invalid Access Point Name", [cq]: f }], [cq]: o }, bj], [cq]: o }, { [cs]: [{ [ct]: h, [cu]: [aV, A] }], [cr]: [{ [cs]: bC, error: "S3 Outposts does not support Dual-stack", [cq]: f }, { [cs]: bJ, error: "S3 Outposts does not support FIPS", [cq]: f }, { [cs]: bD, error: "S3 Outposts does not support S3 Accelerate", [cq]: f }, { [cs]: [{ [ct]: d, [cu]: [{ [ct]: i, [cu]: [aT, "resourceId[4]"] }] }], error: "Invalid Arn: Outpost Access Point ARN contains sub resources", [cq]: f }, { [cs]: [{ [ct]: i, [cu]: cf, [cw]: x }], [cr]: [{ [cs]: bY, [cr]: [ba, { [cs]: cj, [cr]: [{ [cs]: bI, [cr]: [{ [cs]: ck, [cr]: [{ [cs]: cl, [cr]: [{ [cs]: cm, [cr]: [{ [cs]: [{ [ct]: i, [cu]: ci, [cw]: O }], [cr]: [{ [cs]: [{ [ct]: i, [cu]: [aT, "resourceId[3]"], [cw]: L }], [cr]: [{ [cs]: [{ [ct]: h, [cu]: [{ [cv]: O }, K] }], [cr]: [{ [cs]: bE, endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.{url#authority}", [cy]: bl, [cE]: am }, [cq]: n }, { endpoint: { [cx]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.s3-outposts.{bucketArn#region}.{bucketPartition#dnsSuffix}", [cy]: bl, [cE]: am }, [cq]: n }], [cq]: o }, { error: "Expected an outpost type `accesspoint`, found {outpostType}", [cq]: f }], [cq]: o }, { error: "Invalid ARN: expected an access point name", [cq]: f }], [cq]: o }, { error: "Invalid ARN: Expected a 4-component resource", [cq]: f }], [cq]: o }, bf], [cq]: o }, bg], [cq]: o }, bh], [cq]: o }], [cq]: o }], [cq]: o }, { error: "Invalid ARN: The outpost Id may only contain a-z, A-Z, 0-9 and `-`. Found: `{outpostId}`", [cq]: f }], [cq]: o }, { error: "Invalid ARN: The Outpost Id was not set", [cq]: f }], [cq]: o }, { error: "Invalid ARN: Unrecognized format: {Bucket} (type: {arnType})", [cq]: f }], [cq]: o }, { error: "Invalid ARN: No ARN type specified", [cq]: f }], [cq]: o }, { [cs]: [{ [ct]: k, [cu]: [ad, 0, 4, b], [cw]: P }, { [ct]: h, [cu]: [{ [cv]: P }, "arn:"] }, { [ct]: r, [cu]: [{ [ct]: d, [cu]: [bm] }] }], error: "Invalid ARN: `{Bucket}` was not a valid ARN", [cq]: f }, { [cs]: [{ [ct]: e, [cu]: [ay, c] }, bm], error: "Path-style addressing cannot be used with ARN buckets", [cq]: f }, { [cs]: bG, [cr]: [{ [cs]: bI, [cr]: [{ [cs]: [az], [cr]: [{ [cs]: [Y, ar, X, aA], endpoint: { [cx]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [Y, ar, X, aC, aD], [cr]: [{ endpoint: bn, [cq]: n }], [cq]: o }, { [cs]: [Y, ar, X, aC, aG], endpoint: bn, [cq]: n }, { [cs]: [aH, ar, X, aA], endpoint: { [cx]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, ar, X, aC, aD], [cr]: [{ endpoint: bo, [cq]: n }], [cq]: o }, { [cs]: [aH, ar, X, aC, aG], endpoint: bo, [cq]: n }, { [cs]: [Y, ar, aJ, aA], endpoint: { [cx]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [Y, ar, aJ, aC, aD], [cr]: [{ endpoint: bp, [cq]: n }], [cq]: o }, { [cs]: [Y, ar, aJ, aC, aG], endpoint: bp, [cq]: n }, { [cs]: [aH, Z, ah, aJ, aA], endpoint: { [cx]: Q, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, Z, ah, aJ, aC, aD], [cr]: [{ [cs]: cc, endpoint: bq, [cq]: n }, { endpoint: bq, [cq]: n }], [cq]: o }, { [cs]: [aH, Z, ah, aJ, aC, aG], endpoint: bq, [cq]: n }, { [cs]: [aH, ar, aJ, aA], endpoint: { [cx]: R, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aH, ar, aJ, aC, aD], [cr]: [{ [cs]: cc, endpoint: { [cx]: R, [cy]: aF, [cE]: am }, [cq]: n }, { endpoint: br, [cq]: n }], [cq]: o }, { [cs]: [aH, ar, aJ, aC, aG], endpoint: br, [cq]: n }], [cq]: o }, { error: "Path-style addressing cannot be used with S3 Accelerate", [cq]: f }], [cq]: o }], [cq]: o }], [cq]: o }, { [cs]: [{ [ct]: d, [cu]: [bs] }, { [ct]: e, [cu]: [bs, c] }], [cr]: [{ [cs]: bI, [cr]: [{ [cs]: co, [cr]: [aX, aY, { [cs]: bE, endpoint: { [cx]: t, [cy]: bt, [cE]: am }, [cq]: n }, { [cs]: bJ, endpoint: { [cx]: "https://s3-object-lambda-fips.{Region}.{partitionResult#dnsSuffix}", [cy]: bt, [cE]: am }, [cq]: n }, { endpoint: { [cx]: "https://s3-object-lambda.{Region}.{partitionResult#dnsSuffix}", [cy]: bt, [cE]: am }, [cq]: n }], [cq]: o }, aS], [cq]: o }], [cq]: o }, { [cs]: [at], [cr]: [{ [cs]: bI, [cr]: [{ [cs]: co, [cr]: [{ [cs]: [X, Y, ar, aA], endpoint: { [cx]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [X, Y, ar, aC, aD], [cr]: [{ endpoint: bu, [cq]: n }], [cq]: o }, { [cs]: [X, Y, ar, aC, aG], endpoint: bu, [cq]: n }, { [cs]: [X, aH, ar, aA], endpoint: { [cx]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [X, aH, ar, aC, aD], [cr]: [{ endpoint: bv, [cq]: n }], [cq]: o }, { [cs]: [X, aH, ar, aC, aG], endpoint: bv, [cq]: n }, { [cs]: [aJ, Y, ar, aA], endpoint: { [cx]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aJ, Y, ar, aC, aD], [cr]: [{ endpoint: bw, [cq]: n }], [cq]: o }, { [cs]: [aJ, Y, ar, aC, aG], endpoint: bw, [cq]: n }, { [cs]: [aJ, aH, Z, ah, aA], endpoint: { [cx]: t, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aJ, aH, Z, ah, aC, aD], [cr]: [{ [cs]: cc, endpoint: bx, [cq]: n }, { endpoint: bx, [cq]: n }], [cq]: o }, { [cs]: [aJ, aH, Z, ah, aC, aG], endpoint: bx, [cq]: n }, { [cs]: [aJ, aH, ar, aA], endpoint: { [cx]: S, [cy]: aB, [cE]: am }, [cq]: n }, { [cs]: [aJ, aH, ar, aC, aD], [cr]: [{ [cs]: cc, endpoint: { [cx]: S, [cy]: aF, [cE]: am }, [cq]: n }, { endpoint: by, [cq]: n }], [cq]: o }, { [cs]: [aJ, aH, ar, aC, aG], endpoint: by, [cq]: n }], [cq]: o }, aS], [cq]: o }], [cq]: o }], [cq]: o }, { error: "A region must be set when sending requests to S3.", [cq]: f }] };
 exports.ruleSet = _data;
 
 
@@ -3936,8 +3936,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   AbortMultipartUploadCommand: () => AbortMultipartUploadCommand,
   AnalyticsFilter: () => AnalyticsFilter,
   AnalyticsS3ExportFileFormat: () => AnalyticsS3ExportFileFormat,
@@ -4179,7 +4179,7 @@ __export(src_exports, {
   waitUntilObjectExists: () => waitUntilObjectExists,
   waitUntilObjectNotExists: () => waitUntilObjectNotExists
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/S3Client.ts
 var import_middleware_expect_continue = __nccwpck_require__(4745);
@@ -4206,8 +4206,7 @@ var import_middleware_serde = __nccwpck_require__(3255);
 
 // src/endpoint/EndpointParameters.ts
 var resolveClientEndpointParameters = /* @__PURE__ */ __name((options) => {
-  return {
-    ...options,
+  return Object.assign(options, {
     useFipsEndpoint: options.useFipsEndpoint ?? false,
     useDualstackEndpoint: options.useDualstackEndpoint ?? false,
     forcePathStyle: options.forcePathStyle ?? false,
@@ -4215,7 +4214,7 @@ var resolveClientEndpointParameters = /* @__PURE__ */ __name((options) => {
     useGlobalEndpoint: options.useGlobalEndpoint ?? false,
     disableMultiregionAccessPoints: options.disableMultiregionAccessPoints ?? false,
     defaultSigningName: "s3"
-  };
+  });
 }, "resolveClientEndpointParameters");
 var commonParams = {
   ForcePathStyle: { type: "clientContextParams", name: "forcePathStyle" },
@@ -4482,12 +4481,9 @@ var NoSuchBucket = class _NoSuchBucket extends S3ServiceException {
 var AnalyticsFilter;
 ((AnalyticsFilter2) => {
   AnalyticsFilter2.visit = /* @__PURE__ */ __name((value, visitor) => {
-    if (value.Prefix !== void 0)
-      return visitor.Prefix(value.Prefix);
-    if (value.Tag !== void 0)
-      return visitor.Tag(value.Tag);
-    if (value.And !== void 0)
-      return visitor.And(value.And);
+    if (value.Prefix !== void 0) return visitor.Prefix(value.Prefix);
+    if (value.Tag !== void 0) return visitor.Tag(value.Tag);
+    if (value.And !== void 0) return visitor.And(value.And);
     return visitor._(value.$unknown[0], value.$unknown[1]);
   }, "visit");
 })(AnalyticsFilter || (AnalyticsFilter = {}));
@@ -4563,14 +4559,10 @@ var PartitionDateSource = {
 var MetricsFilter;
 ((MetricsFilter2) => {
   MetricsFilter2.visit = /* @__PURE__ */ __name((value, visitor) => {
-    if (value.Prefix !== void 0)
-      return visitor.Prefix(value.Prefix);
-    if (value.Tag !== void 0)
-      return visitor.Tag(value.Tag);
-    if (value.AccessPointArn !== void 0)
-      return visitor.AccessPointArn(value.AccessPointArn);
-    if (value.And !== void 0)
-      return visitor.And(value.And);
+    if (value.Prefix !== void 0) return visitor.Prefix(value.Prefix);
+    if (value.Tag !== void 0) return visitor.Tag(value.Tag);
+    if (value.AccessPointArn !== void 0) return visitor.AccessPointArn(value.AccessPointArn);
+    if (value.And !== void 0) return visitor.And(value.And);
     return visitor._(value.$unknown[0], value.$unknown[1]);
   }, "visit");
 })(MetricsFilter || (MetricsFilter = {}));
@@ -5029,16 +5021,11 @@ var RestoreRequestType = {
 var SelectObjectContentEventStream;
 ((SelectObjectContentEventStream3) => {
   SelectObjectContentEventStream3.visit = /* @__PURE__ */ __name((value, visitor) => {
-    if (value.Records !== void 0)
-      return visitor.Records(value.Records);
-    if (value.Stats !== void 0)
-      return visitor.Stats(value.Stats);
-    if (value.Progress !== void 0)
-      return visitor.Progress(value.Progress);
-    if (value.Cont !== void 0)
-      return visitor.Cont(value.Cont);
-    if (value.End !== void 0)
-      return visitor.End(value.End);
+    if (value.Records !== void 0) return visitor.Records(value.Records);
+    if (value.Stats !== void 0) return visitor.Stats(value.Stats);
+    if (value.Progress !== void 0) return visitor.Progress(value.Progress);
+    if (value.Cont !== void 0) return visitor.Cont(value.Cont);
+    if (value.End !== void 0) return visitor.End(value.End);
     return visitor._(value.$unknown[0], value.$unknown[1]);
   }, "visit");
 })(SelectObjectContentEventStream || (SelectObjectContentEventStream = {}));
@@ -5088,18 +5075,12 @@ var RestoreObjectRequestFilterSensitiveLog = /* @__PURE__ */ __name((obj) => ({
   ...obj.RestoreRequest && { RestoreRequest: RestoreRequestFilterSensitiveLog(obj.RestoreRequest) }
 }), "RestoreObjectRequestFilterSensitiveLog");
 var SelectObjectContentEventStreamFilterSensitiveLog = /* @__PURE__ */ __name((obj) => {
-  if (obj.Records !== void 0)
-    return { Records: obj.Records };
-  if (obj.Stats !== void 0)
-    return { Stats: obj.Stats };
-  if (obj.Progress !== void 0)
-    return { Progress: obj.Progress };
-  if (obj.Cont !== void 0)
-    return { Cont: obj.Cont };
-  if (obj.End !== void 0)
-    return { End: obj.End };
-  if (obj.$unknown !== void 0)
-    return { [obj.$unknown[0]]: "UNKNOWN" };
+  if (obj.Records !== void 0) return { Records: obj.Records };
+  if (obj.Stats !== void 0) return { Stats: obj.Stats };
+  if (obj.Progress !== void 0) return { Progress: obj.Progress };
+  if (obj.Cont !== void 0) return { Cont: obj.Cont };
+  if (obj.End !== void 0) return { End: obj.End };
+  if (obj.$unknown !== void 0) return { [obj.$unknown[0]]: "UNKNOWN" };
 }, "SelectObjectContentEventStreamFilterSensitiveLog");
 var SelectObjectContentOutputFilterSensitiveLog = /* @__PURE__ */ __name((obj) => ({
   ...obj,
@@ -9151,27 +9132,27 @@ var se_AnalyticsExportDestination = /* @__PURE__ */ __name((input, context) => {
 var se_AnalyticsFilter = /* @__PURE__ */ __name((input, context) => {
   const bn = new import_xml_builder.XmlNode(_AF);
   AnalyticsFilter.visit(input, {
-    Prefix: (value) => {
+    Prefix: /* @__PURE__ */ __name((value) => {
       if (input[_P] != null) {
         bn.c(import_xml_builder.XmlNode.of(_P, value).n(_P));
       }
-    },
-    Tag: (value) => {
+    }, "Prefix"),
+    Tag: /* @__PURE__ */ __name((value) => {
       if (input[_Ta] != null) {
         bn.c(se_Tag(value, context).n(_Ta));
       }
-    },
-    And: (value) => {
+    }, "Tag"),
+    And: /* @__PURE__ */ __name((value) => {
       if (input[_A] != null) {
         bn.c(se_AnalyticsAndOperator(value, context).n(_A));
       }
-    },
-    _: (name, value) => {
+    }, "And"),
+    _: /* @__PURE__ */ __name((name, value) => {
       if (!(value instanceof import_xml_builder.XmlNode || value instanceof import_xml_builder.XmlText)) {
         throw new Error("Unable to serialize unknown union members in XML.");
       }
       bn.c(new import_xml_builder.XmlNode(name).c(value));
-    }
+    }, "_")
   });
   return bn;
 }, "se_AnalyticsFilter");
@@ -9738,32 +9719,32 @@ var se_MetricsConfiguration = /* @__PURE__ */ __name((input, context) => {
 var se_MetricsFilter = /* @__PURE__ */ __name((input, context) => {
   const bn = new import_xml_builder.XmlNode(_MF);
   MetricsFilter.visit(input, {
-    Prefix: (value) => {
+    Prefix: /* @__PURE__ */ __name((value) => {
       if (input[_P] != null) {
         bn.c(import_xml_builder.XmlNode.of(_P, value).n(_P));
       }
-    },
-    Tag: (value) => {
+    }, "Prefix"),
+    Tag: /* @__PURE__ */ __name((value) => {
       if (input[_Ta] != null) {
         bn.c(se_Tag(value, context).n(_Ta));
       }
-    },
-    AccessPointArn: (value) => {
+    }, "Tag"),
+    AccessPointArn: /* @__PURE__ */ __name((value) => {
       if (input[_APAc] != null) {
         bn.c(import_xml_builder.XmlNode.of(_APAc, value).n(_APAc));
       }
-    },
-    And: (value) => {
+    }, "AccessPointArn"),
+    And: /* @__PURE__ */ __name((value) => {
       if (input[_A] != null) {
         bn.c(se_MetricsAndOperator(value, context).n(_A));
       }
-    },
-    _: (name, value) => {
+    }, "And"),
+    _: /* @__PURE__ */ __name((name, value) => {
       if (!(value instanceof import_xml_builder.XmlNode || value instanceof import_xml_builder.XmlText)) {
         throw new Error("Unable to serialize unknown union members in XML.");
       }
       bn.c(new import_xml_builder.XmlNode(name).c(value));
-    }
+    }, "_")
   });
   return bn;
 }, "se_MetricsFilter");
@@ -12712,22 +12693,21 @@ var resolveHttpAuthRuntimeConfig = /* @__PURE__ */ __name((config) => {
 }, "resolveHttpAuthRuntimeConfig");
 
 // src/runtimeExtensions.ts
-var asPartial = /* @__PURE__ */ __name((t) => t, "asPartial");
 var resolveRuntimeExtensions = /* @__PURE__ */ __name((runtimeConfig, extensions) => {
-  const extensionConfiguration = {
-    ...asPartial((0, import_region_config_resolver.getAwsRegionExtensionConfiguration)(runtimeConfig)),
-    ...asPartial((0, import_smithy_client.getDefaultExtensionConfiguration)(runtimeConfig)),
-    ...asPartial((0, import_protocol_http.getHttpHandlerExtensionConfiguration)(runtimeConfig)),
-    ...asPartial(getHttpAuthExtensionConfiguration(runtimeConfig))
-  };
+  const extensionConfiguration = Object.assign(
+    (0, import_region_config_resolver.getAwsRegionExtensionConfiguration)(runtimeConfig),
+    (0, import_smithy_client.getDefaultExtensionConfiguration)(runtimeConfig),
+    (0, import_protocol_http.getHttpHandlerExtensionConfiguration)(runtimeConfig),
+    getHttpAuthExtensionConfiguration(runtimeConfig)
+  );
   extensions.forEach((extension) => extension.configure(extensionConfiguration));
-  return {
-    ...runtimeConfig,
-    ...(0, import_region_config_resolver.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
-    ...(0, import_smithy_client.resolveDefaultRuntimeConfig)(extensionConfiguration),
-    ...(0, import_protocol_http.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
-    ...resolveHttpAuthRuntimeConfig(extensionConfiguration)
-  };
+  return Object.assign(
+    runtimeConfig,
+    (0, import_region_config_resolver.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
+    (0, import_smithy_client.resolveDefaultRuntimeConfig)(extensionConfiguration),
+    (0, import_protocol_http.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
+    resolveHttpAuthRuntimeConfig(extensionConfiguration)
+  );
 }, "resolveRuntimeExtensions");
 
 // src/S3Client.ts
@@ -12741,6 +12721,8 @@ var S3Client = class extends import_smithy_client.Client {
   config;
   constructor(...[configuration]) {
     const _config_0 = (0, import_runtimeConfig.getRuntimeConfig)(configuration || {});
+    super(_config_0);
+    this.initConfig = _config_0;
     const _config_1 = resolveClientEndpointParameters(_config_0);
     const _config_2 = (0, import_middleware_user_agent.resolveUserAgentConfig)(_config_1);
     const _config_3 = (0, import_middleware_flexible_checksums.resolveFlexibleChecksumsConfig)(_config_2);
@@ -12752,7 +12734,6 @@ var S3Client = class extends import_smithy_client.Client {
     const _config_9 = (0, import_httpAuthSchemeProvider.resolveHttpAuthSchemeConfig)(_config_8);
     const _config_10 = (0, import_middleware_sdk_s32.resolveS3Config)(_config_9, { session: [() => this, CreateSessionCommand] });
     const _config_11 = resolveRuntimeExtensions(_config_10, configuration?.extensions || []);
-    super(_config_11);
     this.config = _config_11;
     this.middlewareStack.use((0, import_middleware_user_agent.getUserAgentPlugin)(this.config));
     this.middlewareStack.use((0, import_middleware_retry.getRetryPlugin)(this.config));
@@ -12763,10 +12744,10 @@ var S3Client = class extends import_smithy_client.Client {
     this.middlewareStack.use(
       (0, import_core3.getHttpAuthSchemeEndpointRuleSetPlugin)(this.config, {
         httpAuthSchemeParametersProvider: import_httpAuthSchemeProvider.defaultS3HttpAuthSchemeParametersProvider,
-        identityProviderConfigProvider: async (config) => new import_core3.DefaultIdentityProviderConfig({
+        identityProviderConfigProvider: /* @__PURE__ */ __name(async (config) => new import_core3.DefaultIdentityProviderConfig({
           "aws.auth#sigv4": config.credentials,
           "aws.auth#sigv4a": config.credentials
-        })
+        }), "identityProviderConfigProvider")
       })
     );
     this.middlewareStack.use((0, import_core3.getHttpSigningPlugin)(this.config));
@@ -15321,9 +15302,9 @@ const defaultSSOHttpAuthSchemeProvider = (authParameters) => {
 exports.defaultSSOHttpAuthSchemeProvider = defaultSSOHttpAuthSchemeProvider;
 const resolveHttpAuthSchemeConfig = (config) => {
     const config_0 = (0, core_1.resolveAwsSdkSigV4Config)(config);
-    return {
-        ...config_0,
-    };
+    return Object.assign(config_0, {
+        authSchemePreference: (0, util_middleware_1.normalizeProvider)(config.authSchemePreference ?? []),
+    });
 };
 exports.resolveHttpAuthSchemeConfig = resolveHttpAuthSchemeConfig;
 
@@ -15393,8 +15374,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   GetRoleCredentialsCommand: () => GetRoleCredentialsCommand,
   GetRoleCredentialsRequestFilterSensitiveLog: () => GetRoleCredentialsRequestFilterSensitiveLog,
   GetRoleCredentialsResponseFilterSensitiveLog: () => GetRoleCredentialsResponseFilterSensitiveLog,
@@ -15416,7 +15397,7 @@ __export(src_exports, {
   paginateListAccountRoles: () => paginateListAccountRoles,
   paginateListAccounts: () => paginateListAccounts
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/SSOClient.ts
 var import_middleware_host_header = __nccwpck_require__(2590);
@@ -15433,12 +15414,11 @@ var import_httpAuthSchemeProvider = __nccwpck_require__(2041);
 
 // src/endpoint/EndpointParameters.ts
 var resolveClientEndpointParameters = /* @__PURE__ */ __name((options) => {
-  return {
-    ...options,
+  return Object.assign(options, {
     useDualstackEndpoint: options.useDualstackEndpoint ?? false,
     useFipsEndpoint: options.useFipsEndpoint ?? false,
     defaultSigningName: "awsssoportal"
-  };
+  });
 }, "resolveClientEndpointParameters");
 var commonParams = {
   UseFIPS: { type: "builtInParams", name: "useFipsEndpoint" },
@@ -15495,22 +15475,21 @@ var resolveHttpAuthRuntimeConfig = /* @__PURE__ */ __name((config) => {
 }, "resolveHttpAuthRuntimeConfig");
 
 // src/runtimeExtensions.ts
-var asPartial = /* @__PURE__ */ __name((t) => t, "asPartial");
 var resolveRuntimeExtensions = /* @__PURE__ */ __name((runtimeConfig, extensions) => {
-  const extensionConfiguration = {
-    ...asPartial((0, import_region_config_resolver.getAwsRegionExtensionConfiguration)(runtimeConfig)),
-    ...asPartial((0, import_smithy_client.getDefaultExtensionConfiguration)(runtimeConfig)),
-    ...asPartial((0, import_protocol_http.getHttpHandlerExtensionConfiguration)(runtimeConfig)),
-    ...asPartial(getHttpAuthExtensionConfiguration(runtimeConfig))
-  };
+  const extensionConfiguration = Object.assign(
+    (0, import_region_config_resolver.getAwsRegionExtensionConfiguration)(runtimeConfig),
+    (0, import_smithy_client.getDefaultExtensionConfiguration)(runtimeConfig),
+    (0, import_protocol_http.getHttpHandlerExtensionConfiguration)(runtimeConfig),
+    getHttpAuthExtensionConfiguration(runtimeConfig)
+  );
   extensions.forEach((extension) => extension.configure(extensionConfiguration));
-  return {
-    ...runtimeConfig,
-    ...(0, import_region_config_resolver.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
-    ...(0, import_smithy_client.resolveDefaultRuntimeConfig)(extensionConfiguration),
-    ...(0, import_protocol_http.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
-    ...resolveHttpAuthRuntimeConfig(extensionConfiguration)
-  };
+  return Object.assign(
+    runtimeConfig,
+    (0, import_region_config_resolver.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
+    (0, import_smithy_client.resolveDefaultRuntimeConfig)(extensionConfiguration),
+    (0, import_protocol_http.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
+    resolveHttpAuthRuntimeConfig(extensionConfiguration)
+  );
 }, "resolveRuntimeExtensions");
 
 // src/SSOClient.ts
@@ -15524,6 +15503,8 @@ var SSOClient = class extends import_smithy_client.Client {
   config;
   constructor(...[configuration]) {
     const _config_0 = (0, import_runtimeConfig.getRuntimeConfig)(configuration || {});
+    super(_config_0);
+    this.initConfig = _config_0;
     const _config_1 = resolveClientEndpointParameters(_config_0);
     const _config_2 = (0, import_middleware_user_agent.resolveUserAgentConfig)(_config_1);
     const _config_3 = (0, import_middleware_retry.resolveRetryConfig)(_config_2);
@@ -15532,7 +15513,6 @@ var SSOClient = class extends import_smithy_client.Client {
     const _config_6 = (0, import_middleware_endpoint.resolveEndpointConfig)(_config_5);
     const _config_7 = (0, import_httpAuthSchemeProvider.resolveHttpAuthSchemeConfig)(_config_6);
     const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
-    super(_config_8);
     this.config = _config_8;
     this.middlewareStack.use((0, import_middleware_user_agent.getUserAgentPlugin)(this.config));
     this.middlewareStack.use((0, import_middleware_retry.getRetryPlugin)(this.config));
@@ -15543,9 +15523,9 @@ var SSOClient = class extends import_smithy_client.Client {
     this.middlewareStack.use(
       (0, import_core.getHttpAuthSchemeEndpointRuleSetPlugin)(this.config, {
         httpAuthSchemeParametersProvider: import_httpAuthSchemeProvider.defaultSSOHttpAuthSchemeParametersProvider,
-        identityProviderConfigProvider: async (config) => new import_core.DefaultIdentityProviderConfig({
+        identityProviderConfigProvider: /* @__PURE__ */ __name(async (config) => new import_core.DefaultIdentityProviderConfig({
           "aws.auth#sigv4": config.credentials
-        })
+        }), "identityProviderConfigProvider")
       })
     );
     this.middlewareStack.use((0, import_core.getHttpSigningPlugin)(this.config));
@@ -16121,14 +16101,14 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/submodules/client/index.ts
-var client_exports = {};
-__export(client_exports, {
+var index_exports = {};
+__export(index_exports, {
   emitWarningIfUnsupportedVersion: () => emitWarningIfUnsupportedVersion,
   setCredentialFeature: () => setCredentialFeature,
   setFeature: () => setFeature,
   state: () => state
 });
-module.exports = __toCommonJS(client_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/submodules/client/emitWarningIfUnsupportedVersion.ts
 var state = {
@@ -16201,8 +16181,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/submodules/httpAuthSchemes/index.ts
-var httpAuthSchemes_exports = {};
-__export(httpAuthSchemes_exports, {
+var index_exports = {};
+__export(index_exports, {
   AWSSDKSigV4Signer: () => AWSSDKSigV4Signer,
   AwsSdkSigV4ASigner: () => AwsSdkSigV4ASigner,
   AwsSdkSigV4Signer: () => AwsSdkSigV4Signer,
@@ -16212,7 +16192,7 @@ __export(httpAuthSchemes_exports, {
   resolveAwsSdkSigV4Config: () => resolveAwsSdkSigV4Config,
   validateSigningProperties: () => validateSigningProperties
 });
-module.exports = __toCommonJS(httpAuthSchemes_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.ts
 var import_protocol_http2 = __nccwpck_require__(2356);
@@ -16373,28 +16353,38 @@ var import_client = __nccwpck_require__(5152);
 var import_core2 = __nccwpck_require__(402);
 var import_signature_v4 = __nccwpck_require__(5118);
 var resolveAwsSdkSigV4Config = /* @__PURE__ */ __name((config) => {
-  let isUserSupplied = false;
-  let credentialsProvider;
-  if (config.credentials) {
-    isUserSupplied = true;
-    credentialsProvider = (0, import_core2.memoizeIdentityProvider)(config.credentials, import_core2.isIdentityExpired, import_core2.doesIdentityRequireRefresh);
-  }
-  if (!credentialsProvider) {
-    if (config.credentialDefaultProvider) {
-      credentialsProvider = (0, import_core2.normalizeProvider)(
-        config.credentialDefaultProvider(
-          Object.assign({}, config, {
-            parentClientConfig: config
-          })
-        )
-      );
-    } else {
-      credentialsProvider = /* @__PURE__ */ __name(async () => {
-        throw new Error("`credentials` is missing");
-      }, "credentialsProvider");
-    }
-  }
-  const boundCredentialsProvider = /* @__PURE__ */ __name(async () => credentialsProvider({ callerClientConfig: config }), "boundCredentialsProvider");
+  let inputCredentials = config.credentials;
+  let isUserSupplied = !!config.credentials;
+  let resolvedCredentials = void 0;
+  Object.defineProperty(config, "credentials", {
+    set(credentials) {
+      if (credentials && credentials !== inputCredentials && credentials !== resolvedCredentials) {
+        isUserSupplied = true;
+      }
+      inputCredentials = credentials;
+      const memoizedProvider = normalizeCredentialProvider(config, {
+        credentials: inputCredentials,
+        credentialDefaultProvider: config.credentialDefaultProvider
+      });
+      const boundProvider = bindCallerConfig(config, memoizedProvider);
+      if (isUserSupplied && !boundProvider.attributed) {
+        resolvedCredentials = /* @__PURE__ */ __name(async (options) => boundProvider(options).then(
+          (creds) => (0, import_client.setCredentialFeature)(creds, "CREDENTIALS_CODE", "e")
+        ), "resolvedCredentials");
+        resolvedCredentials.memoized = boundProvider.memoized;
+        resolvedCredentials.configBound = boundProvider.configBound;
+        resolvedCredentials.attributed = true;
+      } else {
+        resolvedCredentials = boundProvider;
+      }
+    },
+    get() {
+      return resolvedCredentials;
+    },
+    enumerable: true,
+    configurable: true
+  });
+  config.credentials = inputCredentials;
   const {
     // Default for signingEscapePath
     signingEscapePath = true,
@@ -16421,7 +16411,7 @@ var resolveAwsSdkSigV4Config = /* @__PURE__ */ __name((config) => {
       config.signingName = config.signingName || signingService || config.serviceId;
       const params = {
         ...config,
-        credentials: boundCredentialsProvider,
+        credentials: config.credentials,
         region: config.signingRegion,
         service: config.signingName,
         sha256,
@@ -16448,7 +16438,7 @@ var resolveAwsSdkSigV4Config = /* @__PURE__ */ __name((config) => {
       config.signingName = config.signingName || signingService || config.serviceId;
       const params = {
         ...config,
-        credentials: boundCredentialsProvider,
+        credentials: config.credentials,
         region: config.signingRegion,
         service: config.signingName,
         sha256,
@@ -16458,17 +16448,56 @@ var resolveAwsSdkSigV4Config = /* @__PURE__ */ __name((config) => {
       return new SignerCtor(params);
     }, "signer");
   }
-  return {
-    ...config,
+  const resolvedConfig = Object.assign(config, {
     systemClockOffset,
     signingEscapePath,
-    credentials: isUserSupplied ? async () => boundCredentialsProvider().then(
-      (creds) => (0, import_client.setCredentialFeature)(creds, "CREDENTIALS_CODE", "e")
-    ) : boundCredentialsProvider,
     signer
-  };
+  });
+  return resolvedConfig;
 }, "resolveAwsSdkSigV4Config");
 var resolveAWSSDKSigV4Config = resolveAwsSdkSigV4Config;
+function normalizeCredentialProvider(config, {
+  credentials,
+  credentialDefaultProvider
+}) {
+  let credentialsProvider;
+  if (credentials) {
+    if (!credentials?.memoized) {
+      credentialsProvider = (0, import_core2.memoizeIdentityProvider)(credentials, import_core2.isIdentityExpired, import_core2.doesIdentityRequireRefresh);
+    } else {
+      credentialsProvider = credentials;
+    }
+  } else {
+    if (credentialDefaultProvider) {
+      credentialsProvider = (0, import_core2.normalizeProvider)(
+        credentialDefaultProvider(
+          Object.assign({}, config, {
+            parentClientConfig: config
+          })
+        )
+      );
+    } else {
+      credentialsProvider = /* @__PURE__ */ __name(async () => {
+        throw new Error(
+          "@aws-sdk/core::resolveAwsSdkSigV4Config - `credentials` not provided and no credentialDefaultProvider was configured."
+        );
+      }, "credentialsProvider");
+    }
+  }
+  credentialsProvider.memoized = true;
+  return credentialsProvider;
+}
+__name(normalizeCredentialProvider, "normalizeCredentialProvider");
+function bindCallerConfig(config, credentialsProvider) {
+  if (credentialsProvider.configBound) {
+    return credentialsProvider;
+  }
+  const fn = /* @__PURE__ */ __name(async (options) => credentialsProvider({ ...options, callerClientConfig: config }), "fn");
+  fn.memoized = credentialsProvider.memoized;
+  fn.configBound = true;
+  return fn;
+}
+__name(bindCallerConfig, "bindCallerConfig");
 // Annotate the CommonJS export names for ESM import in node:
 0 && (0);
 
@@ -16499,8 +16528,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/submodules/protocols/index.ts
-var protocols_exports = {};
-__export(protocols_exports, {
+var index_exports = {};
+__export(index_exports, {
   _toBool: () => _toBool,
   _toNum: () => _toNum,
   _toStr: () => _toStr,
@@ -16512,7 +16541,7 @@ __export(protocols_exports, {
   parseXmlBody: () => parseXmlBody,
   parseXmlErrorBody: () => parseXmlErrorBody
 });
-module.exports = __toCommonJS(protocols_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/submodules/protocols/coercing-serializers.ts
 var _toStr = /* @__PURE__ */ __name((val) => {
@@ -16648,7 +16677,7 @@ var parseXmlBody = /* @__PURE__ */ __name((streamBody, context) => collectBodySt
       ignoreDeclaration: true,
       parseTagValue: false,
       trimValues: false,
-      tagValueProcessor: (_, val) => val.trim() === "" && val.includes("\n") ? "" : void 0
+      tagValueProcessor: /* @__PURE__ */ __name((_, val) => val.trim() === "" && val.includes("\n") ? "" : void 0, "tagValueProcessor")
     });
     parser.addEntity("#xD", "\r");
     parser.addEntity("#10", "\n");
@@ -16722,8 +16751,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   ENV_ACCOUNT_ID: () => ENV_ACCOUNT_ID,
   ENV_CREDENTIAL_SCOPE: () => ENV_CREDENTIAL_SCOPE,
   ENV_EXPIRATION: () => ENV_EXPIRATION,
@@ -16732,7 +16761,7 @@ __export(src_exports, {
   ENV_SESSION: () => ENV_SESSION,
   fromEnv: () => fromEnv
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/fromEnv.ts
 var import_client = __nccwpck_require__(5152);
@@ -17032,11 +17061,11 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   fromIni: () => fromIni
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/fromIni.ts
 
@@ -17054,22 +17083,22 @@ var import_client = __nccwpck_require__(5152);
 var import_property_provider = __nccwpck_require__(1238);
 var resolveCredentialSource = /* @__PURE__ */ __name((credentialSource, profileName, logger) => {
   const sourceProvidersMap = {
-    EcsContainer: async (options) => {
+    EcsContainer: /* @__PURE__ */ __name(async (options) => {
       const { fromHttp } = await Promise.resolve().then(() => __toESM(__nccwpck_require__(8605)));
       const { fromContainerMetadata } = await Promise.resolve().then(() => __toESM(__nccwpck_require__(566)));
       logger?.debug("@aws-sdk/credential-provider-ini - credential_source is EcsContainer");
       return async () => (0, import_property_provider.chain)(fromHttp(options ?? {}), fromContainerMetadata(options))().then(setNamedProvider);
-    },
-    Ec2InstanceMetadata: async (options) => {
+    }, "EcsContainer"),
+    Ec2InstanceMetadata: /* @__PURE__ */ __name(async (options) => {
       logger?.debug("@aws-sdk/credential-provider-ini - credential_source is Ec2InstanceMetadata");
       const { fromInstanceMetadata } = await Promise.resolve().then(() => __toESM(__nccwpck_require__(566)));
       return async () => fromInstanceMetadata(options)().then(setNamedProvider);
-    },
-    Environment: async (options) => {
+    }, "Ec2InstanceMetadata"),
+    Environment: /* @__PURE__ */ __name(async (options) => {
       logger?.debug("@aws-sdk/credential-provider-ini - credential_source is Environment");
       const { fromEnv } = await Promise.resolve().then(() => __toESM(__nccwpck_require__(5606)));
       return async () => fromEnv(options)().then(setNamedProvider);
-    }
+    }, "Environment")
   };
   if (credentialSource in sourceProvidersMap) {
     return sourceProvidersMap[credentialSource];
@@ -17313,13 +17342,13 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   credentialsTreatedAsExpired: () => credentialsTreatedAsExpired,
   credentialsWillNeedRefresh: () => credentialsWillNeedRefresh,
   defaultProvider: () => defaultProvider
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/defaultProvider.ts
 var import_credential_provider_env = __nccwpck_require__(5606);
@@ -17453,11 +17482,11 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   fromProcess: () => fromProcess
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/fromProcess.ts
 var import_shared_ini_file_loader = __nccwpck_require__(4964);
@@ -17589,13 +17618,13 @@ var init_loadSso = __esm({
 });
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   fromSSO: () => fromSSO,
   isSsoProfile: () => isSsoProfile,
   validateSsoProfile: () => validateSsoProfile
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/fromSSO.ts
 
@@ -17915,10 +17944,10 @@ var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "defau
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-module.exports = __toCommonJS(src_exports);
-__reExport(src_exports, __nccwpck_require__(8079), module.exports);
-__reExport(src_exports, __nccwpck_require__(4453), module.exports);
+var index_exports = {};
+module.exports = __toCommonJS(index_exports);
+__reExport(index_exports, __nccwpck_require__(8079), module.exports);
+__reExport(index_exports, __nccwpck_require__(4453), module.exports);
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -17951,8 +17980,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS: () => NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS,
   NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME: () => NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME,
   NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME: () => NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME,
@@ -17974,15 +18003,15 @@ __export(src_exports, {
   validatePartition: () => validatePartition,
   validateRegion: () => validateRegion
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/NodeDisableMultiregionAccessPointConfigOptions.ts
 var import_util_config_provider = __nccwpck_require__(6716);
 var NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME = "AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS";
 var NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME = "s3_disable_multiregion_access_points";
 var NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS = {
-  environmentVariableSelector: (env) => (0, import_util_config_provider.booleanSelector)(env, NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME, import_util_config_provider.SelectorType.ENV),
-  configFileSelector: (profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME, import_util_config_provider.SelectorType.CONFIG),
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => (0, import_util_config_provider.booleanSelector)(env, NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME, import_util_config_provider.SelectorType.ENV), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME, import_util_config_provider.SelectorType.CONFIG), "configFileSelector"),
   default: false
 };
 
@@ -17991,8 +18020,8 @@ var NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS = {
 var NODE_USE_ARN_REGION_ENV_NAME = "AWS_S3_USE_ARN_REGION";
 var NODE_USE_ARN_REGION_INI_NAME = "s3_use_arn_region";
 var NODE_USE_ARN_REGION_CONFIG_OPTIONS = {
-  environmentVariableSelector: (env) => (0, import_util_config_provider.booleanSelector)(env, NODE_USE_ARN_REGION_ENV_NAME, import_util_config_provider.SelectorType.ENV),
-  configFileSelector: (profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_USE_ARN_REGION_INI_NAME, import_util_config_provider.SelectorType.CONFIG),
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => (0, import_util_config_provider.booleanSelector)(env, NODE_USE_ARN_REGION_ENV_NAME, import_util_config_provider.SelectorType.ENV), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_USE_ARN_REGION_INI_NAME, import_util_config_provider.SelectorType.CONFIG), "configFileSelector"),
   default: false
 };
 
@@ -18080,10 +18109,8 @@ var validateDNSHostLabel = /* @__PURE__ */ __name((label, options = { tlsCompati
 }, "validateDNSHostLabel");
 var validateCustomEndpoint = /* @__PURE__ */ __name((options) => {
   if (options.isCustomEndpoint) {
-    if (options.dualstackEndpoint)
-      throw new Error("Dualstack endpoint is not supported with custom endpoint");
-    if (options.accelerateEndpoint)
-      throw new Error("Accelerate endpoint is not supported with custom endpoint");
+    if (options.dualstackEndpoint) throw new Error("Dualstack endpoint is not supported with custom endpoint");
+    if (options.accelerateEndpoint) throw new Error("Accelerate endpoint is not supported with custom endpoint");
   }
 }, "validateCustomEndpoint");
 var getArnResources = /* @__PURE__ */ __name((resource) => {
@@ -18111,8 +18138,7 @@ var validateNoDualstack = /* @__PURE__ */ __name((dualstackEndpoint) => {
     throw new Error("Dualstack endpoint is not supported with Outpost or Multi-region Access Point ARN.");
 }, "validateNoDualstack");
 var validateNoFIPS = /* @__PURE__ */ __name((useFipsEndpoint) => {
-  if (useFipsEndpoint)
-    throw new Error(`FIPS region is not supported with Outpost.`);
+  if (useFipsEndpoint) throw new Error(`FIPS region is not supported with Outpost.`);
 }, "validateNoFIPS");
 var validateMrapAlias = /* @__PURE__ */ __name((name) => {
   try {
@@ -18382,9 +18408,9 @@ var bucketEndpointMiddlewareOptions = {
   override: true
 };
 var getBucketEndpointPlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.addRelativeTo(bucketEndpointMiddleware(options), bucketEndpointMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getBucketEndpointPlugin");
 
 // src/configurations.ts
@@ -18396,14 +18422,13 @@ function resolveBucketEndpointConfig(input) {
     useArnRegion = false,
     disableMultiregionAccessPoints = false
   } = input;
-  return {
-    ...input,
+  return Object.assign(input, {
     bucketEndpoint,
     forcePathStyle,
     useAccelerateEndpoint,
     useArnRegion: typeof useArnRegion === "function" ? useArnRegion : () => Promise.resolve(useArnRegion),
     disableMultiregionAccessPoints: typeof disableMultiregionAccessPoints === "function" ? disableMultiregionAccessPoints : () => Promise.resolve(disableMultiregionAccessPoints)
-  };
+  });
 }
 __name(resolveBucketEndpointConfig, "resolveBucketEndpointConfig");
 // Annotate the CommonJS export names for ESM import in node:
@@ -18438,13 +18463,13 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   addExpectContinueMiddleware: () => addExpectContinueMiddleware,
   addExpectContinueMiddlewareOptions: () => addExpectContinueMiddlewareOptions,
   getAddExpectContinuePlugin: () => getAddExpectContinuePlugin
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 var import_protocol_http = __nccwpck_require__(2356);
 function addExpectContinueMiddleware(options) {
   return (next) => async (args) => {
@@ -18471,9 +18496,9 @@ var addExpectContinueMiddlewareOptions = {
   override: true
 };
 var getAddExpectContinuePlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(addExpectContinueMiddleware(options), addExpectContinueMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getAddExpectContinuePlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -18540,8 +18565,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   CONFIG_REQUEST_CHECKSUM_CALCULATION: () => CONFIG_REQUEST_CHECKSUM_CALCULATION,
   CONFIG_RESPONSE_CHECKSUM_VALIDATION: () => CONFIG_RESPONSE_CHECKSUM_VALIDATION,
   ChecksumAlgorithm: () => ChecksumAlgorithm,
@@ -18561,7 +18586,7 @@ __export(src_exports, {
   getFlexibleChecksumsPlugin: () => getFlexibleChecksumsPlugin,
   resolveFlexibleChecksumsConfig: () => resolveFlexibleChecksumsConfig
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/constants.ts
 var RequestChecksumCalculation = {
@@ -18616,8 +18641,7 @@ var DEFAULT_CHECKSUM_ALGORITHM = "CRC32" /* CRC32 */;
 
 // src/stringUnionSelector.ts
 var stringUnionSelector = /* @__PURE__ */ __name((obj, key, union, type) => {
-  if (!(key in obj))
-    return void 0;
+  if (!(key in obj)) return void 0;
   const value = obj[key].toUpperCase();
   if (!Object.values(union).includes(value)) {
     throw new TypeError(`Cannot load ${type} '${key}'. Expected one of ${Object.values(union)}, got '${obj[key]}'.`);
@@ -18629,8 +18653,8 @@ var stringUnionSelector = /* @__PURE__ */ __name((obj, key, union, type) => {
 var ENV_REQUEST_CHECKSUM_CALCULATION = "AWS_REQUEST_CHECKSUM_CALCULATION";
 var CONFIG_REQUEST_CHECKSUM_CALCULATION = "request_checksum_calculation";
 var NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS = {
-  environmentVariableSelector: (env) => stringUnionSelector(env, ENV_REQUEST_CHECKSUM_CALCULATION, RequestChecksumCalculation, "env" /* ENV */),
-  configFileSelector: (profile) => stringUnionSelector(profile, CONFIG_REQUEST_CHECKSUM_CALCULATION, RequestChecksumCalculation, "shared config entry" /* CONFIG */),
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => stringUnionSelector(env, ENV_REQUEST_CHECKSUM_CALCULATION, RequestChecksumCalculation, "env" /* ENV */), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => stringUnionSelector(profile, CONFIG_REQUEST_CHECKSUM_CALCULATION, RequestChecksumCalculation, "shared config entry" /* CONFIG */), "configFileSelector"),
   default: DEFAULT_REQUEST_CHECKSUM_CALCULATION
 };
 
@@ -18638,8 +18662,8 @@ var NODE_REQUEST_CHECKSUM_CALCULATION_CONFIG_OPTIONS = {
 var ENV_RESPONSE_CHECKSUM_VALIDATION = "AWS_RESPONSE_CHECKSUM_VALIDATION";
 var CONFIG_RESPONSE_CHECKSUM_VALIDATION = "response_checksum_validation";
 var NODE_RESPONSE_CHECKSUM_VALIDATION_CONFIG_OPTIONS = {
-  environmentVariableSelector: (env) => stringUnionSelector(env, ENV_RESPONSE_CHECKSUM_VALIDATION, ResponseChecksumValidation, "env" /* ENV */),
-  configFileSelector: (profile) => stringUnionSelector(profile, CONFIG_RESPONSE_CHECKSUM_VALIDATION, ResponseChecksumValidation, "shared config entry" /* CONFIG */),
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => stringUnionSelector(env, ENV_RESPONSE_CHECKSUM_VALIDATION, ResponseChecksumValidation, "env" /* ENV */), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => stringUnionSelector(profile, CONFIG_RESPONSE_CHECKSUM_VALIDATION, ResponseChecksumValidation, "shared config entry" /* CONFIG */), "configFileSelector"),
   default: DEFAULT_RESPONSE_CHECKSUM_VALIDATION
 };
 
@@ -18999,7 +19023,7 @@ var flexibleChecksumsResponseMiddleware = /* @__PURE__ */ __name((config, middle
 
 // src/getFlexibleChecksumsPlugin.ts
 var getFlexibleChecksumsPlugin = /* @__PURE__ */ __name((config, middlewareConfig) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(flexibleChecksumsMiddleware(config, middlewareConfig), flexibleChecksumsMiddlewareOptions);
     clientStack.addRelativeTo(
       flexibleChecksumsInputMiddleware(config, middlewareConfig),
@@ -19009,21 +19033,19 @@ var getFlexibleChecksumsPlugin = /* @__PURE__ */ __name((config, middlewareConfi
       flexibleChecksumsResponseMiddleware(config, middlewareConfig),
       flexibleChecksumsResponseMiddlewareOptions
     );
-  }
+  }, "applyToStack")
 }), "getFlexibleChecksumsPlugin");
 
 // src/resolveFlexibleChecksumsConfig.ts
 var import_util_middleware = __nccwpck_require__(6324);
-var resolveFlexibleChecksumsConfig = /* @__PURE__ */ __name((input) => ({
-  ...input,
-  requestChecksumCalculation: (0, import_util_middleware.normalizeProvider)(
-    input.requestChecksumCalculation ?? DEFAULT_REQUEST_CHECKSUM_CALCULATION
-  ),
-  responseChecksumValidation: (0, import_util_middleware.normalizeProvider)(
-    input.responseChecksumValidation ?? DEFAULT_RESPONSE_CHECKSUM_VALIDATION
-  ),
-  requestStreamBufferSize: Number(input.requestStreamBufferSize ?? 0)
-}), "resolveFlexibleChecksumsConfig");
+var resolveFlexibleChecksumsConfig = /* @__PURE__ */ __name((input) => {
+  const { requestChecksumCalculation, responseChecksumValidation, requestStreamBufferSize } = input;
+  return Object.assign(input, {
+    requestChecksumCalculation: (0, import_util_middleware.normalizeProvider)(requestChecksumCalculation ?? DEFAULT_REQUEST_CHECKSUM_CALCULATION),
+    responseChecksumValidation: (0, import_util_middleware.normalizeProvider)(responseChecksumValidation ?? DEFAULT_RESPONSE_CHECKSUM_VALIDATION),
+    requestStreamBufferSize: Number(requestStreamBufferSize ?? 0)
+  });
+}, "resolveFlexibleChecksumsConfig");
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -19056,22 +19078,21 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   getHostHeaderPlugin: () => getHostHeaderPlugin,
   hostHeaderMiddleware: () => hostHeaderMiddleware,
   hostHeaderMiddlewareOptions: () => hostHeaderMiddlewareOptions,
   resolveHostHeaderConfig: () => resolveHostHeaderConfig
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 var import_protocol_http = __nccwpck_require__(2356);
 function resolveHostHeaderConfig(input) {
   return input;
 }
 __name(resolveHostHeaderConfig, "resolveHostHeaderConfig");
 var hostHeaderMiddleware = /* @__PURE__ */ __name((options) => (next) => async (args) => {
-  if (!import_protocol_http.HttpRequest.isInstance(args.request))
-    return next(args);
+  if (!import_protocol_http.HttpRequest.isInstance(args.request)) return next(args);
   const { request } = args;
   const { handlerProtocol = "" } = options.requestHandler.metadata || {};
   if (handlerProtocol.indexOf("h2") >= 0 && !request.headers[":authority"]) {
@@ -19079,8 +19100,7 @@ var hostHeaderMiddleware = /* @__PURE__ */ __name((options) => (next) => async (
     request.headers[":authority"] = request.hostname + (request.port ? ":" + request.port : "");
   } else if (!request.headers["host"]) {
     let host = request.hostname;
-    if (request.port != null)
-      host += `:${request.port}`;
+    if (request.port != null) host += `:${request.port}`;
     request.headers["host"] = host;
   }
   return next(args);
@@ -19093,9 +19113,9 @@ var hostHeaderMiddlewareOptions = {
   override: true
 };
 var getHostHeaderPlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(hostHeaderMiddleware(options), hostHeaderMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getHostHeaderPlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -19129,13 +19149,13 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   getLocationConstraintPlugin: () => getLocationConstraintPlugin,
   locationConstraintMiddleware: () => locationConstraintMiddleware,
   locationConstraintMiddlewareOptions: () => locationConstraintMiddlewareOptions
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 function locationConstraintMiddleware(options) {
   return (next) => async (args) => {
     const { CreateBucketConfiguration } = args.input;
@@ -19160,9 +19180,9 @@ var locationConstraintMiddlewareOptions = {
   override: true
 };
 var getLocationConstraintPlugin = /* @__PURE__ */ __name((config) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(locationConstraintMiddleware(config), locationConstraintMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getLocationConstraintPlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -19196,13 +19216,13 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   getLoggerPlugin: () => getLoggerPlugin,
   loggerMiddleware: () => loggerMiddleware,
   loggerMiddlewareOptions: () => loggerMiddlewareOptions
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/loggerMiddleware.ts
 var loggerMiddleware = /* @__PURE__ */ __name(() => (next, context) => async (args) => {
@@ -19242,9 +19262,9 @@ var loggerMiddlewareOptions = {
   override: true
 };
 var getLoggerPlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(loggerMiddleware(), loggerMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getLoggerPlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -19278,20 +19298,24 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   addRecursionDetectionMiddlewareOptions: () => addRecursionDetectionMiddlewareOptions,
   getRecursionDetectionPlugin: () => getRecursionDetectionPlugin,
   recursionDetectionMiddleware: () => recursionDetectionMiddleware
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 var import_protocol_http = __nccwpck_require__(2356);
 var TRACE_ID_HEADER_NAME = "X-Amzn-Trace-Id";
 var ENV_LAMBDA_FUNCTION_NAME = "AWS_LAMBDA_FUNCTION_NAME";
 var ENV_TRACE_ID = "_X_AMZN_TRACE_ID";
 var recursionDetectionMiddleware = /* @__PURE__ */ __name((options) => (next) => async (args) => {
   const { request } = args;
-  if (!import_protocol_http.HttpRequest.isInstance(request) || options.runtime !== "node" || request.headers.hasOwnProperty(TRACE_ID_HEADER_NAME)) {
+  if (!import_protocol_http.HttpRequest.isInstance(request) || options.runtime !== "node") {
+    return next(args);
+  }
+  const traceIdHeader = Object.keys(request.headers ?? {}).find((h) => h.toLowerCase() === TRACE_ID_HEADER_NAME.toLowerCase()) ?? TRACE_ID_HEADER_NAME;
+  if (request.headers.hasOwnProperty(traceIdHeader)) {
     return next(args);
   }
   const functionName = process.env[ENV_LAMBDA_FUNCTION_NAME];
@@ -19313,9 +19337,9 @@ var addRecursionDetectionMiddlewareOptions = {
   priority: "low"
 };
 var getRecursionDetectionPlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(recursionDetectionMiddleware(options), addRecursionDetectionMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getRecursionDetectionPlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -19349,8 +19373,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_OPTIONS: () => NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_OPTIONS,
   S3ExpressIdentityCache: () => S3ExpressIdentityCache,
   S3ExpressIdentityCacheEntry: () => S3ExpressIdentityCacheEntry,
@@ -19381,7 +19405,7 @@ __export(src_exports, {
   validateBucketNameMiddleware: () => validateBucketNameMiddleware,
   validateBucketNameMiddlewareOptions: () => validateBucketNameMiddlewareOptions
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/check-content-length-header.ts
 var import_protocol_http = __nccwpck_require__(2356);
@@ -19412,9 +19436,9 @@ var checkContentLengthHeaderMiddlewareOptions = {
   override: true
 };
 var getCheckContentLengthHeaderPlugin = /* @__PURE__ */ __name((unused) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(checkContentLengthHeader(), checkContentLengthHeaderMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getCheckContentLengthHeaderPlugin");
 
 // src/region-redirect-endpoint-middleware.ts
@@ -19427,9 +19451,9 @@ var regionRedirectEndpointMiddleware = /* @__PURE__ */ __name((config) => {
     if (context.__s3RegionRedirect) {
       Object.defineProperty(config, "region", {
         writable: false,
-        value: async () => {
+        value: /* @__PURE__ */ __name(async () => {
           return context.__s3RegionRedirect;
-        }
+        }, "value")
       });
       unlock = /* @__PURE__ */ __name(() => Object.defineProperty(config, "region", {
         writable: true,
@@ -19491,10 +19515,10 @@ var regionRedirectMiddlewareOptions = {
   override: true
 };
 var getRegionRedirectMiddlewarePlugin = /* @__PURE__ */ __name((clientConfig) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(regionRedirectMiddleware(clientConfig), regionRedirectMiddlewareOptions);
     clientStack.addRelativeTo(regionRedirectEndpointMiddleware(clientConfig), regionRedirectEndpointMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getRegionRedirectMiddlewarePlugin");
 
 // src/s3-expires-middleware.ts
@@ -19528,9 +19552,9 @@ var s3ExpiresMiddlewareOptions = {
   toMiddleware: "deserializerMiddleware"
 };
 var getS3ExpiresMiddlewarePlugin = /* @__PURE__ */ __name((clientConfig) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.addRelativeTo(s3ExpiresMiddleware(clientConfig), s3ExpiresMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getS3ExpiresMiddlewarePlugin");
 
 // src/s3-express/classes/S3ExpressIdentityCache.ts
@@ -19660,8 +19684,8 @@ var SESSION_TOKEN_HEADER = SESSION_TOKEN_QUERY_PARAM.toLowerCase();
 var NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_ENV_NAME = "AWS_S3_DISABLE_EXPRESS_SESSION_AUTH";
 var NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_INI_NAME = "s3_disable_express_session_auth";
 var NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_OPTIONS = {
-  environmentVariableSelector: (env) => (0, import_util_config_provider.booleanSelector)(env, NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_ENV_NAME, import_util_config_provider.SelectorType.ENV),
-  configFileSelector: (profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_INI_NAME, import_util_config_provider.SelectorType.CONFIG),
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => (0, import_util_config_provider.booleanSelector)(env, NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_ENV_NAME, import_util_config_provider.SelectorType.ENV), "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => (0, import_util_config_provider.booleanSelector)(profile, NODE_DISABLE_S3_EXPRESS_SESSION_AUTH_INI_NAME, import_util_config_provider.SelectorType.CONFIG), "configFileSelector"),
   default: false
 };
 
@@ -19760,9 +19784,9 @@ var s3ExpressMiddlewareOptions = {
   override: true
 };
 var getS3ExpressPlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(s3ExpressMiddleware(options), s3ExpressMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getS3ExpressPlugin");
 
 // src/s3-express/functions/s3ExpressHttpSigningMiddleware.ts
@@ -19819,12 +19843,12 @@ var s3ExpressHttpSigningMiddleware = /* @__PURE__ */ __name((config) => (next, c
   return output;
 }, "s3ExpressHttpSigningMiddleware");
 var getS3ExpressHttpSigningPlugin = /* @__PURE__ */ __name((config) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.addRelativeTo(
       s3ExpressHttpSigningMiddleware(config),
       import_core2.httpSigningMiddlewareOptions
     );
-  }
+  }, "applyToStack")
 }), "getS3ExpressHttpSigningPlugin");
 
 // src/s3Configuration.ts
@@ -19832,21 +19856,28 @@ var resolveS3Config = /* @__PURE__ */ __name((input, {
   session
 }) => {
   const [s3ClientProvider, CreateSessionCommandCtor] = session;
-  return {
-    ...input,
-    forcePathStyle: input.forcePathStyle ?? false,
-    useAccelerateEndpoint: input.useAccelerateEndpoint ?? false,
-    disableMultiregionAccessPoints: input.disableMultiregionAccessPoints ?? false,
-    followRegionRedirects: input.followRegionRedirects ?? false,
-    s3ExpressIdentityProvider: input.s3ExpressIdentityProvider ?? new S3ExpressIdentityProviderImpl(
+  const {
+    forcePathStyle,
+    useAccelerateEndpoint,
+    disableMultiregionAccessPoints,
+    followRegionRedirects,
+    s3ExpressIdentityProvider,
+    bucketEndpoint
+  } = input;
+  return Object.assign(input, {
+    forcePathStyle: forcePathStyle ?? false,
+    useAccelerateEndpoint: useAccelerateEndpoint ?? false,
+    disableMultiregionAccessPoints: disableMultiregionAccessPoints ?? false,
+    followRegionRedirects: followRegionRedirects ?? false,
+    s3ExpressIdentityProvider: s3ExpressIdentityProvider ?? new S3ExpressIdentityProviderImpl(
       async (key) => s3ClientProvider().send(
         new CreateSessionCommandCtor({
           Bucket: key
         })
       )
     ),
-    bucketEndpoint: input.bucketEndpoint ?? false
-  };
+    bucketEndpoint: bucketEndpoint ?? false
+  });
 }, "resolveS3Config");
 
 // src/throw-200-exceptions.ts
@@ -19879,9 +19910,9 @@ var throw200ExceptionsMiddleware = /* @__PURE__ */ __name((config) => (next, con
   }
   response.body = body;
   const bodyBytes = await collectBody(bodyCopy, {
-    streamCollector: async (stream) => {
+    streamCollector: /* @__PURE__ */ __name(async (stream) => {
       return (0, import_util_stream.headStream)(stream, MAX_BYTES_TO_INSPECT);
-    }
+    }, "streamCollector")
   });
   if (typeof bodyCopy?.destroy === "function") {
     bodyCopy.destroy();
@@ -19911,9 +19942,9 @@ var throw200ExceptionsMiddlewareOptions = {
   override: true
 };
 var getThrow200ExceptionsPlugin = /* @__PURE__ */ __name((config) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.addRelativeTo(throw200ExceptionsMiddleware(config), throw200ExceptionsMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getThrow200ExceptionsPlugin");
 
 // src/validate-bucket-name.ts
@@ -19978,10 +20009,10 @@ var validateBucketNameMiddlewareOptions = {
   override: true
 };
 var getValidateBucketNamePlugin = /* @__PURE__ */ __name((options) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(validateBucketNameMiddleware(options), validateBucketNameMiddlewareOptions);
     clientStack.addRelativeTo(bucketEndpointMiddleware(options), bucketEndpointMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getValidateBucketNamePlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -20015,14 +20046,14 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   getSsecPlugin: () => getSsecPlugin,
   isValidBase64EncodedSSECustomerKey: () => isValidBase64EncodedSSECustomerKey,
   ssecMiddleware: () => ssecMiddleware,
   ssecMiddlewareOptions: () => ssecMiddlewareOptions
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 function ssecMiddleware(options) {
   return (next) => async (args) => {
     const input = { ...args.input };
@@ -20070,14 +20101,13 @@ var ssecMiddlewareOptions = {
   override: true
 };
 var getSsecPlugin = /* @__PURE__ */ __name((config) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(ssecMiddleware(config), ssecMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getSsecPlugin");
 function isValidBase64EncodedSSECustomerKey(str, options) {
   const base64Regex = /^(?:[A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
-  if (!base64Regex.test(str))
-    return false;
+  if (!base64Regex.test(str)) return false;
   try {
     const decodedBytes = options.base64Decoder(str);
     return decodedBytes.length === 32;
@@ -20118,15 +20148,15 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   DEFAULT_UA_APP_ID: () => DEFAULT_UA_APP_ID,
   getUserAgentMiddlewareOptions: () => getUserAgentMiddlewareOptions,
   getUserAgentPlugin: () => getUserAgentPlugin,
   resolveUserAgentConfig: () => resolveUserAgentConfig,
   userAgentMiddleware: () => userAgentMiddleware
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/configurations.ts
 var import_core = __nccwpck_require__(402);
@@ -20140,10 +20170,10 @@ function isValidUserAgentAppId(appId) {
 __name(isValidUserAgentAppId, "isValidUserAgentAppId");
 function resolveUserAgentConfig(input) {
   const normalizedAppIdProvider = (0, import_core.normalizeProvider)(input.userAgentAppId ?? DEFAULT_UA_APP_ID);
-  return {
-    ...input,
-    customUserAgent: typeof input.customUserAgent === "string" ? [[input.customUserAgent]] : input.customUserAgent,
-    userAgentAppId: async () => {
+  const { customUserAgent } = input;
+  return Object.assign(input, {
+    customUserAgent: typeof customUserAgent === "string" ? [[customUserAgent]] : customUserAgent,
+    userAgentAppId: /* @__PURE__ */ __name(async () => {
       const appId = await normalizedAppIdProvider();
       if (!isValidUserAgentAppId(appId)) {
         const logger = input.logger?.constructor?.name === "NoOpLogger" || !input.logger ? console : input.logger;
@@ -20154,8 +20184,8 @@ function resolveUserAgentConfig(input) {
         }
       }
       return appId;
-    }
-  };
+    }, "userAgentAppId")
+  });
 }
 __name(resolveUserAgentConfig, "resolveUserAgentConfig");
 
@@ -20310,9 +20340,9 @@ var getUserAgentMiddlewareOptions = {
   override: true
 };
 var getUserAgentPlugin = /* @__PURE__ */ __name((config) => ({
-  applyToStack: (clientStack) => {
+  applyToStack: /* @__PURE__ */ __name((clientStack) => {
     clientStack.add(userAgentMiddleware(config), getUserAgentMiddlewareOptions);
-  }
+  }, "applyToStack")
 }), "getUserAgentPlugin");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -20376,9 +20406,9 @@ const defaultSSOOIDCHttpAuthSchemeProvider = (authParameters) => {
 exports.defaultSSOOIDCHttpAuthSchemeProvider = defaultSSOOIDCHttpAuthSchemeProvider;
 const resolveHttpAuthSchemeConfig = (config) => {
     const config_0 = (0, core_1.resolveAwsSdkSigV4Config)(config);
-    return {
-        ...config_0,
-    };
+    return Object.assign(config_0, {
+        authSchemePreference: (0, util_middleware_1.normalizeProvider)(config.authSchemePreference ?? []),
+    });
 };
 exports.resolveHttpAuthSchemeConfig = resolveHttpAuthSchemeConfig;
 
@@ -20448,8 +20478,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/submodules/sso-oidc/index.ts
-var sso_oidc_exports = {};
-__export(sso_oidc_exports, {
+var index_exports = {};
+__export(index_exports, {
   $Command: () => import_smithy_client6.Command,
   AccessDeniedException: () => AccessDeniedException,
   AuthorizationPendingException: () => AuthorizationPendingException,
@@ -20470,7 +20500,7 @@ __export(sso_oidc_exports, {
   UnsupportedGrantTypeException: () => UnsupportedGrantTypeException,
   __Client: () => import_smithy_client2.Client
 });
-module.exports = __toCommonJS(sso_oidc_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/submodules/sso-oidc/SSOOIDCClient.ts
 var import_middleware_host_header = __nccwpck_require__(2590);
@@ -20487,12 +20517,11 @@ var import_httpAuthSchemeProvider = __nccwpck_require__(8396);
 
 // src/submodules/sso-oidc/endpoint/EndpointParameters.ts
 var resolveClientEndpointParameters = /* @__PURE__ */ __name((options) => {
-  return {
-    ...options,
+  return Object.assign(options, {
     useDualstackEndpoint: options.useDualstackEndpoint ?? false,
     useFipsEndpoint: options.useFipsEndpoint ?? false,
     defaultSigningName: "sso-oauth"
-  };
+  });
 }, "resolveClientEndpointParameters");
 var commonParams = {
   UseFIPS: { type: "builtInParams", name: "useFipsEndpoint" },
@@ -20549,22 +20578,21 @@ var resolveHttpAuthRuntimeConfig = /* @__PURE__ */ __name((config) => {
 }, "resolveHttpAuthRuntimeConfig");
 
 // src/submodules/sso-oidc/runtimeExtensions.ts
-var asPartial = /* @__PURE__ */ __name((t) => t, "asPartial");
 var resolveRuntimeExtensions = /* @__PURE__ */ __name((runtimeConfig, extensions) => {
-  const extensionConfiguration = {
-    ...asPartial((0, import_region_config_resolver.getAwsRegionExtensionConfiguration)(runtimeConfig)),
-    ...asPartial((0, import_smithy_client.getDefaultExtensionConfiguration)(runtimeConfig)),
-    ...asPartial((0, import_protocol_http.getHttpHandlerExtensionConfiguration)(runtimeConfig)),
-    ...asPartial(getHttpAuthExtensionConfiguration(runtimeConfig))
-  };
+  const extensionConfiguration = Object.assign(
+    (0, import_region_config_resolver.getAwsRegionExtensionConfiguration)(runtimeConfig),
+    (0, import_smithy_client.getDefaultExtensionConfiguration)(runtimeConfig),
+    (0, import_protocol_http.getHttpHandlerExtensionConfiguration)(runtimeConfig),
+    getHttpAuthExtensionConfiguration(runtimeConfig)
+  );
   extensions.forEach((extension) => extension.configure(extensionConfiguration));
-  return {
-    ...runtimeConfig,
-    ...(0, import_region_config_resolver.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
-    ...(0, import_smithy_client.resolveDefaultRuntimeConfig)(extensionConfiguration),
-    ...(0, import_protocol_http.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
-    ...resolveHttpAuthRuntimeConfig(extensionConfiguration)
-  };
+  return Object.assign(
+    runtimeConfig,
+    (0, import_region_config_resolver.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
+    (0, import_smithy_client.resolveDefaultRuntimeConfig)(extensionConfiguration),
+    (0, import_protocol_http.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
+    resolveHttpAuthRuntimeConfig(extensionConfiguration)
+  );
 }, "resolveRuntimeExtensions");
 
 // src/submodules/sso-oidc/SSOOIDCClient.ts
@@ -20578,6 +20606,8 @@ var SSOOIDCClient = class extends import_smithy_client2.Client {
   config;
   constructor(...[configuration]) {
     const _config_0 = (0, import_runtimeConfig.getRuntimeConfig)(configuration || {});
+    super(_config_0);
+    this.initConfig = _config_0;
     const _config_1 = resolveClientEndpointParameters(_config_0);
     const _config_2 = (0, import_middleware_user_agent.resolveUserAgentConfig)(_config_1);
     const _config_3 = (0, import_middleware_retry.resolveRetryConfig)(_config_2);
@@ -20586,7 +20616,6 @@ var SSOOIDCClient = class extends import_smithy_client2.Client {
     const _config_6 = (0, import_middleware_endpoint.resolveEndpointConfig)(_config_5);
     const _config_7 = (0, import_httpAuthSchemeProvider.resolveHttpAuthSchemeConfig)(_config_6);
     const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
-    super(_config_8);
     this.config = _config_8;
     this.middlewareStack.use((0, import_middleware_user_agent.getUserAgentPlugin)(this.config));
     this.middlewareStack.use((0, import_middleware_retry.getRetryPlugin)(this.config));
@@ -20597,9 +20626,9 @@ var SSOOIDCClient = class extends import_smithy_client2.Client {
     this.middlewareStack.use(
       (0, import_core.getHttpAuthSchemeEndpointRuleSetPlugin)(this.config, {
         httpAuthSchemeParametersProvider: import_httpAuthSchemeProvider.defaultSSOOIDCHttpAuthSchemeParametersProvider,
-        identityProviderConfigProvider: async (config) => new import_core.DefaultIdentityProviderConfig({
+        identityProviderConfigProvider: /* @__PURE__ */ __name(async (config) => new import_core.DefaultIdentityProviderConfig({
           "aws.auth#sigv4": config.credentials
-        })
+        }), "identityProviderConfigProvider")
       })
     );
     this.middlewareStack.use((0, import_core.getHttpSigningPlugin)(this.config));
@@ -21021,7 +21050,7 @@ var se_CreateTokenCommand = /* @__PURE__ */ __name(async (input, context) => {
       grantType: [],
       redirectUri: [],
       refreshToken: [],
-      scope: (_) => (0, import_smithy_client5._json)(_)
+      scope: /* @__PURE__ */ __name((_) => (0, import_smithy_client5._json)(_), "scope")
     })
   );
   b.m("POST").h(headers).b(body);
@@ -21413,6 +21442,8 @@ class STSClient extends smithy_client_1.Client {
     config;
     constructor(...[configuration]) {
         const _config_0 = (0, runtimeConfig_1.getRuntimeConfig)(configuration || {});
+        super(_config_0);
+        this.initConfig = _config_0;
         const _config_1 = (0, EndpointParameters_1.resolveClientEndpointParameters)(_config_0);
         const _config_2 = (0, middleware_user_agent_1.resolveUserAgentConfig)(_config_1);
         const _config_3 = (0, middleware_retry_1.resolveRetryConfig)(_config_2);
@@ -21421,7 +21452,6 @@ class STSClient extends smithy_client_1.Client {
         const _config_6 = (0, middleware_endpoint_1.resolveEndpointConfig)(_config_5);
         const _config_7 = (0, httpAuthSchemeProvider_1.resolveHttpAuthSchemeConfig)(_config_6);
         const _config_8 = (0, runtimeExtensions_1.resolveRuntimeExtensions)(_config_7, configuration?.extensions || []);
-        super(_config_8);
         this.config = _config_8;
         this.middlewareStack.use((0, middleware_user_agent_1.getUserAgentPlugin)(this.config));
         this.middlewareStack.use((0, middleware_retry_1.getRetryPlugin)(this.config));
@@ -21549,17 +21579,16 @@ const defaultSTSHttpAuthSchemeProvider = (authParameters) => {
     return options;
 };
 exports.defaultSTSHttpAuthSchemeProvider = defaultSTSHttpAuthSchemeProvider;
-const resolveStsAuthConfig = (input) => ({
-    ...input,
+const resolveStsAuthConfig = (input) => Object.assign(input, {
     stsClientCtor: STSClient_1.STSClient,
 });
 exports.resolveStsAuthConfig = resolveStsAuthConfig;
 const resolveHttpAuthSchemeConfig = (config) => {
     const config_0 = (0, exports.resolveStsAuthConfig)(config);
     const config_1 = (0, core_1.resolveAwsSdkSigV4Config)(config_0);
-    return {
-        ...config_1,
-    };
+    return Object.assign(config_1, {
+        authSchemePreference: (0, util_middleware_1.normalizeProvider)(config.authSchemePreference ?? []),
+    });
 };
 exports.resolveHttpAuthSchemeConfig = resolveHttpAuthSchemeConfig;
 
@@ -21573,13 +21602,12 @@ exports.resolveHttpAuthSchemeConfig = resolveHttpAuthSchemeConfig;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.commonParams = exports.resolveClientEndpointParameters = void 0;
 const resolveClientEndpointParameters = (options) => {
-    return {
-        ...options,
+    return Object.assign(options, {
         useDualstackEndpoint: options.useDualstackEndpoint ?? false,
         useFipsEndpoint: options.useFipsEndpoint ?? false,
         useGlobalEndpoint: options.useGlobalEndpoint ?? false,
         defaultSigningName: "sts",
-    };
+    });
 };
 exports.resolveClientEndpointParameters = resolveClientEndpointParameters;
 exports.commonParams = {
@@ -21657,8 +21685,8 @@ var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "defau
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/submodules/sts/index.ts
-var sts_exports = {};
-__export(sts_exports, {
+var index_exports = {};
+__export(index_exports, {
   AssumeRoleCommand: () => AssumeRoleCommand,
   AssumeRoleResponseFilterSensitiveLog: () => AssumeRoleResponseFilterSensitiveLog,
   AssumeRoleWithWebIdentityCommand: () => AssumeRoleWithWebIdentityCommand,
@@ -21679,8 +21707,8 @@ __export(sts_exports, {
   getDefaultRoleAssumer: () => getDefaultRoleAssumer2,
   getDefaultRoleAssumerWithWebIdentity: () => getDefaultRoleAssumerWithWebIdentity2
 });
-module.exports = __toCommonJS(sts_exports);
-__reExport(sts_exports, __nccwpck_require__(3723), module.exports);
+module.exports = __toCommonJS(index_exports);
+__reExport(index_exports, __nccwpck_require__(3723), module.exports);
 
 // src/submodules/sts/STS.ts
 var import_smithy_client6 = __nccwpck_require__(1411);
@@ -22467,7 +22495,7 @@ var getDefaultRoleAssumer = /* @__PURE__ */ __name((stsOptions, STSClient3) => {
       stsClient = new STSClient3({
         profile: stsOptions?.parentClientConfig?.profile,
         // A hack to make sts client uses the credential in current closure.
-        credentialDefaultProvider: () => async () => closureSourceCreds,
+        credentialDefaultProvider: /* @__PURE__ */ __name(() => async () => closureSourceCreds, "credentialDefaultProvider"),
         region: resolvedRegion,
         requestHandler: isCompatibleRequestHandler ? requestHandler : void 0,
         logger
@@ -22542,8 +22570,7 @@ var isH2 = /* @__PURE__ */ __name((requestHandler) => {
 // src/submodules/sts/defaultRoleAssumers.ts
 var import_STSClient2 = __nccwpck_require__(3723);
 var getCustomizableStsClientCtor = /* @__PURE__ */ __name((baseCtor, customizations) => {
-  if (!customizations)
-    return baseCtor;
+  if (!customizations) return baseCtor;
   else
     return class CustomizableSTSClient extends baseCtor {
       static {
@@ -22698,22 +22725,10 @@ const region_config_resolver_1 = __nccwpck_require__(6463);
 const protocol_http_1 = __nccwpck_require__(2356);
 const smithy_client_1 = __nccwpck_require__(1411);
 const httpAuthExtensionConfiguration_1 = __nccwpck_require__(4532);
-const asPartial = (t) => t;
 const resolveRuntimeExtensions = (runtimeConfig, extensions) => {
-    const extensionConfiguration = {
-        ...asPartial((0, region_config_resolver_1.getAwsRegionExtensionConfiguration)(runtimeConfig)),
-        ...asPartial((0, smithy_client_1.getDefaultExtensionConfiguration)(runtimeConfig)),
-        ...asPartial((0, protocol_http_1.getHttpHandlerExtensionConfiguration)(runtimeConfig)),
-        ...asPartial((0, httpAuthExtensionConfiguration_1.getHttpAuthExtensionConfiguration)(runtimeConfig)),
-    };
+    const extensionConfiguration = Object.assign((0, region_config_resolver_1.getAwsRegionExtensionConfiguration)(runtimeConfig), (0, smithy_client_1.getDefaultExtensionConfiguration)(runtimeConfig), (0, protocol_http_1.getHttpHandlerExtensionConfiguration)(runtimeConfig), (0, httpAuthExtensionConfiguration_1.getHttpAuthExtensionConfiguration)(runtimeConfig));
     extensions.forEach((extension) => extension.configure(extensionConfiguration));
-    return {
-        ...runtimeConfig,
-        ...(0, region_config_resolver_1.resolveAwsRegionExtensionConfiguration)(extensionConfiguration),
-        ...(0, smithy_client_1.resolveDefaultRuntimeConfig)(extensionConfiguration),
-        ...(0, protocol_http_1.resolveHttpHandlerRuntimeConfig)(extensionConfiguration),
-        ...(0, httpAuthExtensionConfiguration_1.resolveHttpAuthRuntimeConfig)(extensionConfiguration),
-    };
+    return Object.assign(runtimeConfig, (0, region_config_resolver_1.resolveAwsRegionExtensionConfiguration)(extensionConfiguration), (0, smithy_client_1.resolveDefaultRuntimeConfig)(extensionConfiguration), (0, protocol_http_1.resolveHttpHandlerRuntimeConfig)(extensionConfiguration), (0, httpAuthExtensionConfiguration_1.resolveHttpAuthRuntimeConfig)(extensionConfiguration));
 };
 exports.resolveRuntimeExtensions = resolveRuntimeExtensions;
 
@@ -22744,8 +22759,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   NODE_REGION_CONFIG_FILE_OPTIONS: () => NODE_REGION_CONFIG_FILE_OPTIONS,
   NODE_REGION_CONFIG_OPTIONS: () => NODE_REGION_CONFIG_OPTIONS,
   REGION_ENV_NAME: () => REGION_ENV_NAME,
@@ -22754,26 +22769,16 @@ __export(src_exports, {
   resolveAwsRegionExtensionConfiguration: () => resolveAwsRegionExtensionConfiguration,
   resolveRegionConfig: () => resolveRegionConfig
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/extensions/index.ts
 var getAwsRegionExtensionConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
-  let runtimeConfigRegion = /* @__PURE__ */ __name(async () => {
-    if (runtimeConfig.region === void 0) {
-      throw new Error("Region is missing from runtimeConfig");
-    }
-    const region = runtimeConfig.region;
-    if (typeof region === "string") {
-      return region;
-    }
-    return region();
-  }, "runtimeConfigRegion");
   return {
     setRegion(region) {
-      runtimeConfigRegion = region;
+      runtimeConfig.region = region;
     },
     region() {
-      return runtimeConfigRegion;
+      return runtimeConfig.region;
     }
   };
 }, "getAwsRegionExtensionConfiguration");
@@ -22787,11 +22792,11 @@ var resolveAwsRegionExtensionConfiguration = /* @__PURE__ */ __name((awsRegionEx
 var REGION_ENV_NAME = "AWS_REGION";
 var REGION_INI_NAME = "region";
 var NODE_REGION_CONFIG_OPTIONS = {
-  environmentVariableSelector: (env) => env[REGION_ENV_NAME],
-  configFileSelector: (profile) => profile[REGION_INI_NAME],
-  default: () => {
+  environmentVariableSelector: /* @__PURE__ */ __name((env) => env[REGION_ENV_NAME], "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => profile[REGION_INI_NAME], "configFileSelector"),
+  default: /* @__PURE__ */ __name(() => {
     throw new Error("Region is missing");
-  }
+  }, "default")
 };
 var NODE_REGION_CONFIG_FILE_OPTIONS = {
   preferredFile: "credentials"
@@ -22809,23 +22814,22 @@ var resolveRegionConfig = /* @__PURE__ */ __name((input) => {
   if (!region) {
     throw new Error("Region is missing");
   }
-  return {
-    ...input,
-    region: async () => {
+  return Object.assign(input, {
+    region: /* @__PURE__ */ __name(async () => {
       if (typeof region === "string") {
         return getRealRegion(region);
       }
       const providedRegion = await region();
       return getRealRegion(providedRegion);
-    },
-    useFipsEndpoint: async () => {
+    }, "region"),
+    useFipsEndpoint: /* @__PURE__ */ __name(async () => {
       const providedRegion = typeof region === "string" ? region : await region();
       if (isFipsRegion(providedRegion)) {
         return true;
       }
       return typeof useFipsEndpoint !== "function" ? Promise.resolve(!!useFipsEndpoint) : useFipsEndpoint();
-    }
-  };
+    }, "useFipsEndpoint")
+  });
 }, "resolveRegionConfig");
 // Annotate the CommonJS export names for ESM import in node:
 
@@ -22859,12 +22863,12 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   SignatureV4MultiRegion: () => SignatureV4MultiRegion,
   signatureV4CrtContainer: () => signatureV4CrtContainer
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/SignatureV4MultiRegion.ts
 var import_middleware_sdk_s3 = __nccwpck_require__(7445);
@@ -22924,8 +22928,7 @@ var SignatureV4MultiRegion = class {
       let CrtSignerV4 = null;
       try {
         CrtSignerV4 = signatureV4CrtContainer.CrtSignerV4;
-        if (typeof CrtSignerV4 !== "function")
-          throw new Error();
+        if (typeof CrtSignerV4 !== "function") throw new Error();
       } catch (e) {
         e.message = `${e.message}
 Please check whether you have installed the "@aws-sdk/signature-v4-crt" package explicitly. 
@@ -22983,13 +22986,13 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   fromSso: () => fromSso,
   fromStatic: () => fromStatic,
   nodeProvider: () => nodeProvider
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/fromSso.ts
 
@@ -23261,8 +23264,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   ConditionObject: () => import_util_endpoints.ConditionObject,
   DeprecatedObject: () => import_util_endpoints.DeprecatedObject,
   EndpointError: () => import_util_endpoints.EndpointError,
@@ -23292,7 +23295,7 @@ __export(src_exports, {
   setPartitionInfo: () => setPartitionInfo,
   useDefaultPartitionInfo: () => useDefaultPartitionInfo
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/aws.ts
 
@@ -23333,11 +23336,9 @@ var ARN_DELIMITER = ":";
 var RESOURCE_DELIMITER = "/";
 var parseArn = /* @__PURE__ */ __name((value) => {
   const segments = value.split(ARN_DELIMITER);
-  if (segments.length < 6)
-    return null;
+  if (segments.length < 6) return null;
   const [arn, partition2, service, region, accountId, ...resourcePath] = segments;
-  if (arn !== "arn" || partition2 === "" || service === "" || resourcePath.join(ARN_DELIMITER) === "")
-    return null;
+  if (arn !== "arn" || partition2 === "" || service === "" || resourcePath.join(ARN_DELIMITER) === "") return null;
   const resourceId = resourcePath.map((resource) => resource.split(RESOURCE_DELIMITER)).flat();
   return {
     partition: partition2,
@@ -23559,6 +23560,9 @@ var partitions_default = {
     },
     regionRegex: "^eu\\-isoe\\-\\w+\\-\\d+$",
     regions: {
+      "aws-iso-e-global": {
+        description: "AWS ISOE (Europe) global region"
+      },
       "eu-isoe-west-1": {
         description: "EU ISOE West"
       }
@@ -23583,6 +23587,22 @@ var partitions_default = {
       },
       "us-isof-south-1": {
         description: "US ISOF SOUTH"
+      }
+    }
+  }, {
+    id: "aws-eusc",
+    outputs: {
+      dnsSuffix: "amazonaws.eu",
+      dualStackDnsSuffix: "amazonaws.eu",
+      implicitGlobalRegion: "eusc-de-east-1",
+      name: "aws-eusc",
+      supportsDualStack: false,
+      supportsFIPS: true
+    },
+    regionRegex: "^eusc\\-(de)\\-\\w+\\-\\d+$",
+    regions: {
+      "eusc-de-east-1": {
+        description: "EU (Germany)"
       }
     }
   }],
@@ -23692,8 +23712,8 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   NODE_APP_ID_CONFIG_OPTIONS: () => NODE_APP_ID_CONFIG_OPTIONS,
   UA_APP_ID_ENV_NAME: () => UA_APP_ID_ENV_NAME,
   UA_APP_ID_INI_NAME: () => UA_APP_ID_INI_NAME,
@@ -23701,7 +23721,7 @@ __export(src_exports, {
   crtAvailability: () => crtAvailability,
   defaultUserAgent: () => defaultUserAgent
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/defaultUserAgent.ts
 var import_os = __nccwpck_require__(857);
@@ -23758,8 +23778,8 @@ var UA_APP_ID_ENV_NAME = "AWS_SDK_UA_APP_ID";
 var UA_APP_ID_INI_NAME = "sdk_ua_app_id";
 var UA_APP_ID_INI_NAME_DEPRECATED = "sdk-ua-app-id";
 var NODE_APP_ID_CONFIG_OPTIONS = {
-  environmentVariableSelector: (env2) => env2[UA_APP_ID_ENV_NAME],
-  configFileSelector: (profile) => profile[UA_APP_ID_INI_NAME] ?? profile[UA_APP_ID_INI_NAME_DEPRECATED],
+  environmentVariableSelector: /* @__PURE__ */ __name((env2) => env2[UA_APP_ID_ENV_NAME], "environmentVariableSelector"),
+  configFileSelector: /* @__PURE__ */ __name((profile) => profile[UA_APP_ID_INI_NAME] ?? profile[UA_APP_ID_INI_NAME_DEPRECATED], "configFileSelector"),
   default: import_middleware_user_agent.DEFAULT_UA_APP_ID
 };
 // Annotate the CommonJS export names for ESM import in node:
@@ -23794,12 +23814,12 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   XmlNode: () => XmlNode,
   XmlText: () => XmlText
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
 // src/escape-attribute.ts
 function escapeAttribute(value) {
@@ -24016,14 +24036,13 @@ var NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS = {
 // src/endpointsConfig/resolveCustomEndpointsConfig.ts
 var import_util_middleware = __nccwpck_require__(6324);
 var resolveCustomEndpointsConfig = /* @__PURE__ */ __name((input) => {
-  const { endpoint, urlParser } = input;
-  return {
-    ...input,
-    tls: input.tls ?? true,
+  const { tls, endpoint, urlParser, useDualstackEndpoint } = input;
+  return Object.assign(input, {
+    tls: tls ?? true,
     endpoint: (0, import_util_middleware.normalizeProvider)(typeof endpoint === "string" ? urlParser(endpoint) : endpoint),
     isCustomEndpoint: true,
-    useDualstackEndpoint: (0, import_util_middleware.normalizeProvider)(input.useDualstackEndpoint ?? false)
-  };
+    useDualstackEndpoint: (0, import_util_middleware.normalizeProvider)(useDualstackEndpoint ?? false)
+  });
 }, "resolveCustomEndpointsConfig");
 
 // src/endpointsConfig/resolveEndpointsConfig.ts
@@ -24049,14 +24068,13 @@ var getEndpointFromRegion = /* @__PURE__ */ __name(async (input) => {
 // src/endpointsConfig/resolveEndpointsConfig.ts
 var resolveEndpointsConfig = /* @__PURE__ */ __name((input) => {
   const useDualstackEndpoint = (0, import_util_middleware.normalizeProvider)(input.useDualstackEndpoint ?? false);
-  const { endpoint, useFipsEndpoint, urlParser } = input;
-  return {
-    ...input,
-    tls: input.tls ?? true,
+  const { endpoint, useFipsEndpoint, urlParser, tls } = input;
+  return Object.assign(input, {
+    tls: tls ?? true,
     endpoint: endpoint ? (0, import_util_middleware.normalizeProvider)(typeof endpoint === "string" ? urlParser(endpoint) : endpoint) : () => getEndpointFromRegion({ ...input, useDualstackEndpoint, useFipsEndpoint }),
     isCustomEndpoint: !!endpoint,
     useDualstackEndpoint
-  };
+  });
 }, "resolveEndpointsConfig");
 
 // src/regionConfig/config.ts
@@ -24085,8 +24103,7 @@ var resolveRegionConfig = /* @__PURE__ */ __name((input) => {
   if (!region) {
     throw new Error("Region is missing");
   }
-  return {
-    ...input,
+  return Object.assign(input, {
     region: async () => {
       if (typeof region === "string") {
         return getRealRegion(region);
@@ -24101,7 +24118,7 @@ var resolveRegionConfig = /* @__PURE__ */ __name((input) => {
       }
       return typeof useFipsEndpoint !== "function" ? Promise.resolve(!!useFipsEndpoint) : useFipsEndpoint();
     }
-  };
+  });
 }, "resolveRegionConfig");
 
 // src/regionInfo/getHostnameFromVariants.ts
@@ -25689,8 +25706,7 @@ __export(src_exports, {
 module.exports = __toCommonJS(src_exports);
 
 // src/EventStreamSerdeConfig.ts
-var resolveEventStreamSerdeConfig = /* @__PURE__ */ __name((input) => ({
-  ...input,
+var resolveEventStreamSerdeConfig = /* @__PURE__ */ __name((input) => Object.assign(input, {
   eventStreamMarshaller: input.eventStreamSerdeProvider(input)
 }), "resolveEventStreamSerdeConfig");
 // Annotate the CommonJS export names for ESM import in node:
@@ -26843,17 +26859,16 @@ var getEndpointPlugin = /* @__PURE__ */ __name((config, instructions) => ({
 var import_getEndpointFromConfig2 = __nccwpck_require__(6041);
 var resolveEndpointConfig = /* @__PURE__ */ __name((input) => {
   const tls = input.tls ?? true;
-  const { endpoint } = input;
+  const { endpoint, useDualstackEndpoint, useFipsEndpoint } = input;
   const customEndpointProvider = endpoint != null ? async () => toEndpointV1(await (0, import_util_middleware.normalizeProvider)(endpoint)()) : void 0;
   const isCustomEndpoint = !!endpoint;
-  const resolvedConfig = {
-    ...input,
+  const resolvedConfig = Object.assign(input, {
     endpoint: customEndpointProvider,
     tls,
     isCustomEndpoint,
-    useDualstackEndpoint: (0, import_util_middleware.normalizeProvider)(input.useDualstackEndpoint ?? false),
-    useFipsEndpoint: (0, import_util_middleware.normalizeProvider)(input.useFipsEndpoint ?? false)
-  };
+    useDualstackEndpoint: (0, import_util_middleware.normalizeProvider)(useDualstackEndpoint ?? false),
+    useFipsEndpoint: (0, import_util_middleware.normalizeProvider)(useFipsEndpoint ?? false)
+  });
   let configuredEndpointPromise = void 0;
   resolvedConfig.serviceConfiguredEndpoint = async () => {
     if (input.serviceId && !configuredEndpointPromise) {
@@ -27119,22 +27134,21 @@ var NODE_MAX_ATTEMPT_CONFIG_OPTIONS = {
   default: import_util_retry.DEFAULT_MAX_ATTEMPTS
 };
 var resolveRetryConfig = /* @__PURE__ */ __name((input) => {
-  const { retryStrategy } = input;
-  const maxAttempts = (0, import_util_middleware.normalizeProvider)(input.maxAttempts ?? import_util_retry.DEFAULT_MAX_ATTEMPTS);
-  return {
-    ...input,
+  const { retryStrategy, retryMode: _retryMode, maxAttempts: _maxAttempts } = input;
+  const maxAttempts = (0, import_util_middleware.normalizeProvider)(_maxAttempts ?? import_util_retry.DEFAULT_MAX_ATTEMPTS);
+  return Object.assign(input, {
     maxAttempts,
     retryStrategy: async () => {
       if (retryStrategy) {
         return retryStrategy;
       }
-      const retryMode = await (0, import_util_middleware.normalizeProvider)(input.retryMode)();
+      const retryMode = await (0, import_util_middleware.normalizeProvider)(_retryMode)();
       if (retryMode === import_util_retry.RETRY_MODES.ADAPTIVE) {
         return new import_util_retry.AdaptiveRetryStrategy(maxAttempts);
       }
       return new import_util_retry.StandardRetryStrategy(maxAttempts);
     }
-  };
+  });
 }, "resolveRetryConfig");
 var ENV_RETRY_MODE = "AWS_RETRY_MODE";
 var CONFIG_RETRY_MODE = "retry_mode";
@@ -27974,6 +27988,7 @@ var setSocketTimeout = /* @__PURE__ */ __name((request, reject, timeoutInMs = DE
     }, "onTimeout");
     if (request.socket) {
       request.socket.setTimeout(timeout, onTimeout);
+      request.on("close", () => request.socket?.removeListener("timeout", onTimeout));
     } else {
       request.setTimeout(timeout, onTimeout);
     }
@@ -28108,12 +28123,13 @@ or increase socketAcquisitionWarningTimeout=(millis) in the NodeHttpHandler conf
     return socketWarningTimestamp;
   }
   resolveDefaultConfig(options) {
-    const { requestTimeout, connectionTimeout, socketTimeout, httpAgent, httpsAgent } = options || {};
+    const { requestTimeout, connectionTimeout, socketTimeout, socketAcquisitionWarningTimeout, httpAgent, httpsAgent } = options || {};
     const keepAlive = true;
     const maxSockets = 50;
     return {
       connectionTimeout,
       requestTimeout: requestTimeout ?? socketTimeout,
+      socketAcquisitionWarningTimeout,
       httpAgent: (() => {
         if (httpAgent instanceof import_http.Agent || typeof httpAgent?.destroy === "function") {
           return httpAgent;
@@ -28851,19 +28867,18 @@ module.exports = __toCommonJS(src_exports);
 
 // src/extensions/httpExtensionConfiguration.ts
 var getHttpHandlerExtensionConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
-  let httpHandler = runtimeConfig.httpHandler;
   return {
     setHttpHandler(handler) {
-      httpHandler = handler;
+      runtimeConfig.httpHandler = handler;
     },
     httpHandler() {
-      return httpHandler;
+      return runtimeConfig.httpHandler;
     },
     updateHttpClientConfig(key, value) {
-      httpHandler.updateHttpClientConfig(key, value);
+      runtimeConfig.httpHandler?.updateHttpClientConfig(key, value);
     },
     httpHandlerConfigs() {
-      return httpHandler.httpHandlerConfigs();
+      return runtimeConfig.httpHandler.httpHandlerConfigs();
     }
   };
 }, "getHttpHandlerExtensionConfiguration");
@@ -29596,23 +29611,51 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
+  ALGORITHM_IDENTIFIER: () => ALGORITHM_IDENTIFIER,
+  ALGORITHM_IDENTIFIER_V4A: () => ALGORITHM_IDENTIFIER_V4A,
+  ALGORITHM_QUERY_PARAM: () => ALGORITHM_QUERY_PARAM,
+  ALWAYS_UNSIGNABLE_HEADERS: () => ALWAYS_UNSIGNABLE_HEADERS,
+  AMZ_DATE_HEADER: () => AMZ_DATE_HEADER,
+  AMZ_DATE_QUERY_PARAM: () => AMZ_DATE_QUERY_PARAM,
+  AUTH_HEADER: () => AUTH_HEADER,
+  CREDENTIAL_QUERY_PARAM: () => CREDENTIAL_QUERY_PARAM,
+  DATE_HEADER: () => DATE_HEADER,
+  EVENT_ALGORITHM_IDENTIFIER: () => EVENT_ALGORITHM_IDENTIFIER,
+  EXPIRES_QUERY_PARAM: () => EXPIRES_QUERY_PARAM,
+  GENERATED_HEADERS: () => GENERATED_HEADERS,
+  HOST_HEADER: () => HOST_HEADER,
+  KEY_TYPE_IDENTIFIER: () => KEY_TYPE_IDENTIFIER,
+  MAX_CACHE_SIZE: () => MAX_CACHE_SIZE,
+  MAX_PRESIGNED_TTL: () => MAX_PRESIGNED_TTL,
+  PROXY_HEADER_PATTERN: () => PROXY_HEADER_PATTERN,
+  REGION_SET_PARAM: () => REGION_SET_PARAM,
+  SEC_HEADER_PATTERN: () => SEC_HEADER_PATTERN,
+  SHA256_HEADER: () => SHA256_HEADER,
+  SIGNATURE_HEADER: () => SIGNATURE_HEADER,
+  SIGNATURE_QUERY_PARAM: () => SIGNATURE_QUERY_PARAM,
+  SIGNED_HEADERS_QUERY_PARAM: () => SIGNED_HEADERS_QUERY_PARAM,
   SignatureV4: () => SignatureV4,
+  SignatureV4Base: () => SignatureV4Base,
+  TOKEN_HEADER: () => TOKEN_HEADER,
+  TOKEN_QUERY_PARAM: () => TOKEN_QUERY_PARAM,
+  UNSIGNABLE_PATTERNS: () => UNSIGNABLE_PATTERNS,
+  UNSIGNED_PAYLOAD: () => UNSIGNED_PAYLOAD,
   clearCredentialCache: () => clearCredentialCache,
   createScope: () => createScope,
   getCanonicalHeaders: () => getCanonicalHeaders,
   getCanonicalQuery: () => getCanonicalQuery,
   getPayloadHash: () => getPayloadHash,
   getSigningKey: () => getSigningKey,
+  hasHeader: () => hasHeader,
   moveHeadersToQuery: () => moveHeadersToQuery,
-  prepareRequest: () => prepareRequest
+  prepareRequest: () => prepareRequest,
+  signatureV4aContainer: () => signatureV4aContainer
 });
 module.exports = __toCommonJS(src_exports);
 
 // src/SignatureV4.ts
 
-var import_util_middleware = __nccwpck_require__(6324);
-
-var import_util_utf84 = __nccwpck_require__(1577);
+var import_util_utf85 = __nccwpck_require__(1577);
 
 // src/constants.ts
 var ALGORITHM_QUERY_PARAM = "X-Amz-Algorithm";
@@ -29622,6 +29665,7 @@ var SIGNED_HEADERS_QUERY_PARAM = "X-Amz-SignedHeaders";
 var EXPIRES_QUERY_PARAM = "X-Amz-Expires";
 var SIGNATURE_QUERY_PARAM = "X-Amz-Signature";
 var TOKEN_QUERY_PARAM = "X-Amz-Security-Token";
+var REGION_SET_PARAM = "X-Amz-Region-Set";
 var AUTH_HEADER = "authorization";
 var AMZ_DATE_HEADER = AMZ_DATE_QUERY_PARAM.toLowerCase();
 var DATE_HEADER = "date";
@@ -29629,6 +29673,7 @@ var GENERATED_HEADERS = [AUTH_HEADER, AMZ_DATE_HEADER, DATE_HEADER];
 var SIGNATURE_HEADER = SIGNATURE_QUERY_PARAM.toLowerCase();
 var SHA256_HEADER = "x-amz-content-sha256";
 var TOKEN_HEADER = TOKEN_QUERY_PARAM.toLowerCase();
+var HOST_HEADER = "host";
 var ALWAYS_UNSIGNABLE_HEADERS = {
   authorization: true,
   "cache-control": true,
@@ -29648,7 +29693,9 @@ var ALWAYS_UNSIGNABLE_HEADERS = {
 };
 var PROXY_HEADER_PATTERN = /^proxy-/;
 var SEC_HEADER_PATTERN = /^sec-/;
+var UNSIGNABLE_PATTERNS = [/^proxy-/i, /^sec-/i];
 var ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256";
+var ALGORITHM_IDENTIFIER_V4A = "AWS4-ECDSA-P256-SHA256";
 var EVENT_ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256-PAYLOAD";
 var UNSIGNED_PAYLOAD = "UNSIGNED-PAYLOAD";
 var MAX_CACHE_SIZE = 50;
@@ -29706,27 +29753,6 @@ var getCanonicalHeaders = /* @__PURE__ */ __name(({ headers }, unsignableHeaders
   }
   return canonical;
 }, "getCanonicalHeaders");
-
-// src/getCanonicalQuery.ts
-var import_util_uri_escape = __nccwpck_require__(146);
-var getCanonicalQuery = /* @__PURE__ */ __name(({ query = {} }) => {
-  const keys = [];
-  const serialized = {};
-  for (const key of Object.keys(query)) {
-    if (key.toLowerCase() === SIGNATURE_HEADER) {
-      continue;
-    }
-    const encodedKey = (0, import_util_uri_escape.escapeUri)(key);
-    keys.push(encodedKey);
-    const value = query[key];
-    if (typeof value === "string") {
-      serialized[encodedKey] = `${encodedKey}=${(0, import_util_uri_escape.escapeUri)(value)}`;
-    } else if (Array.isArray(value)) {
-      serialized[encodedKey] = value.slice(0).reduce((encoded, value2) => encoded.concat([`${encodedKey}=${(0, import_util_uri_escape.escapeUri)(value2)}`]), []).sort().join("&");
-    }
-  }
-  return keys.sort().map((key) => serialized[key]).filter((serialized2) => serialized2).join("&");
-}, "getCanonicalQuery");
 
 // src/getPayloadHash.ts
 var import_is_array_buffer = __nccwpck_require__(6130);
@@ -29913,6 +29939,33 @@ var prepareRequest = /* @__PURE__ */ __name((request) => {
   return request;
 }, "prepareRequest");
 
+// src/SignatureV4Base.ts
+
+var import_util_middleware = __nccwpck_require__(6324);
+
+var import_util_utf84 = __nccwpck_require__(1577);
+
+// src/getCanonicalQuery.ts
+var import_util_uri_escape = __nccwpck_require__(146);
+var getCanonicalQuery = /* @__PURE__ */ __name(({ query = {} }) => {
+  const keys = [];
+  const serialized = {};
+  for (const key of Object.keys(query)) {
+    if (key.toLowerCase() === SIGNATURE_HEADER) {
+      continue;
+    }
+    const encodedKey = (0, import_util_uri_escape.escapeUri)(key);
+    keys.push(encodedKey);
+    const value = query[key];
+    if (typeof value === "string") {
+      serialized[encodedKey] = `${encodedKey}=${(0, import_util_uri_escape.escapeUri)(value)}`;
+    } else if (Array.isArray(value)) {
+      serialized[encodedKey] = value.slice(0).reduce((encoded, value2) => encoded.concat([`${encodedKey}=${(0, import_util_uri_escape.escapeUri)(value2)}`]), []).sort().join("&");
+    }
+  }
+  return keys.sort().map((key) => serialized[key]).filter((serialized2) => serialized2).join("&");
+}, "getCanonicalQuery");
+
 // src/utilDate.ts
 var iso8601 = /* @__PURE__ */ __name((time) => toDate(time).toISOString().replace(/\.\d{3}Z$/, "Z"), "iso8601");
 var toDate = /* @__PURE__ */ __name((time) => {
@@ -29928,8 +29981,11 @@ var toDate = /* @__PURE__ */ __name((time) => {
   return time;
 }, "toDate");
 
-// src/SignatureV4.ts
-var SignatureV4 = class {
+// src/SignatureV4Base.ts
+var SignatureV4Base = class {
+  static {
+    __name(this, "SignatureV4Base");
+  }
   constructor({
     applyChecksum,
     credentials,
@@ -29938,13 +29994,90 @@ var SignatureV4 = class {
     sha256,
     uriEscapePath = true
   }) {
-    this.headerFormatter = new HeaderFormatter();
     this.service = service;
     this.sha256 = sha256;
     this.uriEscapePath = uriEscapePath;
     this.applyChecksum = typeof applyChecksum === "boolean" ? applyChecksum : true;
     this.regionProvider = (0, import_util_middleware.normalizeProvider)(region);
     this.credentialProvider = (0, import_util_middleware.normalizeProvider)(credentials);
+  }
+  createCanonicalRequest(request, canonicalHeaders, payloadHash) {
+    const sortedHeaders = Object.keys(canonicalHeaders).sort();
+    return `${request.method}
+${this.getCanonicalPath(request)}
+${getCanonicalQuery(request)}
+${sortedHeaders.map((name) => `${name}:${canonicalHeaders[name]}`).join("\n")}
+
+${sortedHeaders.join(";")}
+${payloadHash}`;
+  }
+  async createStringToSign(longDate, credentialScope, canonicalRequest, algorithmIdentifier) {
+    const hash = new this.sha256();
+    hash.update((0, import_util_utf84.toUint8Array)(canonicalRequest));
+    const hashedRequest = await hash.digest();
+    return `${algorithmIdentifier}
+${longDate}
+${credentialScope}
+${(0, import_util_hex_encoding.toHex)(hashedRequest)}`;
+  }
+  getCanonicalPath({ path }) {
+    if (this.uriEscapePath) {
+      const normalizedPathSegments = [];
+      for (const pathSegment of path.split("/")) {
+        if (pathSegment?.length === 0)
+          continue;
+        if (pathSegment === ".")
+          continue;
+        if (pathSegment === "..") {
+          normalizedPathSegments.pop();
+        } else {
+          normalizedPathSegments.push(pathSegment);
+        }
+      }
+      const normalizedPath = `${path?.startsWith("/") ? "/" : ""}${normalizedPathSegments.join("/")}${normalizedPathSegments.length > 0 && path?.endsWith("/") ? "/" : ""}`;
+      const doubleEncoded = (0, import_util_uri_escape.escapeUri)(normalizedPath);
+      return doubleEncoded.replace(/%2F/g, "/");
+    }
+    return path;
+  }
+  validateResolvedCredentials(credentials) {
+    if (typeof credentials !== "object" || // @ts-expect-error: Property 'accessKeyId' does not exist on type 'object'.ts(2339)
+    typeof credentials.accessKeyId !== "string" || // @ts-expect-error: Property 'secretAccessKey' does not exist on type 'object'.ts(2339)
+    typeof credentials.secretAccessKey !== "string") {
+      throw new Error("Resolved credential object is not valid");
+    }
+  }
+  formatDate(now) {
+    const longDate = iso8601(now).replace(/[\-:]/g, "");
+    return {
+      longDate,
+      shortDate: longDate.slice(0, 8)
+    };
+  }
+  getCanonicalHeaderList(headers) {
+    return Object.keys(headers).sort().join(";");
+  }
+};
+
+// src/SignatureV4.ts
+var SignatureV4 = class extends SignatureV4Base {
+  constructor({
+    applyChecksum,
+    credentials,
+    region,
+    service,
+    sha256,
+    uriEscapePath = true
+  }) {
+    super({
+      applyChecksum,
+      credentials,
+      region,
+      service,
+      sha256,
+      uriEscapePath
+    });
+    this.headerFormatter = new HeaderFormatter();
   }
   static {
     __name(this, "SignatureV4");
@@ -29963,7 +30096,7 @@ var SignatureV4 = class {
     const credentials = await this.credentialProvider();
     this.validateResolvedCredentials(credentials);
     const region = signingRegion ?? await this.regionProvider();
-    const { longDate, shortDate } = formatDate(signingDate);
+    const { longDate, shortDate } = this.formatDate(signingDate);
     if (expiresIn > MAX_PRESIGNED_TTL) {
       return Promise.reject(
         "Signature version 4 presigned URLs must have an expiration date less than one week in the future"
@@ -29979,7 +30112,7 @@ var SignatureV4 = class {
     request.query[AMZ_DATE_QUERY_PARAM] = longDate;
     request.query[EXPIRES_QUERY_PARAM] = expiresIn.toString(10);
     const canonicalHeaders = getCanonicalHeaders(request, unsignableHeaders, signableHeaders);
-    request.query[SIGNED_HEADERS_QUERY_PARAM] = getCanonicalHeaderList(canonicalHeaders);
+    request.query[SIGNED_HEADERS_QUERY_PARAM] = this.getCanonicalHeaderList(canonicalHeaders);
     request.query[SIGNATURE_QUERY_PARAM] = await this.getSignature(
       longDate,
       scope,
@@ -30001,7 +30134,7 @@ var SignatureV4 = class {
   }
   async signEvent({ headers, payload }, { signingDate = /* @__PURE__ */ new Date(), priorSignature, signingRegion, signingService }) {
     const region = signingRegion ?? await this.regionProvider();
-    const { shortDate, longDate } = formatDate(signingDate);
+    const { shortDate, longDate } = this.formatDate(signingDate);
     const scope = createScope(shortDate, region, signingService ?? this.service);
     const hashedPayload = await getPayloadHash({ headers: {}, body: payload }, this.sha256);
     const hash = new this.sha256();
@@ -30038,9 +30171,9 @@ var SignatureV4 = class {
     const credentials = await this.credentialProvider();
     this.validateResolvedCredentials(credentials);
     const region = signingRegion ?? await this.regionProvider();
-    const { shortDate } = formatDate(signingDate);
+    const { shortDate } = this.formatDate(signingDate);
     const hash = new this.sha256(await this.getSigningKey(credentials, region, shortDate, signingService));
-    hash.update((0, import_util_utf84.toUint8Array)(stringToSign));
+    hash.update((0, import_util_utf85.toUint8Array)(stringToSign));
     return (0, import_util_hex_encoding.toHex)(await hash.digest());
   }
   async signRequest(requestToSign, {
@@ -30054,7 +30187,7 @@ var SignatureV4 = class {
     this.validateResolvedCredentials(credentials);
     const region = signingRegion ?? await this.regionProvider();
     const request = prepareRequest(requestToSign);
-    const { longDate, shortDate } = formatDate(signingDate);
+    const { longDate, shortDate } = this.formatDate(signingDate);
     const scope = createScope(shortDate, region, signingService ?? this.service);
     request.headers[AMZ_DATE_HEADER] = longDate;
     if (credentials.sessionToken) {
@@ -30071,73 +30204,29 @@ var SignatureV4 = class {
       this.getSigningKey(credentials, region, shortDate, signingService),
       this.createCanonicalRequest(request, canonicalHeaders, payloadHash)
     );
-    request.headers[AUTH_HEADER] = `${ALGORITHM_IDENTIFIER} Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${getCanonicalHeaderList(canonicalHeaders)}, Signature=${signature}`;
+    request.headers[AUTH_HEADER] = `${ALGORITHM_IDENTIFIER} Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${this.getCanonicalHeaderList(canonicalHeaders)}, Signature=${signature}`;
     return request;
   }
-  createCanonicalRequest(request, canonicalHeaders, payloadHash) {
-    const sortedHeaders = Object.keys(canonicalHeaders).sort();
-    return `${request.method}
-${this.getCanonicalPath(request)}
-${getCanonicalQuery(request)}
-${sortedHeaders.map((name) => `${name}:${canonicalHeaders[name]}`).join("\n")}
-
-${sortedHeaders.join(";")}
-${payloadHash}`;
-  }
-  async createStringToSign(longDate, credentialScope, canonicalRequest) {
-    const hash = new this.sha256();
-    hash.update((0, import_util_utf84.toUint8Array)(canonicalRequest));
-    const hashedRequest = await hash.digest();
-    return `${ALGORITHM_IDENTIFIER}
-${longDate}
-${credentialScope}
-${(0, import_util_hex_encoding.toHex)(hashedRequest)}`;
-  }
-  getCanonicalPath({ path }) {
-    if (this.uriEscapePath) {
-      const normalizedPathSegments = [];
-      for (const pathSegment of path.split("/")) {
-        if (pathSegment?.length === 0)
-          continue;
-        if (pathSegment === ".")
-          continue;
-        if (pathSegment === "..") {
-          normalizedPathSegments.pop();
-        } else {
-          normalizedPathSegments.push(pathSegment);
-        }
-      }
-      const normalizedPath = `${path?.startsWith("/") ? "/" : ""}${normalizedPathSegments.join("/")}${normalizedPathSegments.length > 0 && path?.endsWith("/") ? "/" : ""}`;
-      const doubleEncoded = (0, import_util_uri_escape.escapeUri)(normalizedPath);
-      return doubleEncoded.replace(/%2F/g, "/");
-    }
-    return path;
-  }
   async getSignature(longDate, credentialScope, keyPromise, canonicalRequest) {
-    const stringToSign = await this.createStringToSign(longDate, credentialScope, canonicalRequest);
+    const stringToSign = await this.createStringToSign(
+      longDate,
+      credentialScope,
+      canonicalRequest,
+      ALGORITHM_IDENTIFIER
+    );
     const hash = new this.sha256(await keyPromise);
-    hash.update((0, import_util_utf84.toUint8Array)(stringToSign));
+    hash.update((0, import_util_utf85.toUint8Array)(stringToSign));
     return (0, import_util_hex_encoding.toHex)(await hash.digest());
   }
   getSigningKey(credentials, region, shortDate, service) {
     return getSigningKey(this.sha256, credentials, shortDate, region, service || this.service);
   }
-  validateResolvedCredentials(credentials) {
-    if (typeof credentials !== "object" || // @ts-expect-error: Property 'accessKeyId' does not exist on type 'object'.ts(2339)
-    typeof credentials.accessKeyId !== "string" || // @ts-expect-error: Property 'secretAccessKey' does not exist on type 'object'.ts(2339)
-    typeof credentials.secretAccessKey !== "string") {
-      throw new Error("Resolved credential object is not valid");
-    }
-  }
 };
-var formatDate = /* @__PURE__ */ __name((now) => {
-  const longDate = iso8601(now).replace(/[\-:]/g, "");
-  return {
-    longDate,
-    shortDate: longDate.slice(0, 8)
-  };
-}, "formatDate");
-var getCanonicalHeaderList = /* @__PURE__ */ __name((headers) => Object.keys(headers).sort().join(";"), "getCanonicalHeaderList");
+
+// src/signature-v4a-container.ts
+var signatureV4aContainer = {
+  SignatureV4a: null
+};
 // Annotate the CommonJS export names for ESM import in node:
 
 0 && (0);
@@ -31088,12 +31177,11 @@ var getChecksumConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
     });
   }
   return {
-    _checksumAlgorithms: checksumAlgorithms,
     addChecksumAlgorithm(algo) {
-      this._checksumAlgorithms.push(algo);
+      checksumAlgorithms.push(algo);
     },
     checksumAlgorithms() {
-      return this._checksumAlgorithms;
+      return checksumAlgorithms;
     }
   };
 }, "getChecksumConfiguration");
@@ -31107,13 +31195,12 @@ var resolveChecksumRuntimeConfig = /* @__PURE__ */ __name((clientConfig) => {
 
 // src/extensions/retry.ts
 var getRetryConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
-  let _retryStrategy = runtimeConfig.retryStrategy;
   return {
     setRetryStrategy(retryStrategy) {
-      _retryStrategy = retryStrategy;
+      runtimeConfig.retryStrategy = retryStrategy;
     },
     retryStrategy() {
-      return _retryStrategy;
+      return runtimeConfig.retryStrategy;
     }
   };
 }, "getRetryConfiguration");
@@ -31125,17 +31212,11 @@ var resolveRetryRuntimeConfig = /* @__PURE__ */ __name((retryStrategyConfigurati
 
 // src/extensions/defaultExtensionConfiguration.ts
 var getDefaultExtensionConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
-  return {
-    ...getChecksumConfiguration(runtimeConfig),
-    ...getRetryConfiguration(runtimeConfig)
-  };
+  return Object.assign(getChecksumConfiguration(runtimeConfig), getRetryConfiguration(runtimeConfig));
 }, "getDefaultExtensionConfiguration");
 var getDefaultClientConfiguration = getDefaultExtensionConfiguration;
 var resolveDefaultRuntimeConfig = /* @__PURE__ */ __name((config) => {
-  return {
-    ...resolveChecksumRuntimeConfig(config),
-    ...resolveRetryRuntimeConfig(config)
-  };
+  return Object.assign(resolveChecksumRuntimeConfig(config), resolveRetryRuntimeConfig(config));
 }, "resolveDefaultRuntimeConfig");
 
 // src/get-array-if-single-item.ts
@@ -31503,12 +31584,11 @@ var getChecksumConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
     });
   }
   return {
-    _checksumAlgorithms: checksumAlgorithms,
     addChecksumAlgorithm(algo) {
-      this._checksumAlgorithms.push(algo);
+      checksumAlgorithms.push(algo);
     },
     checksumAlgorithms() {
-      return this._checksumAlgorithms;
+      return checksumAlgorithms;
     }
   };
 }, "getChecksumConfiguration");
@@ -31522,14 +31602,10 @@ var resolveChecksumRuntimeConfig = /* @__PURE__ */ __name((clientConfig) => {
 
 // src/extensions/defaultClientConfiguration.ts
 var getDefaultClientConfiguration = /* @__PURE__ */ __name((runtimeConfig) => {
-  return {
-    ...getChecksumConfiguration(runtimeConfig)
-  };
+  return getChecksumConfiguration(runtimeConfig);
 }, "getDefaultClientConfiguration");
 var resolveDefaultRuntimeConfig = /* @__PURE__ */ __name((config) => {
-  return {
-    ...resolveChecksumRuntimeConfig(config)
-  };
+  return resolveChecksumRuntimeConfig(config);
 }, "resolveDefaultRuntimeConfig");
 
 // src/http.ts
@@ -33214,7 +33290,7 @@ function createBufferedReadable(upstream, size, logger) {
     ];
     let mode = -1;
     upstream.on("data", (chunk) => {
-        const chunkMode = (0, createBufferedReadableStream_1.modeOf)(chunk);
+        const chunkMode = (0, createBufferedReadableStream_1.modeOf)(chunk, true);
         if (mode !== chunkMode) {
             if (mode >= 0) {
                 downstream.push((0, createBufferedReadableStream_1.flush)(buffers, mode));
@@ -33284,7 +33360,7 @@ function createBufferedReadableStream(upstream, size, logger) {
             controller.close();
         }
         else {
-            const chunkMode = modeOf(chunk);
+            const chunkMode = modeOf(chunk, false);
             if (mode !== chunkMode) {
                 if (mode >= 0) {
                     controller.enqueue(flush(buffers, mode));
@@ -33352,8 +33428,8 @@ function sizeOf(chunk) {
     return (_b = (_a = chunk === null || chunk === void 0 ? void 0 : chunk.byteLength) !== null && _a !== void 0 ? _a : chunk === null || chunk === void 0 ? void 0 : chunk.length) !== null && _b !== void 0 ? _b : 0;
 }
 exports.sizeOf = sizeOf;
-function modeOf(chunk) {
-    if (typeof Buffer !== "undefined" && chunk instanceof Buffer) {
+function modeOf(chunk, allowBuffer = true) {
+    if (allowBuffer && typeof Buffer !== "undefined" && chunk instanceof Buffer) {
         return 2;
     }
     if (chunk instanceof Uint8Array) {
@@ -61702,21 +61778,21 @@ module.exports = parseParams
 /***/ 7413:
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.750.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-s3","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn g:vitest run","test:browser":"node ./test/browser-build/esbuild && yarn g:vitest run -c vitest.config.browser.ts","test:browser:watch":"node ./test/browser-build/esbuild && yarn g:vitest watch -c vitest.config.browser.ts","test:e2e":"yarn g:vitest run -c vitest.config.e2e.ts && yarn test:browser","test:e2e:watch":"yarn g:vitest watch -c vitest.config.e2e.ts","test:watch":"yarn g:vitest watch"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"5.2.0","@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.750.0","@aws-sdk/credential-provider-node":"3.750.0","@aws-sdk/middleware-bucket-endpoint":"3.734.0","@aws-sdk/middleware-expect-continue":"3.734.0","@aws-sdk/middleware-flexible-checksums":"3.750.0","@aws-sdk/middleware-host-header":"3.734.0","@aws-sdk/middleware-location-constraint":"3.734.0","@aws-sdk/middleware-logger":"3.734.0","@aws-sdk/middleware-recursion-detection":"3.734.0","@aws-sdk/middleware-sdk-s3":"3.750.0","@aws-sdk/middleware-ssec":"3.734.0","@aws-sdk/middleware-user-agent":"3.750.0","@aws-sdk/region-config-resolver":"3.734.0","@aws-sdk/signature-v4-multi-region":"3.750.0","@aws-sdk/types":"3.734.0","@aws-sdk/util-endpoints":"3.743.0","@aws-sdk/util-user-agent-browser":"3.734.0","@aws-sdk/util-user-agent-node":"3.750.0","@aws-sdk/xml-builder":"3.734.0","@smithy/config-resolver":"^4.0.1","@smithy/core":"^3.1.4","@smithy/eventstream-serde-browser":"^4.0.1","@smithy/eventstream-serde-config-resolver":"^4.0.1","@smithy/eventstream-serde-node":"^4.0.1","@smithy/fetch-http-handler":"^5.0.1","@smithy/hash-blob-browser":"^4.0.1","@smithy/hash-node":"^4.0.1","@smithy/hash-stream-node":"^4.0.1","@smithy/invalid-dependency":"^4.0.1","@smithy/md5-js":"^4.0.1","@smithy/middleware-content-length":"^4.0.1","@smithy/middleware-endpoint":"^4.0.5","@smithy/middleware-retry":"^4.0.6","@smithy/middleware-serde":"^4.0.2","@smithy/middleware-stack":"^4.0.1","@smithy/node-config-provider":"^4.0.1","@smithy/node-http-handler":"^4.0.2","@smithy/protocol-http":"^5.0.1","@smithy/smithy-client":"^4.1.5","@smithy/types":"^4.1.0","@smithy/url-parser":"^4.0.1","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.6","@smithy/util-defaults-mode-node":"^4.0.6","@smithy/util-endpoints":"^3.0.1","@smithy/util-middleware":"^4.0.1","@smithy/util-retry":"^4.0.1","@smithy/util-stream":"^4.1.1","@smithy/util-utf8":"^4.0.0","@smithy/util-waiter":"^4.0.2","tslib":"^2.6.2"},"devDependencies":{"@aws-sdk/signature-v4-crt":"3.750.0","@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.2.2"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.797.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-s3","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn g:vitest run","test:browser":"node ./test/browser-build/esbuild && yarn g:vitest run -c vitest.config.browser.ts","test:browser:watch":"node ./test/browser-build/esbuild && yarn g:vitest watch -c vitest.config.browser.ts","test:e2e":"yarn g:vitest run -c vitest.config.e2e.ts && yarn test:browser","test:e2e:watch":"yarn g:vitest watch -c vitest.config.e2e.ts","test:watch":"yarn g:vitest watch"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"5.2.0","@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.796.0","@aws-sdk/credential-provider-node":"3.797.0","@aws-sdk/middleware-bucket-endpoint":"3.775.0","@aws-sdk/middleware-expect-continue":"3.775.0","@aws-sdk/middleware-flexible-checksums":"3.796.0","@aws-sdk/middleware-host-header":"3.775.0","@aws-sdk/middleware-location-constraint":"3.775.0","@aws-sdk/middleware-logger":"3.775.0","@aws-sdk/middleware-recursion-detection":"3.775.0","@aws-sdk/middleware-sdk-s3":"3.796.0","@aws-sdk/middleware-ssec":"3.775.0","@aws-sdk/middleware-user-agent":"3.796.0","@aws-sdk/region-config-resolver":"3.775.0","@aws-sdk/signature-v4-multi-region":"3.796.0","@aws-sdk/types":"3.775.0","@aws-sdk/util-endpoints":"3.787.0","@aws-sdk/util-user-agent-browser":"3.775.0","@aws-sdk/util-user-agent-node":"3.796.0","@aws-sdk/xml-builder":"3.775.0","@smithy/config-resolver":"^4.1.0","@smithy/core":"^3.2.0","@smithy/eventstream-serde-browser":"^4.0.2","@smithy/eventstream-serde-config-resolver":"^4.1.0","@smithy/eventstream-serde-node":"^4.0.2","@smithy/fetch-http-handler":"^5.0.2","@smithy/hash-blob-browser":"^4.0.2","@smithy/hash-node":"^4.0.2","@smithy/hash-stream-node":"^4.0.2","@smithy/invalid-dependency":"^4.0.2","@smithy/md5-js":"^4.0.2","@smithy/middleware-content-length":"^4.0.2","@smithy/middleware-endpoint":"^4.1.0","@smithy/middleware-retry":"^4.1.0","@smithy/middleware-serde":"^4.0.3","@smithy/middleware-stack":"^4.0.2","@smithy/node-config-provider":"^4.0.2","@smithy/node-http-handler":"^4.0.4","@smithy/protocol-http":"^5.1.0","@smithy/smithy-client":"^4.2.0","@smithy/types":"^4.2.0","@smithy/url-parser":"^4.0.2","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.8","@smithy/util-defaults-mode-node":"^4.0.8","@smithy/util-endpoints":"^3.0.2","@smithy/util-middleware":"^4.0.2","@smithy/util-retry":"^4.0.2","@smithy/util-stream":"^4.2.0","@smithy/util-utf8":"^4.0.0","@smithy/util-waiter":"^4.0.3","tslib":"^2.6.2"},"devDependencies":{"@aws-sdk/signature-v4-crt":"3.796.0","@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.2.2"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
 
 /***/ }),
 
 /***/ 5188:
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.750.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-sso","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.750.0","@aws-sdk/middleware-host-header":"3.734.0","@aws-sdk/middleware-logger":"3.734.0","@aws-sdk/middleware-recursion-detection":"3.734.0","@aws-sdk/middleware-user-agent":"3.750.0","@aws-sdk/region-config-resolver":"3.734.0","@aws-sdk/types":"3.734.0","@aws-sdk/util-endpoints":"3.743.0","@aws-sdk/util-user-agent-browser":"3.734.0","@aws-sdk/util-user-agent-node":"3.750.0","@smithy/config-resolver":"^4.0.1","@smithy/core":"^3.1.4","@smithy/fetch-http-handler":"^5.0.1","@smithy/hash-node":"^4.0.1","@smithy/invalid-dependency":"^4.0.1","@smithy/middleware-content-length":"^4.0.1","@smithy/middleware-endpoint":"^4.0.5","@smithy/middleware-retry":"^4.0.6","@smithy/middleware-serde":"^4.0.2","@smithy/middleware-stack":"^4.0.1","@smithy/node-config-provider":"^4.0.1","@smithy/node-http-handler":"^4.0.2","@smithy/protocol-http":"^5.0.1","@smithy/smithy-client":"^4.1.5","@smithy/types":"^4.1.0","@smithy/url-parser":"^4.0.1","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.6","@smithy/util-defaults-mode-node":"^4.0.6","@smithy/util-endpoints":"^3.0.1","@smithy/util-middleware":"^4.0.1","@smithy/util-retry":"^4.0.1","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.2.2"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.797.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline client-sso","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.796.0","@aws-sdk/middleware-host-header":"3.775.0","@aws-sdk/middleware-logger":"3.775.0","@aws-sdk/middleware-recursion-detection":"3.775.0","@aws-sdk/middleware-user-agent":"3.796.0","@aws-sdk/region-config-resolver":"3.775.0","@aws-sdk/types":"3.775.0","@aws-sdk/util-endpoints":"3.787.0","@aws-sdk/util-user-agent-browser":"3.775.0","@aws-sdk/util-user-agent-node":"3.796.0","@smithy/config-resolver":"^4.1.0","@smithy/core":"^3.2.0","@smithy/fetch-http-handler":"^5.0.2","@smithy/hash-node":"^4.0.2","@smithy/invalid-dependency":"^4.0.2","@smithy/middleware-content-length":"^4.0.2","@smithy/middleware-endpoint":"^4.1.0","@smithy/middleware-retry":"^4.1.0","@smithy/middleware-serde":"^4.0.3","@smithy/middleware-stack":"^4.0.2","@smithy/node-config-provider":"^4.0.2","@smithy/node-http-handler":"^4.0.4","@smithy/protocol-http":"^5.1.0","@smithy/smithy-client":"^4.2.0","@smithy/types":"^4.2.0","@smithy/url-parser":"^4.0.2","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.8","@smithy/util-defaults-mode-node":"^4.0.8","@smithy/util-endpoints":"^3.0.2","@smithy/util-middleware":"^4.0.2","@smithy/util-retry":"^4.0.2","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"@tsconfig/node18":"18.2.4","@types/node":"^18.19.69","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.2.2"},"engines":{"node":">=18.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
 
 /***/ }),
 
 /***/ 9955:
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.750.0","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=18.0.0"},"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.750.0","@aws-sdk/middleware-host-header":"3.734.0","@aws-sdk/middleware-logger":"3.734.0","@aws-sdk/middleware-recursion-detection":"3.734.0","@aws-sdk/middleware-user-agent":"3.750.0","@aws-sdk/region-config-resolver":"3.734.0","@aws-sdk/types":"3.734.0","@aws-sdk/util-endpoints":"3.743.0","@aws-sdk/util-user-agent-browser":"3.734.0","@aws-sdk/util-user-agent-node":"3.750.0","@smithy/config-resolver":"^4.0.1","@smithy/core":"^3.1.4","@smithy/fetch-http-handler":"^5.0.1","@smithy/hash-node":"^4.0.1","@smithy/invalid-dependency":"^4.0.1","@smithy/middleware-content-length":"^4.0.1","@smithy/middleware-endpoint":"^4.0.5","@smithy/middleware-retry":"^4.0.6","@smithy/middleware-serde":"^4.0.2","@smithy/middleware-stack":"^4.0.1","@smithy/node-config-provider":"^4.0.1","@smithy/node-http-handler":"^4.0.2","@smithy/protocol-http":"^5.0.1","@smithy/smithy-client":"^4.1.5","@smithy/types":"^4.1.0","@smithy/url-parser":"^4.0.1","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.6","@smithy/util-defaults-mode-node":"^4.0.6","@smithy/util-endpoints":"^3.0.1","@smithy/util-middleware":"^4.0.1","@smithy/util-retry":"^4.0.1","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.2.2"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./sso-oidc.d.ts","./sso-oidc.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./sso-oidc":{"module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js","types":"./dist-types/submodules/sso-oidc/index.d.ts"},"./sts":{"module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js","types":"./dist-types/submodules/sts/index.d.ts"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","version":"3.797.0","description":"Nested clients for AWS SDK packages.","main":"./dist-cjs/index.js","module":"./dist-es/index.js","types":"./dist-types/index.d.ts","scripts":{"build":"yarn lint && concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"node ../../scripts/compilation/inline nested-clients","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","lint":"node ../../scripts/validation/submodules-linter.js --pkg nested-clients","test":"yarn g:vitest run","test:watch":"yarn g:vitest watch"},"engines":{"node":">=18.0.0"},"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","dependencies":{"@aws-crypto/sha256-browser":"5.2.0","@aws-crypto/sha256-js":"5.2.0","@aws-sdk/core":"3.796.0","@aws-sdk/middleware-host-header":"3.775.0","@aws-sdk/middleware-logger":"3.775.0","@aws-sdk/middleware-recursion-detection":"3.775.0","@aws-sdk/middleware-user-agent":"3.796.0","@aws-sdk/region-config-resolver":"3.775.0","@aws-sdk/types":"3.775.0","@aws-sdk/util-endpoints":"3.787.0","@aws-sdk/util-user-agent-browser":"3.775.0","@aws-sdk/util-user-agent-node":"3.796.0","@smithy/config-resolver":"^4.1.0","@smithy/core":"^3.2.0","@smithy/fetch-http-handler":"^5.0.2","@smithy/hash-node":"^4.0.2","@smithy/invalid-dependency":"^4.0.2","@smithy/middleware-content-length":"^4.0.2","@smithy/middleware-endpoint":"^4.1.0","@smithy/middleware-retry":"^4.1.0","@smithy/middleware-serde":"^4.0.3","@smithy/middleware-stack":"^4.0.2","@smithy/node-config-provider":"^4.0.2","@smithy/node-http-handler":"^4.0.4","@smithy/protocol-http":"^5.1.0","@smithy/smithy-client":"^4.2.0","@smithy/types":"^4.2.0","@smithy/url-parser":"^4.0.2","@smithy/util-base64":"^4.0.0","@smithy/util-body-length-browser":"^4.0.0","@smithy/util-body-length-node":"^4.0.0","@smithy/util-defaults-mode-browser":"^4.0.8","@smithy/util-defaults-mode-node":"^4.0.8","@smithy/util-endpoints":"^3.0.2","@smithy/util-middleware":"^4.0.2","@smithy/util-retry":"^4.0.2","@smithy/util-utf8":"^4.0.0","tslib":"^2.6.2"},"devDependencies":{"concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typescript":"~5.2.2"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["./sso-oidc.d.ts","./sso-oidc.js","./sts.d.ts","./sts.js","dist-*/**"],"browser":{"./dist-es/submodules/sso-oidc/runtimeConfig":"./dist-es/submodules/sso-oidc/runtimeConfig.browser","./dist-es/submodules/sts/runtimeConfig":"./dist-es/submodules/sts/runtimeConfig.browser"},"react-native":{},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"packages/nested-clients"},"exports":{"./sso-oidc":{"types":"./dist-types/submodules/sso-oidc/index.d.ts","module":"./dist-es/submodules/sso-oidc/index.js","node":"./dist-cjs/submodules/sso-oidc/index.js","import":"./dist-es/submodules/sso-oidc/index.js","require":"./dist-cjs/submodules/sso-oidc/index.js"},"./sts":{"types":"./dist-types/submodules/sts/index.d.ts","module":"./dist-es/submodules/sts/index.js","node":"./dist-cjs/submodules/sts/index.js","import":"./dist-es/submodules/sts/index.js","require":"./dist-cjs/submodules/sts/index.js"}}}');
 
 /***/ })
 
