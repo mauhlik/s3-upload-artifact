@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.6](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.5...v1.1.6) (2025-05-19)
+
+
+### Bug Fixes
+
+* **deps:** bump the npm-development group across 1 directory with 11 updates ([#112](https://github.com/mauhlik/s3-upload-artifact/issues/112)) ([2e30681](https://github.com/mauhlik/s3-upload-artifact/commit/2e3068177f9af8cab3e39ee07a62020aa3b2bd38))
+* **deps:** bump undici from 5.28.5 to 5.29.0 ([#110](https://github.com/mauhlik/s3-upload-artifact/issues/110)) ([2c4b55d](https://github.com/mauhlik/s3-upload-artifact/commit/2c4b55d50620397fac6b71f702abc606b7137499))
+
 ## [1.1.5](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.4...v1.1.5) (2025-05-06)
 
 
