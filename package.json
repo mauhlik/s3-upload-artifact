@@ -72,7 +72,7 @@
     "@aws-sdk/client-s3": "^3.802.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-eslint-plugin": "^6.4.0",
-    "eslint-plugin-jsdoc": "^50.6.11",
+    "eslint-plugin-jsdoc": "^50.6.17",
     "eslint-plugin-perfectionist": "^4.12.3"
   },
   "devDependencies": {
