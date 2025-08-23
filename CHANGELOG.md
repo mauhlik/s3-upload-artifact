@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.7](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.6...v1.1.7) (2025-08-23)
+
+
+### Bug Fixes
+
+* **deps:** bump @eslint/plugin-kit from 0.3.1 to 0.3.4 ([#143](https://github.com/mauhlik/s3-upload-artifact/issues/143)) ([b8291be](https://github.com/mauhlik/s3-upload-artifact/commit/b8291be0d8c78a52e8ec005f386a2014c0df3c6f))
+* **deps:** bump eslint-plugin-jsdoc from 51.2.1 to 54.1.0 ([#148](https://github.com/mauhlik/s3-upload-artifact/issues/148)) ([af0bf50](https://github.com/mauhlik/s3-upload-artifact/commit/af0bf506ed1417b091da0ecf61ecedeb60c98f3b))
+* **deps:** bump the npm-development group across 1 directory with 12 updates ([#145](https://github.com/mauhlik/s3-upload-artifact/issues/145)) ([547add1](https://github.com/mauhlik/s3-upload-artifact/commit/547add1db204e7c1fe00af527dfd5b723ddfe68d))
+
 ## [1.1.6](https://github.com/mauhlik/s3-upload-artifact/compare/v1.1.5...v1.1.6) (2025-06-25)
 
 
